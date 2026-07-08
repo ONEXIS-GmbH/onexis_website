@@ -11,7 +11,7 @@ const CONTENT = {
   },
 
   hero: {
-    title: 'Test',
+    title: 'Hallo',
     subtitle: 'Test Test',
     ctaPrimary: 'Leistungen ansehen',
     ctaSecondary: 'Gespräch vereinbaren',
