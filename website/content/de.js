@@ -22,7 +22,7 @@ const CONTENT = {
   },
   hero: {
     title: 'Ich bin Nico',
-    subtitle: 'Test Test',
+    subtitle: 'Ändere mich',
     ctaPrimary: 'Leistungen ansehen',
     ctaSecondary: 'Gespräch vereinbaren',
   },
