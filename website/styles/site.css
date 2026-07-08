@@ -200,6 +200,65 @@ button { font: inherit; }
   .hero-watermark { opacity: 0.05 !important; }
 }
 
+/* ============================================================
+   X thread — recurring logo motif between sections (roter Faden)
+   The two logo curves self-draw, then fill, on scroll-in.
+   ============================================================ */
+.x-divider {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 4px 32px;
+}
+.x-divider-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 900ms var(--ease-out);
+}
+.x-divider.is-in .x-divider-rule { transform: scaleX(1); }
+
+.x-divider-mark {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  overflow: visible;
+  transform: scale(0.9) rotate(-8deg);
+  opacity: 0;
+  transition: transform 900ms var(--ease-out), opacity 500ms var(--ease-out);
+}
+.x-divider.is-in .x-divider-mark { transform: none; opacity: 1; }
+
+.x-stroke {
+  fill: currentColor;
+  fill-opacity: 0;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition:
+    stroke-dashoffset 1000ms var(--ease-out) var(--sd, 0ms),
+    fill-opacity 600ms var(--ease-out) var(--fd, 760ms);
+}
+.x-divider.is-in .x-stroke { fill-opacity: 1; }
+.x-dark { color: var(--onexis-anthrazit); }
+.x-teal { color: var(--onexis-blau); --sd: 300ms; --fd: 1060ms; }
+
+@media (max-width: 600px) {
+  .x-divider { padding-left: 20px; padding-right: 20px; gap: 16px; }
+  .x-divider-mark { width: 26px; height: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .x-divider-rule { transform: scaleX(1) !important; transition: none !important; }
+  .x-divider-mark { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .x-stroke { fill-opacity: 1 !important; transition: none !important; }
+}
+
 /* TOM scrollytelling --------------------------------------- */
 @keyframes tom-narration-in {
   from { opacity: 0; transform: translateY(10px); }

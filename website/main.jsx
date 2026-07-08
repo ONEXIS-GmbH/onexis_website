@@ -9,6 +9,7 @@ import Sectors from './components/Sectors.jsx'
 import Team from './components/Team.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+import XDivider from './components/XDivider.jsx'
 import './styles/tokens.css'
 import './styles/site.css'
 
@@ -19,11 +20,17 @@ function App() {
       <main id="main-content">
         <Hero />
         <Promises />
+        <XDivider />
         <TOMSection />
+        <XDivider />
         <Vorgehen />
+        <XDivider />
         <Cases />
+        <XDivider />
         <Sectors />
+        <XDivider />
         <Team />
+        <XDivider />
         <Contact />
       </main>
       <Footer />
