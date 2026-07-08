@@ -1,22 +1,31 @@
 const CONTENT = {
-
   nav: {
     links: [
-      { href: '#leistungen', label: 'Leistungen' },
-      { href: '#vorgehen',   label: 'Vorgehen' },
-      { href: '#referenzen', label: 'Referenzen' },
-      { href: '#team',       label: 'Team' },
+      {
+        href: '#leistungen',
+        label: 'Leistungen',
+      },
+      {
+        href: '#vorgehen',
+        label: 'Vorgehen',
+      },
+      {
+        href: '#referenzen',
+        label: 'Referenzen',
+      },
+      {
+        href: '#team',
+        label: 'Team',
+      },
     ],
     cta: 'Kontakt',
   },
-
   hero: {
-    title: 'Hallo',
+    title: 'Ich bin Nico',
     subtitle: 'Test Test',
     ctaPrimary: 'Leistungen ansehen',
     ctaSecondary: 'Gespräch vereinbaren',
   },
-
   promises: {
     eyebrow: 'Was uns auszeichnet',
     heading: ['Weil Ihre Zufriedenheit', 'unser Antrieb ist.'],
@@ -27,7 +36,6 @@ const CONTENT = {
       'Wir sind pragmatisch.',
     ],
   },
-
   tom: {
     eyebrow: 'Leistungen',
     heading: ['Vier Dimensionen.', 'Ein Target Operating Model.'],
@@ -59,11 +67,7 @@ const CONTENT = {
         short: 'People',
         sub: 'Menschen, Wissen, Befähigung.',
         body: 'Interim-Mandat, CIO-Sparring, Inhouse-Seminar - wir bringen Senior-Köpfe ins Team und transferieren Wissen, statt Abhängigkeit aufzubauen.',
-        items: [
-          'Interim-Management',
-          'Sparring für CIOs und IT-Leitung',
-          'Seminare und Inhouse-Trainings',
-        ],
+        items: ['Interim-Management', 'Sparring für CIOs und IT-Leitung', 'Seminare und Inhouse-Trainings'],
       },
       {
         title: 'Infrastruktur & Technologie',
@@ -78,25 +82,55 @@ const CONTENT = {
       },
     ],
     services: [
-      { name: 'Projektleitung', body: 'Von der Planung bis zur Betriebsübergabe - verlässlich zum Ziel.' },
-      { name: 'Health Check',   body: 'Klarheit in zwei bis vier Wochen, wenn ein Projekt wackelt.' },
-      { name: 'Interim',        body: 'Verantwortung auf Zeit, mit klarem Mandat und Übergabe.' },
-      { name: 'PMO',            body: 'Aufbau und Betrieb eines wirkungsvollen Portfolio-Cockpits.' },
+      {
+        name: 'Projektleitung',
+        body: 'Von der Planung bis zur Betriebsübergabe - verlässlich zum Ziel.',
+      },
+      {
+        name: 'Health Check',
+        body: 'Klarheit in zwei bis vier Wochen, wenn ein Projekt wackelt.',
+      },
+      {
+        name: 'Interim',
+        body: 'Verantwortung auf Zeit, mit klarem Mandat und Übergabe.',
+      },
+      {
+        name: 'PMO',
+        body: 'Aufbau und Betrieb eines wirkungsvollen Portfolio-Cockpits.',
+      },
     ],
   },
-
   vorgehen: {
     eyebrow: 'Vorgehen',
     heading: ['Fünf Schritte -', 'transparent vom ersten Tag.'],
     steps: [
-      { n: '01', title: 'Aufnahme',  body: 'Erstanalyse: Zielbild, Stakeholder, Status, Risiken.' },
-      { n: '02', title: 'Diagnose',  body: 'Lage entlang der TOM-Dimensionen, mit klaren Hypothesen.' },
-      { n: '03', title: 'Mandat',    body: 'Rolle, Befugnisse und Erfolgskriterien verschriftlicht.' },
-      { n: '04', title: 'Lieferung', body: 'Iterative Lieferung mit schlankem Reporting.' },
-      { n: '05', title: 'Übergabe',  body: 'Sauberer Hand-over an Linie oder internes Team.' },
+      {
+        n: '01',
+        title: 'Aufnahme',
+        body: 'Erstanalyse: Zielbild, Stakeholder, Status, Risiken.',
+      },
+      {
+        n: '02',
+        title: 'Diagnose',
+        body: 'Lage entlang der TOM-Dimensionen, mit klaren Hypothesen.',
+      },
+      {
+        n: '03',
+        title: 'Mandat',
+        body: 'Rolle, Befugnisse und Erfolgskriterien verschriftlicht.',
+      },
+      {
+        n: '04',
+        title: 'Lieferung',
+        body: 'Iterative Lieferung mit schlankem Reporting.',
+      },
+      {
+        n: '05',
+        title: 'Übergabe',
+        body: 'Sauberer Hand-over an Linie oder internes Team.',
+      },
     ],
   },
-
   cases: {
     eyebrow: 'Referenzen',
     heading: ['Drei Mandate.', 'Drei sehr unterschiedliche Lagen.'],
@@ -107,25 +141,33 @@ const CONTENT = {
         role: 'Interim - PMO',
         headline: 'Eskaliertes Kernsystem-Programm stabilisiert.',
         body: 'Schadenplattform-Programm 11 Monate hinter Plan, Reporting unbrauchbar, vier Lieferanten im Konflikt. Wir haben Interim-Programmleitung übernommen, ein schlankes PMO aufgesetzt und auf ein realistisches 18-Monats-Fenster re-geplant.',
-        metric: { v: '90 Tage', l: 'bis Stabilisierung' },
+        metric: {
+          v: '90 Tage',
+          l: 'bis Stabilisierung',
+        },
       },
       {
         sector: 'Öffentliche Verwaltung',
         role: 'IT-Architektur',
         headline: 'Architektur-Zielbild für ein Bürgerportal.',
         body: 'Fachseite und IT diskutierten seit über einem Jahr ohne tragfähige Entscheidung. Wir haben drei Szenarien sauber gerechnet, eine Roadmap inkl. TCO erstellt - einstimmig im Lenkungsausschuss verabschiedet.',
-        metric: { v: '8 Wochen', l: 'bis Entscheid' },
+        metric: {
+          v: '8 Wochen',
+          l: 'bis Entscheid',
+        },
       },
       {
         sector: 'Energie',
         role: 'PMO - Projektleitung',
         headline: 'Portfolio-Cockpit aufgebaut und übergeben.',
         body: 'Vierzehn parallele IT-Vorhaben ohne gemeinsame Methodik. Wir haben ein PMO aufgebaut, das Portfolio-Cockpit etabliert und nach neun Monaten an die interne Leitung übergeben.',
-        metric: { v: '9 Monate', l: 'bis interne Übergabe' },
+        metric: {
+          v: '9 Monate',
+          l: 'bis interne Übergabe',
+        },
       },
     ],
   },
-
   sectors: {
     eyebrow: 'Branchen',
     heading: 'Breit aufgestellt.',
@@ -137,7 +179,6 @@ const CONTENT = {
       'Versicherungen',
     ],
   },
-
   team: {
     eyebrow: 'Team',
     heading: ['Ein Team aus 10+', 'Professionals.'],
@@ -146,7 +187,6 @@ const CONTENT = {
     memberName: 'Stefan Büttler',
     memberTitle: 'Gründer und Geschäftsführer',
   },
-
   contact: {
     eyebrow: 'Kontakt',
     heading: 'Sprechen wir.',
@@ -169,7 +209,6 @@ const CONTENT = {
     successTitle: 'Vielen Dank.',
     successBody: 'Wir melden uns innerhalb von 48 Stunden.',
   },
-
   footer: {
     tagline: 'Ihr Partner für IT-Beratung, Projekt-Management, IT-Architektur & Seminare.',
     addressTitle: 'Adresse',
@@ -179,14 +218,22 @@ const CONTENT = {
     phone: '061 556 10 10',
     legalTitle: 'Rechtliches',
     legalLinks: [
-      { label: 'Impressum',   href: '/impressum' },
-      { label: 'Datenschutz', href: '/datenschutz' },
-      { label: 'AGB',         href: '/agb' },
+      {
+        label: 'Impressum',
+        href: '/impressum',
+      },
+      {
+        label: 'Datenschutz',
+        href: '/datenschutz',
+      },
+      {
+        label: 'AGB',
+        href: '/agb',
+      },
     ],
     copyright: '© 2026 ONEXIS GmbH',
     slogan: 'Projects in Motion',
   },
-
 }
 
 export default CONTENT
