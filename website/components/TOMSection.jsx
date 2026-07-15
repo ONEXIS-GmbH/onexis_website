@@ -377,7 +377,7 @@ function TOMSection() {
   return (
     <>
       <section
-        id="leistungen"
+        id="erfolgsmodell"
         ref={sectionRef}
         className="tom-scroll-section"
         style={{

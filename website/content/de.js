@@ -21,23 +21,78 @@ const CONTENT = {
     cta: 'Kontakt',
   },
   hero: {
-    title: 'Ich bin Nico',
-    subtitle: 'Ändere mich',
+    title:
+      'Ihre IT-Architektur durchdacht, Ihre Projekte sicher realisiert - wir begleiten Sie von der modernen Strategie bis zum erfolgreichen Go-live.',
+    subtitle:
+      'Wir übersetzen herausfordernde IT-Strategien in funktionierende Realität: Ihr Partner für starke IT-Architekturen und nahtloses Projektmanagement.',
     ctaPrimary: 'Leistungen ansehen',
     ctaSecondary: 'Gespräch vereinbaren',
   },
   promises: {
     eyebrow: 'Was uns auszeichnet',
-    heading: ['Weil Ihre Zufriedenheit', 'unser Antrieb ist.'],
+    heading: ['Wir verkaufen', 'Vertrauen und Expertise.'],
+    columns: [
+      {
+        n: '1',
+        label: 'Was wir tun',
+        points: [
+          '**Zukunftsfähige IT-Architekturen** - massgeschneidert, präzise und skalierbar.',
+          'Zielbild, Blueprint, Realisierung - ein Partner für Ihre gesamte IT-Wertschöpfung.',
+        ],
+      },
+      {
+        n: '2',
+        label: 'Wie wir arbeiten',
+        points: [
+          '**Pragmatisch** im Ansatz, fokussiert im Handeln, partnerschaftlich im Erfolg.',
+        ],
+      },
+      {
+        n: '3',
+        label: 'Warum wir',
+        points: [
+          'Mit **20+ Jahren Projekterfolg** bringen wir agile Methoden und klassische Verlässlichkeit auf den Punkt.',
+          'Wo Ausfallsicherheit auf Innovation trifft - State-of-the-Art-Lösungen für kritische Infrastrukturen.',
+        ],
+      },
+    ],
+  },
+  services: {
+    eyebrow: 'Leistungen',
+    heading: ['Unsere Services -', 'von der Strategie bis zum Go-live.'],
     items: [
-      'Wir finden gemeinsam Lösungen.',
-      'Wir leben Termintreue.',
-      'Wir sind fokussiert auf Ihr Ziel.',
-      'Wir sind pragmatisch.',
+      {
+        name: 'IT Beratung',
+        points: [
+          'Assessments in den Bereichen IT Organisation, Architektur & Technologie, Prozesse, Skills & Profile',
+          'IT-Strategien inkl. KI',
+          'IT-Zielmodelle, Zielbild-Erarbeitung für künftiges Betriebsmodell',
+          'Technische Blueprints in den Bereichen Event-Mesh, Agentic-AI, Cloud, DevSecOps, etc',
+        ],
+      },
+      {
+        name: 'Projekt Management',
+        points: [
+          'Agiles & hybrides Projekt- und Programm-Management für Vorstudien, Konzeption, Umsetzung, Betriebsübergabe',
+          'IT-Themenfelder: Organisation, Technologie, Prozesse, Profile & Skills',
+          'Projekt Health Checks & Reviews',
+          'Leitung eskalierter Projekte',
+          'A.i. Leitung von IT-Management-Positionen, Projektleitungs- oder PMO-Funktionen',
+        ],
+      },
+      {
+        name: 'IT Architektur',
+        points: [
+          'Unterstützung beim Aufbau agil orientierter Enterprise Architekturen. Z. B. Governance, Prozesse, Prinzipien, Methodik etc.',
+          'Aufbau und Integration von Architektur-Disziplinen im Unternehmen',
+          'Erstellung von Architektur Blueprints & Konzepten für verschiedene Architektur-Disziplinen wie z. B. Integration, Applikation, Cloud, Daten etc.',
+          'Standortbestimmung IST vs Zielbild inkl. Architektur-Roadmaps, abgestimmt mit dem IT-Projekt Portfolio',
+        ],
+      },
     ],
   },
   tom: {
-    eyebrow: 'Leistungen',
+    eyebrow: 'Unser Erfolgsmodell',
     heading: ['Vier Dimensionen.', 'Ein Target Operating Model.'],
     quadrants: [
       {
@@ -132,9 +187,9 @@ const CONTENT = {
     ],
   },
   cases: {
-    eyebrow: 'Referenzen',
+    eyebrow: 'Use Cases',
     heading: ['Drei Mandate.', 'Drei sehr unterschiedliche Lagen.'],
-    intro: 'Namen unserer Kunden teilen wir auf Anfrage. Hier exemplarisch, anonymisiert - was wir konkret bewirkt haben.',
+    intro: 'Exemplarisch und anonymisiert - was wir in konkreten Mandaten bewirkt haben.',
     items: [
       {
         sector: 'Versicherungen',
@@ -168,6 +223,11 @@ const CONTENT = {
       },
     ],
   },
+  references: {
+    eyebrow: 'Referenzen',
+    heading: ['Unternehmen,', 'die auf uns zählen.'],
+    clients: ['Swissgrid', 'Repower', 'Alpiq', 'AEW', 'Immobilien Aargau'],
+  },
   sectors: {
     eyebrow: 'Branchen',
     heading: 'Breit aufgestellt.',
@@ -181,11 +241,27 @@ const CONTENT = {
   },
   team: {
     eyebrow: 'Team',
-    heading: ['Ein Team aus 10+', 'Professionals.'],
+    heading: ['Ein Team aus', 'Professionals.'],
     body: 'Wir durften in unserer Laufbahn mehr als 30 Kunden national und international bedienen und viele Mandate zum Erfolg bringen. Unser Rezept: ziel- und lösungsorientiert, klar, strukturiert und pragmatisch.',
-    memberInitials: 'SB',
-    memberName: 'Stefan Büttler',
-    memberTitle: 'Gründer und Geschäftsführer',
+    members: [
+      {
+        name: 'Stefan Büttler',
+        title: 'Gründer und Geschäftsführer',
+        img: '/team/stefan-buettler.jpg',
+      },
+      {
+        name: 'Nico Clerici',
+        img: '/team/nico-clerici.jpg',
+      },
+      {
+        name: 'Gabriel Wey',
+        img: '/team/gabriel-wey.jpg',
+      },
+      {
+        name: 'Philipp Brunner',
+        img: '/team/philipp-brunner.jpg',
+      },
+    ],
   },
   contact: {
     eyebrow: 'Kontakt',

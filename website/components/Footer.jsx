@@ -20,8 +20,6 @@ function Footer() {
           paddingBottom: 40, borderBottom: '1px solid rgba(255,255,255,.1)',
         }}>
           <div>
-            <img src="/assets/logo-negativ.svg" alt="ONEXIS"
-              style={{ height: 28, marginBottom: 18 }} />
             <p style={{
               margin: 0, fontSize: 14, color: 'var(--fg-on-dark-muted)', lineHeight: 1.7, maxWidth: 360,
             }}>

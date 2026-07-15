@@ -14,11 +14,11 @@ function Hero() {
   return (
     <section id="top" className="hero" style={{
       position: 'relative',
-      background: 'var(--onexis-anthrazit)',
-      color: '#fff',
+      background: 'var(--bg-muted)',
+      color: 'var(--fg)',
       overflow: 'hidden',
     }}>
-      <img src="/assets/logo-x-negativ.svg" alt="" aria-hidden="true"
+      <img src="/assets/logo-x.svg" alt="" aria-hidden="true"
         className="hero-watermark"
         style={{
           position: 'absolute',
@@ -29,21 +29,31 @@ function Hero() {
         }} />
 
       <div className="container-wide hero-inner" style={{ position: 'relative' }}>
-        <div className="hero-eyebrow-row" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <img src="/assets/logo.svg" alt="ONEXIS"
+          className="hero-line"
+          style={{
+            '--d': '0.05s',
+            height: 'clamp(44px, 6vw, 76px)',
+            width: 'auto',
+          }} />
+
+        <div className="hero-eyebrow-row" style={{
+          display: 'flex', alignItems: 'center', gap: 16, marginTop: 56,
+        }}>
           <span className="hero-rule" />
           <div style={{
             fontSize: 13, fontWeight: 600,
             letterSpacing: 'clamp(0.22em, 1.1vw, 0.42em)',
-            textTransform: 'uppercase', color: 'var(--accent)',
+            textTransform: 'uppercase', color: 'var(--accent-ink)',
           }}>Projects in Motion</div>
         </div>
 
         <h1 style={{
-          margin: '32px 0 0',
+          margin: '28px 0 0',
           fontWeight: 300,
-          fontSize: 'clamp(48px, 7vw, 92px)',
-          lineHeight: 1.02,
-          letterSpacing: '-0.03em',
+          fontSize: 'clamp(32px, 4.4vw, 60px)',
+          lineHeight: 1.12,
+          letterSpacing: '-0.025em',
           maxWidth: 1040,
         }}>
           <span className="hero-line" style={{ display: 'block', '--d': '0.2s' }}>
@@ -53,8 +63,8 @@ function Hero() {
 
         <p className="hero-line" style={{
           '--d': '0.55s',
-          marginTop: 36, fontSize: 19, lineHeight: 1.6,
-          color: 'var(--fg-on-dark-muted)', maxWidth: 620,
+          marginTop: 32, fontSize: 19, lineHeight: 1.6,
+          color: 'var(--fg-muted)', maxWidth: 680,
         }}>
           {c.subtitle}
         </p>
@@ -66,7 +76,7 @@ function Hero() {
           <a href="#leistungen" className="btn btn-primary">
             {c.ctaPrimary} <Arrow />
           </a>
-          <a href="#kontakt" className="btn btn-ghost-inverse">
+          <a href="#kontakt" className="btn btn-ghost">
             {c.ctaSecondary}
           </a>
         </div>

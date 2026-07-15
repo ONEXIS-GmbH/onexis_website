@@ -51,7 +51,7 @@ function Nav() {
         height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <a href="#top" aria-label="ONEXIS — Startseite" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.svg" alt="ONEXIS" style={{ height: 28 }} />
+          <img src="/assets/logo-x.svg" alt="" aria-hidden="true" style={{ height: 24 }} />
         </a>
 
         <nav className="nav-desktop" aria-label="Hauptnavigation">

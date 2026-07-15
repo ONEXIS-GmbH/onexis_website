@@ -39,7 +39,7 @@ function CaseRow({ c }) {
 function Cases() {
   const c = CONTENT.cases
   return (
-    <section id="referenzen" className="section muted">
+    <section id="use-cases" className="section muted">
       <div className="container-wide">
         <div className="eyebrow">{c.eyebrow}</div>
         <h2 className="h-section" style={{ marginTop: 16, maxWidth: 760 }}>
