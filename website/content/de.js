@@ -226,7 +226,13 @@ const CONTENT = {
   references: {
     eyebrow: 'Referenzen',
     heading: ['Unternehmen,', 'die auf uns zählen.'],
-    clients: ['Swissgrid', 'Repower', 'Alpiq', 'AEW', 'Immobilien Aargau'],
+    clients: [
+      { name: 'Swissgrid', logo: '/referenzen/sg_logo_standard_rgb_100mm.png' },
+      { name: 'Repower', logo: '/referenzen/repower_RGB.jpg' },
+      { name: 'Alpiq', logo: '/referenzen/Alpiq_intec_logo.png', scale: 1.3 },
+      { name: 'AEW', logo: '/referenzen/Logo_der_AEW_Energie_AG.png', scale: 1.5 },
+      { name: 'Immobilien Aargau' },
+    ],
   },
   sectors: {
     eyebrow: 'Branchen',

@@ -12,8 +12,18 @@ function References() {
         </h2>
 
         <div className="client-grid" style={{ marginTop: 48 }}>
-          {c.clients.map((name) => (
-            <div key={name} className="client-cell">{name}</div>
+          {c.clients.map((client) => (
+            <div key={client.name} className="client-cell">
+              {client.logo
+                ? <img
+                    className="client-logo"
+                    src={client.logo}
+                    alt={client.name}
+                    loading="lazy"
+                    style={client.scale ? { maxHeight: `${44 * client.scale}px` } : undefined}
+                  />
+                : client.name}
+            </div>
           ))}
         </div>
       </div>

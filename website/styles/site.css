@@ -336,6 +336,12 @@ button { font: inherit; }
   color: var(--fg);
   min-width: 0;
 }
+.client-logo {
+  max-height: 44px;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
 @media (min-width: 560px)  { .client-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .client-grid { grid-template-columns: repeat(5, 1fr); } }
 
