@@ -21,10 +21,12 @@ const CONTENT = {
     cta: 'Kontakt',
   },
   hero: {
+    partnerPrefix: 'Ihr Partner für',
+    rotatingWords: ['IT-Beratung', 'Projektmanagement', 'IT-Architektur', 'Seminare'],
     title:
-      'Ihre IT-Architektur durchdacht, Ihre Projekte sicher realisiert - wir begleiten Sie von der modernen Strategie bis zum erfolgreichen Go-live.',
+      'Ihre IT-Architektur durchdacht, Ihre Projekte sicher realisiert.',
     subtitle:
-      'Wir übersetzen herausfordernde IT-Strategien in funktionierende Realität: Ihr Partner für starke IT-Architekturen und nahtloses Projektmanagement.',
+      'Wir übersetzen herausfordernde IT-Strategien in funktionierende Realität.',
     ctaPrimary: 'Leistungen ansehen',
     ctaSecondary: 'Gespräch vereinbaren',
   },

@@ -43,24 +43,27 @@ function Nav() {
         background: solid ? 'rgba(255,255,255,.9)' : 'transparent',
         backdropFilter: solid ? 'blur(14px)' : 'none',
         WebkitBackdropFilter: solid ? 'blur(14px)' : 'none',
-        borderBottom: solid ? '1px solid var(--border)' : '1px solid transparent',
-        transition: 'background 200ms, border-color 200ms',
+        boxShadow: solid ? '0 1px 0 var(--border)' : 'none',
+        transition: 'background 200ms, box-shadow 200ms',
       }}
     >
       <div className="container-wide" style={{
         height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <a href="#top" aria-label="ONEXIS — Startseite" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo-x.svg" alt="" aria-hidden="true" style={{ height: 24 }} />
+          <img src={solid ? '/assets/logo-x.svg' : '/assets/logo-x-negativ.svg'}
+            alt="" aria-hidden="true" style={{ height: 24 }} />
         </a>
 
         <nav className="nav-desktop" aria-label="Hauptnavigation">
           {c.links.map(l => (
             <a key={l.href} href={l.href} className="nav-link" style={{
-              fontSize: 14, color: 'var(--fg)', fontWeight: 500, textDecoration: 'none',
+              fontSize: 14, color: solid ? 'var(--fg)' : 'var(--fg-on-dark)',
+              fontWeight: 500, textDecoration: 'none',
             }}>{l.label}</a>
           ))}
-          <a href="#kontakt" className="btn btn-dark" style={{ padding: '10px 18px' }}>
+          <a href="#kontakt" className={`btn ${solid ? 'btn-dark' : 'btn-ghost-inverse'}`}
+            style={{ padding: '10px 18px' }}>
             {c.cta}
           </a>
         </nav>
@@ -72,6 +75,7 @@ function Nav() {
           aria-controls="mobile-nav"
           aria-label={open ? 'Menü schliessen' : 'Menü öffnen'}
           onClick={() => setOpen(o => !o)}
+          style={{ color: solid ? 'var(--fg)' : 'var(--fg-on-dark)' }}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
