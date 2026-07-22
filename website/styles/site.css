@@ -161,43 +161,77 @@ button { font: inherit; }
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
 }
-@keyframes hero-watermark-settle {
-  from { opacity: 0; transform: scale(1.04); }
-  to   { opacity: 0.05; transform: none; }
-}
-@keyframes hero-rule-grow {
-  from { width: 0; }
-  to   { width: 32px; }
-}
-
 .hero-line {
   opacity: 0;
   transform: translateY(14px);
   animation: hero-fade-up 700ms var(--ease-out) forwards;
   animation-delay: var(--d, 0s);
 }
-.hero-watermark {
-  opacity: 0;
-  animation: hero-watermark-settle 1600ms var(--ease-out) forwards;
-  animation-delay: 0.1s;
+
+/* hero X — teal arm wipes in top→bottom on first load ------- */
+.hero-x       { opacity: 0; animation: hero-x-fade 700ms var(--ease-out) 0.1s forwards; }
+.hero-x-white { fill: var(--fg-on-dark); fill-opacity: 0.12; }   /* faint watermark arm */
+.hero-x-teal  { fill: var(--onexis-blau); fill-opacity: 0.5; }   /* medium, brand accent */
+.hero-x-wipe {
+  transform: scaleY(0);
+  transform-origin: 0 0;      /* top */
+  transform-box: fill-box;
+  animation: hero-x-reveal 1400ms var(--ease-out) 0.35s forwards;
 }
-.hero-rule {
-  display: inline-block;
-  height: 1px;
-  width: 0;
-  background: var(--accent);
-  animation: hero-rule-grow 700ms var(--ease-out) forwards;
-  animation-delay: 0.05s;
+@keyframes hero-x-fade   { to { opacity: 1; } }
+@keyframes hero-x-reveal { to { transform: scaleY(1); } }
+
+.hero-x-wrap {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(240px, 44%, 600px);
+  pointer-events: none;
+}
+
+/* mobile/tablet: hide the X — no room beside the text, and behind it looks crowded */
+@media (max-width: 900px) {
+  .hero-x-wrap { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-line   { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .hero-x      { opacity: 1; animation: none; }
+  .hero-x-wipe { transform: scaleY(1); animation: none; }
+}
+
+/* hero rotating word ---------------------------------------- */
+/* All words share one grid cell; invisible ghosts size the slot
+   to the widest term so the line never reflows (zero layout shift). */
+.rotator-slot {
+  display: inline-grid;
+  overflow: hidden;
+  vertical-align: baseline;
+  line-height: 1.2;
+}
+.rotator-ghost,
+.rotator-word { grid-area: 1 / 1; }
+.rotator-ghost { visibility: hidden; }
+.rotator-word {
+  color: var(--accent);
+  font-weight: 500;
+  will-change: transform, opacity;
+}
+.rotator-word.in  { animation: rot-word-in  460ms var(--ease-out) both; }
+.rotator-word.out { animation: rot-word-out 300ms var(--ease-out) both; }
+
+@keyframes rot-word-in {
+  from { opacity: 0; transform: translateY(0.6em); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes rot-word-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-0.6em); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-line, .hero-watermark, .hero-rule {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    width: 32px;
-  }
-  .hero-watermark { opacity: 0.05 !important; }
+  .rotator-word.in,
+  .rotator-word.out { animation: none !important; }
 }
 
 /* ============================================================
@@ -301,9 +335,10 @@ button { font: inherit; }
 @media (max-width: 600px) { .section { padding: 64px 0; } .section-sm { padding: 56px 0; } }
 
 /* hero padding ---------------------------------------------- */
-.hero-inner { padding-top: 140px; padding-bottom: 140px; }
-@media (max-width: 900px) { .hero-inner { padding-top: 108px; padding-bottom: 96px; } }
-@media (max-width: 600px) { .hero-inner { padding-top: 92px;  padding-bottom: 80px; } }
+/* top padding includes the 72px nav that now overlays the hero */
+.hero-inner { padding-top: 212px; padding-bottom: 140px; }
+@media (max-width: 900px) { .hero-inner { padding-top: 180px; padding-bottom: 96px; } }
+@media (max-width: 600px) { .hero-inner { padding-top: 164px; padding-bottom: 80px; } }
 
 /* Promises — was/wie/warum three-up ------------------------- */
 .promise-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
