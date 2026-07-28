@@ -256,18 +256,25 @@ const CONTENT = {
         name: 'Stefan Büttler',
         title: 'Gründer und Geschäftsführer',
         img: '/team/stefan-buettler.jpg',
+        email: 'stefan.buettler@onexis.ch',
       },
       {
         name: 'Nico Clerici',
+        title: 'Junior Data Engineer',
         img: '/team/nico-clerici.jpg',
+        email: 'nico.clerici@onexis.ch',
       },
       {
         name: 'Gabriel Wey',
+        title: 'Projektleiter',
         img: '/team/gabriel-wey.jpg',
+        email: 'gabriel.wey@onexis.ch',
       },
       {
         name: 'Philipp Brunner',
+        title: 'Projektleiter',
         img: '/team/philipp-brunner.jpg',
+        email: 'philipp.brunner@onexis.ch',
       },
     ],
   },
@@ -317,6 +324,224 @@ const CONTENT = {
     ],
     copyright: '© 2026 ONEXIS GmbH',
     slogan: 'Projects in Motion',
+  },
+  legal: {
+    impressum: {
+      eyebrow: 'Rechtliches',
+      title: 'Impressum',
+      blocks: [
+        {
+          heading: 'Firmenname',
+          body: [
+            'ONEXIS GmbH',
+            'UID-Nr. CHE-288.852.078',
+            'MWST Nr. CHE-288.852.078 MWST',
+          ],
+        },
+        {
+          heading: 'Adresse',
+          body: [
+            'Sissacherstrasse 20',
+            '4460 Gelterkinden',
+            'Schweiz',
+          ],
+        },
+        {
+          heading: 'Telefon',
+          body: ['+41 61 556 10 10'],
+        },
+        {
+          heading: 'E-Mail',
+          body: ['info@onexis.ch'],
+        },
+        {
+          heading: 'Geschäftsführung',
+          body: [
+            'Stefan Büttler',
+            'stefan.buettler@onexis.ch',
+          ],
+        },
+      ],
+      footnote: 'Alle Angaben ohne Gewähr. Änderungen vorbehalten.',
+    },
+    datenschutz: {
+      eyebrow: 'Rechtliches',
+      title: 'Datenschutz',
+      blocks: [
+        {
+          heading: 'Datenschutzerklärung',
+          body: [
+            'Diese Datenschutzerklärung informiert, wofür, wie und wo welche Personendaten bearbeitet werden sowie welche Rechte Personen haben, deren Daten bearbeitet werden.',
+          ],
+        },
+        {
+          heading: 'Kontaktadresse für Fragen zur Datenschutzerklärung und zur Datenbearbeitung',
+          body: [
+            'Stefan Büttler',
+            'ONEXIS GmbH',
+            'Sissacherstrasse 20',
+            'CH-4460 Gelterkinden',
+            'stefan.buettler@onexis.ch',
+          ],
+        },
+        {
+          heading: 'Begriffe',
+          body: [
+            'Betroffene Person: Natürliche Person, über die wir Personendaten bearbeiten.',
+            'Personendaten: Alle Angaben, die sich auf eine bestimmte oder bestimmbare natürliche Person beziehen.',
+            'Besonders schützenswerte Personendaten: Daten über gewerkschaftliche, politische, religiöse oder weltanschauliche Ansichten und Tätigkeiten, Daten über die Gesundheit, die Intimsphäre oder die Zugehörigkeit zu einer Ethnie oder Rasse, genetische Daten, biometrische Daten, die eine natürliche Person eindeutig identifizieren, Daten über straf- und verwaltungsrechtliche Sanktionen oder Verfolgungen, und Daten über Massnahmen der sozialen Hilfe.',
+            'Bearbeiten: Jeder Umgang mit Personendaten, unabhängig von den angewandten Mitteln und Verfahren, beispielsweise das Abfragen, Abgleichen, Anpassen, Archivieren, Aufbewahren, Auslesen, Bekanntgeben, Beschaffen, Erfassen, Erheben, Löschen, Offenlegen, Ordnen, Organisieren, Speichern, Verändern, Verbreiten, Verknüpfen, Vernichten und Verwenden von Personendaten.',
+          ],
+        },
+        {
+          heading: 'Rechtsgrundlagen',
+          body: [
+            'Wir bearbeiten Personendaten im Einklang mit dem schweizerischen Datenschutzrecht wie insbesondere dem Bundesgesetz über den Datenschutz (Datenschutzgesetz, DSG) und der Verordnung über den Datenschutz (Datenschutzverordnung, DSV).',
+          ],
+        },
+        {
+          heading: 'Art, Umfang und Zweck der Bearbeitung von Personendaten',
+          body: [
+            'Wir bearbeiten jene Personendaten, die erforderlich sind, um unsere Aktivitäten und Tätigkeiten dauerhaft, menschenfreundlich, sicher und zuverlässig ausüben zu können. Die bearbeiteten Personendaten können insbesondere in die Kategorien von Browser- und Gerätedaten, Inhaltsdaten, Kommunikationsdaten, Metadaten, Nutzungsdaten, Stammdaten einschliesslich Bestandes- und Kontaktdaten, Standortdaten, Transaktionsdaten, Vertragsdaten und Zahlungsdaten fallen.',
+          ],
+        },
+        {
+          heading: 'Bekanntgabe von Personendaten',
+          body: [
+            'Wir können Personendaten an Dritte bekanntgeben, durch Dritte bearbeiten lassen oder gemeinsam mit Dritten bearbeiten. Bei solchen Dritten handelt es sich insbesondere um spezialisierte Anbieter, deren Leistungen wir in Anspruch nehmen.',
+          ],
+        },
+        {
+          heading: 'Kommunikation',
+          body: [
+            'Wir bearbeiten Personendaten, um mit einzelnen Personen sowie mit Behörden, Organisationen und Unternehmen kommunizieren zu können. Dabei bearbeiten wir insbesondere Daten, die uns eine betroffene Person bei der Kontaktaufnahme übermittelt, beispielsweise per Briefpost oder E-Mail.',
+          ],
+        },
+        {
+          heading: 'Datensicherheit',
+          body: [
+            'Wir treffen geeignete technische und organisatorische Massnahmen, um eine dem jeweiligen Risiko angemessene Datensicherheit zu gewährleisten. Mit unseren Massnahmen gewährleisten wir insbesondere die Vertraulichkeit, Verfügbarkeit, Nachvollziehbarkeit und Integrität der bearbeiteten Personendaten.',
+          ],
+        },
+        {
+          heading: 'Rechte von betroffenen Personen',
+          body: [
+            'Wir gewähren betroffenen Personen sämtliche Ansprüche gemäss dem anwendbaren Datenschutzrecht. Betroffene Personen verfügen insbesondere über folgende Rechte:',
+            'Auskunft: Betroffene Personen können Auskunft verlangen, ob wir Personendaten über sie bearbeiten.',
+            'Berichtigung und Einschränkung: Betroffene Personen können unrichtige Personendaten berichtigen lassen.',
+            'Löschung und Widerspruch: Betroffene Personen können Personendaten löschen lassen («Recht auf Vergessen»).',
+            'Datenherausgabe und Datenübertragung: Betroffene Personen können die Herausgabe von Personendaten verlangen.',
+          ],
+        },
+        {
+          heading: 'Nutzung der ONEXIS Website',
+          body: [
+            'Cookies: Wir können Cookies verwenden. Bei Cookies – eigenen Cookies (First-Party-Cookies) als auch Cookies von Dritten, deren Dienste wir nutzen (Third-Party-Cookies) – handelt es sich um Daten, die im Browser gespeichert werden.',
+            'Protokollierung: Wir können für jeden Zugriff auf unsere Website mindestens folgende Angaben protokollieren: Datum und Zeit, IP-Adresse, Zugriffsstatus, Betriebssystem, Browser, aufgerufene Seite und übertragene Datenmenge.',
+          ],
+        },
+        {
+          heading: 'Social Media',
+          body: [
+            'Wir sind auf Social Media-Plattformen präsent, um mit interessierten Personen kommunizieren sowie über unsere Aktivitäten informieren zu können. Es gelten jeweils auch die Bestimmungen der einzelnen Plattformen.',
+          ],
+        },
+        {
+          heading: 'Dienste von Dritten',
+          body: [
+            'Wir nutzen Dienste von spezialisierten Dritten, um unsere Aktivitäten dauerhaft, sicher und zuverlässig ausüben zu können. Wir nutzen insbesondere:',
+            'Dienste von Google: Google LLC (USA) / Google Ireland Limited (Irland)',
+            'Dienste von Microsoft: Microsoft Ireland Operations Limited (Irland) / Microsoft Corporation (USA)',
+            'Diese Datenschutzerklärung kann jederzeit aktualisiert werden. Aktualisierungen werden in geeigneter Form, insbesondere durch die Veröffentlichung der jeweils aktuellen Datenschutzerklärung, auf dieser Website mitgeteilt.',
+          ],
+        },
+      ],
+    },
+    agb: {
+      eyebrow: 'Rechtliches',
+      title: 'AGB',
+      blocks: [
+        {
+          heading: 'Unser Service-Portfolio',
+          body: [
+            'IT Beratung',
+            'IT Projekt Management',
+            'IT Architektur',
+            'Leadership- und Resilienz-Trainings',
+          ],
+        },
+        {
+          heading: 'Vertragsabschluss',
+          body: [
+            'Ein Vertrag kommt dann zustande, wenn das Angebot von ONEXIS schriftlich oder elektronisch bestätigt wurde.',
+          ],
+        },
+        {
+          heading: 'Anwendung der AGB’s',
+          body: [
+            'Sofern nichts anderes vereinbart wird, gelten jeweils die AGB der ONEXIS GmbH. Ergänzende Bedingungen oder die AGB’s eines Auftraggebers gelten nur bei ausdrücklicher schriftlicher Anerkennung.',
+          ],
+        },
+        {
+          heading: 'Partner und Subunternehmner',
+          body: [
+            'Subunternehmer und Partner können zur Leistungserbringung eingesetzt werden.',
+          ],
+        },
+        {
+          heading: 'Preise und Zahlungen',
+          body: [
+            'Als Standardwährung gilt Schweizerfranken (CHF). Bei internationalen Verträgen kann die Währung des Firmensitzes vom Auftraggeber zum Einsatz kommen.',
+            'Genannte Beträge in Angeboten gelten jeweils exklusive Mehrwertsteuer.',
+            'Zahlungsziel sind 30 Tage',
+            'Verzugszins 5 % p.a.',
+          ],
+        },
+        {
+          heading: 'Kündigungsrecht',
+          body: [
+            'Verträge sind, wenn nicht anders vereinbart, jederzeit kündbar. Bis dahin geleistete Stunden sind durch den Auftraggeber zu begleichen.',
+          ],
+        },
+        {
+          heading: 'Haftung & Gewährleistung',
+          body: [
+            'Eine Haftung ist nur bei grober Fahrlässigkeit oder Vorsatz gegeben. Es gilt keine Haftung für indirekte Schäden oder entgangenen Gewinn.',
+          ],
+        },
+        {
+          heading: 'Urheberrecht',
+          body: [
+            'Alle Materialien, Präsentationen und Softwarelösungen sind urheberrechtlich geschützt. Eine Weitergabe ohne schriftliche Zustimmung ist nicht erlaubt.',
+          ],
+        },
+        {
+          heading: 'Datenschutz',
+          body: [
+            'Die Datenverarbeitung erfolgt gemäss Schweizer DSG und EU-DSGVO. Details sind der Datenschutzerklärung zu entnehmen.',
+          ],
+        },
+        {
+          heading: 'Anwendbares Recht',
+          body: [
+            'Es gilt ausschliesslich Schweizer Recht.',
+          ],
+        },
+        {
+          heading: 'Gerichtsstand',
+          body: [
+            'Gerichtsstand ist der Sitz der ONEXIS GmbH in CH-4460 Gelterkinden.',
+          ],
+        },
+        {
+          heading: 'Salvatorische Klausel',
+          body: [
+            'Sollten einzelne Bestimmungen dieser AGB unwirksam oder undurchführbar sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt. Die unwirksame Bestimmung wird durch eine solche ersetzt, die dem wirtschaftlichen Zweck am nächsten kommt.',
+          ],
+        },
+      ],
+      footnote: 'Alle Angaben erfolgen ohne Gewähr. Änderungen vorbehalten.',
+    },
   },
 }
 
