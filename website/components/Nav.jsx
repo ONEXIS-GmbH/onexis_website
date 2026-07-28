@@ -1,7 +1,7 @@
 import React from 'react'
 import CONTENT from '../content/de.js'
 
-function Nav() {
+function Nav({ hrefPrefix = '' }) {
   const c = CONTENT.nav
   const [scrolled, setScrolled] = React.useState(false)
   const [open, setOpen] = React.useState(false)
@@ -50,19 +50,19 @@ function Nav() {
       <div className="container-wide" style={{
         height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
-        <a href="#top" aria-label="ONEXIS — Startseite" style={{ display: 'flex', alignItems: 'center' }}>
+        <a href={`${hrefPrefix}#top`} aria-label="ONEXIS — Startseite" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={solid ? '/assets/logo-x.svg' : '/assets/logo-x-negativ.svg'}
             alt="" aria-hidden="true" style={{ height: 24 }} />
         </a>
 
         <nav className="nav-desktop" aria-label="Hauptnavigation">
           {c.links.map(l => (
-            <a key={l.href} href={l.href} className="nav-link" style={{
+            <a key={l.href} href={`${hrefPrefix}${l.href}`} className="nav-link" style={{
               fontSize: 14, color: solid ? 'var(--fg)' : 'var(--fg-on-dark)',
               fontWeight: 500, textDecoration: 'none',
             }}>{l.label}</a>
           ))}
-          <a href="#kontakt" className={`btn ${solid ? 'btn-dark' : 'btn-ghost-inverse'}`}
+          <a href={`${hrefPrefix}#kontakt`} className={`btn ${solid ? 'btn-dark' : 'btn-ghost-inverse'}`}
             style={{ padding: '10px 18px' }}>
             {c.cta}
           </a>
@@ -90,11 +90,11 @@ function Nav() {
         <nav id="mobile-nav" className="nav-panel" aria-label="Hauptnavigation">
           <div className="container-wide" style={{ display: 'flex', flexDirection: 'column' }}>
             {c.links.map(l => (
-              <a key={l.href} href={l.href} className="nav-link" onClick={() => setOpen(false)}>
+              <a key={l.href} href={`${hrefPrefix}${l.href}`} className="nav-link" onClick={() => setOpen(false)}>
                 {l.label}
               </a>
             ))}
-            <a href="#kontakt" className="btn btn-dark" onClick={() => setOpen(false)}>
+            <a href={`${hrefPrefix}#kontakt`} className="btn btn-dark" onClick={() => setOpen(false)}>
               {c.cta}
             </a>
           </div>

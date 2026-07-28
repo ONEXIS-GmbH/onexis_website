@@ -38,6 +38,17 @@ function Team() {
                     {m.title}
                   </div>
                 )}
+                {m.email && (
+                  <a
+                    href={`mailto:${m.email}`}
+                    style={{
+                      display: 'inline-block', marginTop: 6, fontSize: 13,
+                      color: 'var(--accent-ink)', textDecoration: 'none',
+                    }}
+                  >
+                    {m.email}
+                  </a>
+                )}
               </figcaption>
             </figure>
           ))}

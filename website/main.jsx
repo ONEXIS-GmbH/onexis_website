@@ -12,10 +12,18 @@ import Team from './components/Team.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 import XDivider from './components/XDivider.jsx'
+import LegalPage from './components/LegalPage.jsx'
 import './styles/tokens.css'
 import './styles/site.css'
 
-function App() {
+// Rechtsseiten-Routen (Cloudflare-Pages-SPA, siehe public/_redirects).
+const LEGAL_ROUTES = {
+  '/impressum': 'impressum',
+  '/datenschutz': 'datenschutz',
+  '/agb': 'agb',
+}
+
+function Home() {
   return (
     <>
       <Nav />
@@ -42,6 +50,12 @@ function App() {
       <Footer />
     </>
   )
+}
+
+function App() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  const legalPage = LEGAL_ROUTES[path]
+  return legalPage ? <LegalPage page={legalPage} /> : <Home />
 }
 
 createRoot(document.getElementById('app')).render(<App />)
