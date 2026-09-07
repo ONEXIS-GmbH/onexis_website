@@ -6,6 +6,10 @@ website/dist/
 website/node_modules/
 website/package-lock.json
 
+# Raw design source assets — too large to ship, keep the optimized
+# hero-bg-*.webp/jpg derivatives (website/scripts/make-hero-bg.sh) instead
+website/public/assets/Background_2_kurve.jpg
+
 # IDE & tool configs
 .cursor/
 .agents/
