@@ -12,19 +12,38 @@ function References() {
         </h2>
 
         <div className="client-grid" style={{ marginTop: 48 }}>
-          {c.clients.map((client) => (
-            <div key={client.name} className="client-cell">
-              {client.logo
-                ? <img
-                    className="client-logo"
-                    src={client.logo}
-                    alt={client.name}
-                    loading="lazy"
-                    style={client.scale ? { maxHeight: `${44 * client.scale}px` } : undefined}
-                  />
-                : client.name}
-            </div>
-          ))}
+          {c.clients.map((client) => {
+            if (!client.logo) {
+              return <div key={client.name} className="client-cell">{client.name}</div>
+            }
+            const logo = (
+              <img
+                className="client-logo"
+                src={client.logo}
+                alt={client.name}
+                loading="lazy"
+                decoding="async"
+                width={client.w}
+                height={client.h}
+                style={client.scale ? { maxHeight: `${44 * client.scale}px` } : undefined}
+              />
+            )
+            return (
+              <div key={client.name} className="client-cell">
+                {client.url
+                  ? <a
+                      className="client-link"
+                      href={client.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${client.name} – Website öffnen (neuer Tab)`}
+                    >
+                      {logo}
+                    </a>
+                  : logo}
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

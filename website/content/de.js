@@ -6,10 +6,6 @@ const CONTENT = {
         label: 'Leistungen',
       },
       {
-        href: '#vorgehen',
-        label: 'Vorgehen',
-      },
-      {
         href: '#referenzen',
         label: 'Referenzen',
       },
@@ -59,36 +55,140 @@ const CONTENT = {
       },
     ],
   },
-  services: {
-    eyebrow: 'Leistungen',
-    heading: ['Unsere Services -', 'von der Strategie bis zum Go-live.'],
-    items: [
+  // Leistungen: Single Source of Truth für den Startseiten-Teaser
+  // (Services.jsx) UND die Übersichtsseite /leistungen (LeistungenPage.jsx).
+  // Struktur: 3 Säulen → Services. `items` = Leaf-Themen aus dem Board;
+  // sie sind erfasst, werden aktuell aber nicht gerendert (Q3: Name + Satz).
+  leistungen: {
+    // -- Startseiten-Teaser (#leistungen) --------------------
+    teaser: {
+      eyebrow: 'Leistungen',
+      heading: ['Ein Partner', 'für Ihre gesamte IT-Wertschöpfung.'],
+      intro:
+        'Von der Analyse über die Umsetzung bis zur Befähigung - drei Felder, ein durchgängiger Ansatz.',
+      cta: 'Alle Leistungen ansehen',
+      href: '/leistungen',
+    },
+    // -- Übersichtsseite /leistungen -------------------------
+    hero: {
+      eyebrow: 'Leistungen',
+      title: 'Projects in Motion',
+      subtitle:
+        'Von der Analyse über die Umsetzung bis zur Befähigung - unser Leistungsspektrum entlang Ihrer IT-Wertschöpfung.',
+    },
+    contact: {
+      text: 'Nicht sicher, welche Leistung zu Ihrem Vorhaben passt?',
+      button: 'Erstgespräch vereinbaren',
+      href: '/#kontakt',
+    },
+    pillars: [
       {
-        name: 'IT Beratung',
-        points: [
-          'Assessments in den Bereichen IT Organisation, Architektur & Technologie, Prozesse, Skills & Profile',
-          'IT-Strategien inkl. KI',
-          'IT-Zielmodelle, Zielbild-Erarbeitung für künftiges Betriebsmodell',
-          'Technische Blueprints in den Bereichen Event-Mesh, Agentic-AI, Cloud, DevSecOps, etc',
+        id: 'assess-design',
+        name: 'Assess & Design',
+        tagline: 'Standortbestimmung und Zielbild - bevor investiert wird.',
+        intro:
+          'Wir klären, wo Ihre IT steht und wohin sie soll - mit belastbaren Assessments und einem Zielbild, auf das sich investieren lässt.',
+        services: [
+          {
+            name: 'IT Orga',
+            body: 'Service-Orientierung, Zielmodelle und IT-Strategie - die Organisation, die Ihre Vorhaben trägt.',
+            items: ['Service-Orientierung', 'Zielmodelle', 'IT-Strategie'],
+          },
+          {
+            name: 'IT Prozess & Daten',
+            body: 'Prozesse und Datenhaushalt, die verlässlich liefern - von ITIL bis Data Governance.',
+            items: [
+              'IT-Service Management',
+              'ITIL',
+              'Business Process Automation - Konzept',
+              'Data Governance',
+              'Data Management',
+            ],
+          },
+          {
+            name: 'IT Arch. & Technologie',
+            body: 'Architektur, die das nächste Vorhaben trägt - und die fünf danach.',
+            items: [
+              'Tech-Radar',
+              'Blueprints (Integration, Daten, Application, Cloud)',
+              'Enterprise Architekturen',
+              'Architektur-Disziplinen',
+              'Architektur-Assessments & Zielbild',
+            ],
+          },
+          {
+            name: 'People & Skills',
+            body: 'Die richtigen Profile, gezielt aufgebaut - Zielprofile, Hiring und Change.',
+            items: ['Zielprofile', 'Up-Skilling & Hiring', 'Transformation & Change Management'],
+          },
         ],
       },
       {
-        name: 'Projekt Management',
-        points: [
-          'Agiles & hybrides Projekt- und Programm-Management für Vorstudien, Konzeption, Umsetzung, Betriebsübergabe',
-          'IT-Themenfelder: Organisation, Technologie, Prozesse, Profile & Skills',
-          'Projekt Health Checks & Reviews',
-          'Leitung eskalierter Projekte',
-          'A.i. Leitung von IT-Management-Positionen, Projektleitungs- oder PMO-Funktionen',
+        id: 'execute-deliver',
+        name: 'Execute & Deliver',
+        tagline: 'Umsetzung mit ruhiger Hand, sauber in den Betrieb übergeben.',
+        intro:
+          'Wir führen Vorhaben ins Ziel - mit Steuerung, die trägt, und einer Übergabe, die den Betrieb nicht überrascht.',
+        services: [
+          {
+            name: 'Projekt & Programm Management',
+            body: 'Von der Vorstudie bis zur Betriebsübergabe - klassisch, agil oder hybrid.',
+            items: [
+              'Health-Check & Reviews',
+              'Projekt-Rettung',
+              'Projekt/Programm-Leitung',
+              'Strategie & Blueprint umsetzen',
+            ],
+          },
+          {
+            name: 'Projekt Management Office',
+            body: 'Steuerung, Reporting, Eskalation - das PMO, das Ordnung ins Portfolio bringt.',
+            items: [],
+          },
+          {
+            name: 'Product & Service Ownership',
+            body: 'Verantwortung für Produkt und Service - mit klarem Mandat und Übergabe.',
+            items: [],
+          },
+          {
+            name: 'Talent-Pool',
+            body: 'Senior-Köpfe auf Zeit - a.i.-Positionen, Personalverleih, Dienstleistung.',
+            items: ['ad interim - IT-Positionen', 'Personalverleih', 'Dienstleistung basiert'],
+          },
+          {
+            name: 'Architecture as a Service',
+            body: 'Flexibles Architektur-Modell on demand - Kompetenz, wenn Sie sie brauchen.',
+            items: ['flexibles Architekturmodell - on demand'],
+          },
+          {
+            name: 'Data & AI',
+            body: 'Von der Datenanalyse zum produktiven KI-Einsatz - Engineering, Dashboards, Automation.',
+            items: ['AI Engineering', 'Datenanalyse', 'Dashboards', 'Business Process Automation'],
+          },
+          {
+            name: 'Product Evaluation',
+            body: 'Die richtige Lösung, objektiv gewählt - Market Screening und Empfehlung.',
+            items: ['Market Screening', 'Product Recommendation'],
+          },
         ],
       },
       {
-        name: 'IT Architektur',
-        points: [
-          'Unterstützung beim Aufbau agil orientierter Enterprise Architekturen. Z. B. Governance, Prozesse, Prinzipien, Methodik etc.',
-          'Aufbau und Integration von Architektur-Disziplinen im Unternehmen',
-          'Erstellung von Architektur Blueprints & Konzepten für verschiedene Architektur-Disziplinen wie z. B. Integration, Applikation, Cloud, Daten etc.',
-          'Standortbestimmung IST vs Zielbild inkl. Architektur-Roadmaps, abgestimmt mit dem IT-Projekt Portfolio',
+        id: 'empower',
+        name: 'Empower',
+        tagline: 'Wissen, das bleibt - befähigen statt Abhängigkeit.',
+        intro:
+          'Wir bringen Senior-Wissen ins Team und lassen es dort - als Seminar oder als Workshop, der Bewegung erzeugt.',
+        services: [
+          {
+            name: 'Seminare',
+            body: 'Resilienz, Leadership, Empowerment - Senior-Wissen als Inhouse-Seminar.',
+            items: ['Resilienz', 'Leadership', 'Empowerment'],
+          },
+          {
+            name: 'Workshops',
+            body: 'Vom TOM Canvas bis Lego Serious Play - Workshops, die Bewegung bringen.',
+            items: ['Lego Serious Play', 'AI Potential & Ideation', 'Process Discovery', 'TOM Canvas'],
+          },
         ],
       },
     ],
@@ -136,24 +236,6 @@ const CONTENT = {
           'Zielbild und Plattform-Strategie',
           'Vendor- und Tech-Stack-Reviews',
         ],
-      },
-    ],
-    services: [
-      {
-        name: 'Projektleitung',
-        body: 'Von der Planung bis zur Betriebsübergabe - verlässlich zum Ziel.',
-      },
-      {
-        name: 'Health Check',
-        body: 'Klarheit in zwei bis vier Wochen, wenn ein Projekt wackelt.',
-      },
-      {
-        name: 'Interim',
-        body: 'Verantwortung auf Zeit, mit klarem Mandat und Übergabe.',
-      },
-      {
-        name: 'PMO',
-        body: 'Aufbau und Betrieb eines wirkungsvollen Portfolio-Cockpits.',
       },
     ],
   },
@@ -228,11 +310,13 @@ const CONTENT = {
   references: {
     eyebrow: 'Referenzen',
     heading: ['Unternehmen,', 'die auf uns zählen.'],
+    // w/h = Originalmasse der Datei. Nur damit der Browser das Seitenverhältnis
+    // kennt, bevor das (lazy geladene) Logo da ist — sonst springt das Raster.
     clients: [
-      { name: 'Swissgrid', logo: '/referenzen/sg_logo_standard_rgb_100mm.png' },
-      { name: 'Repower', logo: '/referenzen/repower_RGB.jpg' },
-      { name: 'Alpiq', logo: '/referenzen/Alpiq_intec_logo.png', scale: 1.3 },
-      { name: 'AEW', logo: '/referenzen/Logo_der_AEW_Energie_AG.png', scale: 1.5 },
+      { name: 'Swissgrid', logo: '/referenzen/sg_logo_standard_rgb_100mm.png', w: 1182, h: 288, url: 'https://www.swissgrid.ch' },
+      { name: 'Repower', logo: '/referenzen/repower_RGB.jpg', w: 1181, h: 213, url: 'https://www.repower.ch' },
+      { name: 'Alpiq', logo: '/referenzen/Alpiq_intec_logo.png', w: 1654, h: 791, scale: 1.3, url: 'https://www.alpiq.com' },
+      { name: 'AEW', logo: '/referenzen/Logo_der_AEW_Energie_AG.png', w: 2011, h: 1394, scale: 1.5, url: 'https://www.aew.ch' },
       { name: 'Immobilien Aargau' },
     ],
   },
@@ -259,12 +343,6 @@ const CONTENT = {
         email: 'stefan.buettler@onexis.ch',
       },
       {
-        name: 'Nico Clerici',
-        title: 'Junior Data Engineer',
-        img: '/team/nico-clerici.jpg',
-        email: 'nico.clerici@onexis.ch',
-      },
-      {
         name: 'Gabriel Wey',
         title: 'Projektleiter',
         img: '/team/gabriel-wey.jpg',
@@ -275,6 +353,12 @@ const CONTENT = {
         title: 'Projektleiter',
         img: '/team/philipp-brunner.jpg',
         email: 'philipp.brunner@onexis.ch',
+      },
+      {
+        name: 'Nico Clerici',
+        title: 'Junior Data Engineer',
+        img: '/team/nico-clerici.jpg',
+        email: 'nico.clerici@onexis.ch',
       },
     ],
   },
@@ -293,10 +377,12 @@ const CONTENT = {
     labelLastName: 'Nachname',
     labelEmail: 'E-Mail',
     labelMessage: 'Mitteilung',
+    requiredNote: 'Alle Felder werden benötigt.',
     labelSubmit: 'Senden',
     sending: 'Wird gesendet …',
     errRequired: 'Bitte ausfüllen.',
     errEmail: 'Bitte eine gültige E-Mail-Adresse angeben.',
+    errSend: 'Senden fehlgeschlagen. Bitte später erneut versuchen oder direkt an kontakt@onexis.ch schreiben.',
     successTitle: 'Vielen Dank.',
     successBody: 'Wir melden uns innerhalb von 48 Stunden.',
   },

@@ -4,15 +4,15 @@ import Hero from './components/Hero.jsx'
 import Promises from './components/Promises.jsx'
 import Services from './components/Services.jsx'
 import TOMSection from './components/TOMSection.jsx'
-import Vorgehen from './components/Vorgehen.jsx'
 import Cases from './components/Cases.jsx'
 import References from './components/References.jsx'
-import Sectors from './components/Sectors.jsx'
 import Team from './components/Team.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 import XDivider from './components/XDivider.jsx'
 import LegalPage from './components/LegalPage.jsx'
+import LeistungenPage from './components/LeistungenPage.jsx'
+import { applyRouteMeta } from './content/meta.js'
 import './styles/tokens.css'
 import './styles/site.css'
 
@@ -26,25 +26,21 @@ const LEGAL_ROUTES = {
 function Home() {
   return (
     <>
-      <Nav />
+      <Nav heroLight />
       <main id="main-content">
         <Hero />
         <Services />
         <XDivider />
-        <Vorgehen />
-        <XDivider />
-        <TOMSection />
-        <XDivider />
         <Promises />
-        <XDivider />
+        <XDivider muted/>
+        <TOMSection />
+        <XDivider muted/>
         <Cases />
         <XDivider />
         <References />
-        <XDivider />
-        <Sectors />
-        <XDivider />
+        <XDivider muted />
         <Team />
-        <XDivider />
+        <XDivider muted />
         <Contact />
       </main>
       <Footer />
@@ -54,6 +50,8 @@ function Home() {
 
 function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  applyRouteMeta(path)
+  if (path === '/leistungen') return <LeistungenPage />
   const legalPage = LEGAL_ROUTES[path]
   return legalPage ? <LegalPage page={legalPage} /> : <Home />
 }

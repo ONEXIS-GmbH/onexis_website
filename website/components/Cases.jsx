@@ -39,7 +39,7 @@ function CaseRow({ c }) {
 function Cases() {
   const c = CONTENT.cases
   return (
-    <section id="use-cases" className="section muted">
+    <section id="use-cases" className="section">
       <div className="container-wide">
         <div className="eyebrow">{c.eyebrow}</div>
         <h2 className="h-section" style={{ marginTop: 16, maxWidth: 760 }}>
@@ -53,7 +53,7 @@ function Cases() {
           {c.intro}
         </p>
 
-        <div style={{ marginTop: 40, borderBottom: '1px solid var(--border)' }}>
+        <div style={{ marginTop: 40 }}>
           {c.items.map((item, i) => <CaseRow key={i} c={item} />)}
         </div>
       </div>

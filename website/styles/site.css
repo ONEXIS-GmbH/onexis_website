@@ -6,13 +6,20 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+/* Smooth scrolling is motion too: an anchor jump animates the whole viewport,
+   which is exactly what motion-sensitive users ask us to stop. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 img { display: block; max-width: 100%; }
 button { font: inherit; }
 
 /* container helpers ----------------------------------------- */
-.container        { max-width: var(--container-default); margin: 0 auto; padding: 0 32px; }
-.container-wide   { max-width: var(--container-wide);    margin: 0 auto; padding: 0 32px; }
-.container-narrow { max-width: var(--container-narrow);  margin: 0 auto; padding: 0 32px; }
+/* Inline padding uses max(…, env(safe-area-inset-*)) so that with
+   viewport-fit=cover the copy clears the notch in landscape. */
+.container        { max-width: var(--container-default); margin: 0 auto; padding-inline: max(32px, env(safe-area-inset-left)) max(32px, env(safe-area-inset-right)); }
+.container-wide   { max-width: var(--container-wide);    margin: 0 auto; padding-inline: max(32px, env(safe-area-inset-left)) max(32px, env(safe-area-inset-right)); }
+.container-narrow { max-width: var(--container-narrow);  margin: 0 auto; padding-inline: max(32px, env(safe-area-inset-left)) max(32px, env(safe-area-inset-right)); }
 
 /* section spacing ------------------------------------------- */
 .section          { padding: 128px 0; position: relative; }
@@ -113,6 +120,10 @@ button { font: inherit; }
 }
 .btn-ghost-inverse:hover { background: rgba(255,255,255,.06); }
 
+/* (Der frühere .section.inverse-Button-Guard ist weggefallen: tokens.css
+   färbt dort jetzt nur noch `a:not(.btn)`, also an der Wurzel statt im
+   Nachhinein.) */
+
 /* arrow glyph used in CTAs --------------------------------- */
 .arrow {
   width: 14px; height: 14px;
@@ -156,6 +167,63 @@ button { font: inherit; }
   border-color: var(--border-strong);
 }
 
+/* ============================================================
+   Dark hero band — shared by the Startseite and /leistungen.
+   The teal glow is positioned per instance via --glow-*; the band
+   bleeds up under the transparent nav so the negative logo reads.
+   ============================================================ */
+.hero-dark {
+  position: relative;
+  margin-top: calc(-1 * var(--nav-h));
+  color: var(--fg-on-dark);
+  overflow: hidden;
+  background:
+    radial-gradient(var(--glow-w, 62%) var(--glow-h, 78%)
+        at var(--glow-x, 76%) var(--glow-y, 50%),
+      color-mix(in srgb, var(--onexis-blau) var(--glow-core, 42%), transparent) 0%,
+      color-mix(in srgb, var(--onexis-blau) var(--glow-mid, 9%), transparent) 44%,
+      transparent 68%),
+    var(--onexis-anthrazit);
+}
+.hero-dark--leistungen {
+  --glow-w: 58%; --glow-h: 74%;
+  --glow-x: 78%; --glow-y: 42%;
+  --glow-core: 34%; --glow-mid: 7%;
+}
+/* On /leistungen, under 900px the glow washes straight through the copy —
+   measured 4.09:1 on a 390px viewport, below the 4.5:1 floor. Lift it above
+   the text block: atmosphere overhead, clean ground under the type. (The
+   Startseite hero replaces this background entirely — see
+   .hero-dark--image — so this only affects .hero-dark--leistungen.) */
+@media (max-width: 900px) {
+  .hero-dark { --glow-y: 10%; }
+}
+
+/* Startseite hero: photo, shown plain --------------------- */
+.hero-dark--image {
+  background: var(--onexis-anthrazit);
+  /* Fills the start screen exactly, on any viewport — dvh (not vh) tracks
+     mobile browser chrome showing/hiding. min- (not a fixed height) so a
+     very short window grows the section instead of clipping the CTAs.
+     justify-content centers .hero-inner's padded block in the extra room
+     instead of pinning it to the top with empty space below. */
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 50%;
+}
+.hero-dark--image .hero-inner { position: relative; z-index: 1; }
+
 /* hero entrance --------------------------------------------- */
 @keyframes hero-fade-up {
   from { opacity: 0; transform: translateY(14px); }
@@ -164,40 +232,12 @@ button { font: inherit; }
 .hero-line {
   opacity: 0;
   transform: translateY(14px);
-  animation: hero-fade-up 700ms var(--ease-out) forwards;
+  animation: hero-fade-up var(--dur-entrance) var(--ease-out) forwards;
   animation-delay: var(--d, 0s);
 }
 
-/* hero X — teal arm wipes in top→bottom on first load ------- */
-.hero-x       { opacity: 0; animation: hero-x-fade 700ms var(--ease-out) 0.1s forwards; }
-.hero-x-white { fill: var(--fg-on-dark); fill-opacity: 0.12; }   /* faint watermark arm */
-.hero-x-teal  { fill: var(--onexis-blau); fill-opacity: 0.5; }   /* medium, brand accent */
-.hero-x-wipe {
-  transform: scaleY(0);
-  transform-origin: 0 0;      /* top */
-  transform-box: fill-box;
-  animation: hero-x-reveal 1400ms var(--ease-out) 0.35s forwards;
-}
-@keyframes hero-x-fade   { to { opacity: 1; } }
-@keyframes hero-x-reveal { to { transform: scaleY(1); } }
-
-.hero-x-wrap {
-  position: absolute;
-  right: 2%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: clamp(240px, 44%, 600px);
-  pointer-events: none;
-}
-
-/* mobile/tablet: hide the X — no room beside the text, and behind it looks crowded */
-@media (max-width: 900px) {
-  .hero-x-wrap { display: none; }
-}
 @media (prefers-reduced-motion: reduce) {
   .hero-line   { animation: none !important; opacity: 1 !important; transform: none !important; }
-  .hero-x      { opacity: 1; animation: none; }
-  .hero-x-wipe { transform: scaleY(1); animation: none; }
 }
 
 /* hero rotating word ---------------------------------------- */
@@ -213,7 +253,9 @@ button { font: inherit; }
 .rotator-word { grid-area: 1 / 1; }
 .rotator-ghost { visibility: hidden; }
 .rotator-word {
-  color: var(--accent);
+  /* --accent (#62BDCC) is only 2.2:1 as text — see tokens.css — so the
+     rotating word uses the darkened, AA-safe ink variant instead */
+  color: var(--accent-ink);
   font-weight: 500;
   will-change: transform, opacity;
 }
@@ -238,7 +280,12 @@ button { font: inherit; }
    X divider — the ONEXIS X breaking a hairline between sections
    Draws its outline then fills in as it scrolls into view.
    ============================================================ */
+/* Vollbreites Band trägt die Hintergrundfarbe (matcht die Sektion darüber),
+   damit der Divider zwischen zwei grauen Sektionen keinen weissen Streifen
+   und an Farbgrenzen keine schwebende Naht erzeugt. */
+.x-divider-band { width: 100%; display: flex; justify-content: center; }
 .x-divider {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 22px;
@@ -252,9 +299,9 @@ button { font: inherit; }
   background: var(--border);
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 900ms var(--ease-out);
+  transition: transform var(--dur-reveal) var(--ease-out);
 }
-.x-divider.is-in .x-divider-rule { transform: scaleX(1); }
+.x-divider-band.is-in .x-divider-rule { transform: scaleX(1); }
 
 .x-divider-mark {
   flex: none;
@@ -263,9 +310,10 @@ button { font: inherit; }
   overflow: visible;
   transform: scale(0.9) rotate(-8deg);
   opacity: 0;
-  transition: transform 900ms var(--ease-out), opacity 500ms var(--ease-out);
+  transition: transform var(--dur-reveal) var(--ease-out),
+              opacity var(--dur-slow) var(--ease-out);
 }
-.x-divider.is-in .x-divider-mark { transform: none; opacity: 1; }
+.x-divider-band.is-in .x-divider-mark { transform: none; opacity: 1; }
 
 .x-stroke {
   fill: currentColor;
@@ -275,10 +323,10 @@ button { font: inherit; }
   stroke-linejoin: round;
   stroke-linecap: round;
   transition:
-    stroke-dashoffset 1000ms var(--ease-out) var(--sd, 0ms),
-    fill-opacity 600ms var(--ease-out) var(--fd, 760ms);
+    stroke-dashoffset var(--dur-reveal) var(--ease-out) var(--sd, 0ms),
+    fill-opacity var(--dur-slow) var(--ease-out) var(--fd, 760ms);
 }
-.x-divider.is-in .x-stroke { fill-opacity: 1; }
+.x-divider-band.is-in .x-stroke { fill-opacity: 1; }
 .x-dark { color: var(--onexis-anthrazit); }
 .x-teal { color: var(--onexis-blau); --sd: 300ms; --fd: 1060ms; }
 
@@ -300,6 +348,26 @@ button { font: inherit; }
 }
 .tom-narration {
   animation: tom-narration-in 360ms var(--ease-out) both;
+}
+
+/* Grid-Spalten dürfen unter ihre min-content-Breite schrumpfen — sonst
+   drückt der längste Tab-Titel die ganze Sektion über den Viewport
+   (gemessen: 3px Überlauf bei 360px). Gleiche Regel wie bei .split-grid. */
+.tom-sticky > .container-wide > * { min-width: 0; }
+
+/* TOM-Dimensionen als Tabs ---------------------------------- */
+.tom-tablist {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.tom-tablist > button { min-width: 0; }
+/* Vier Grossbuchstaben-Labels gehen auf einem Telefon nicht vierspaltig auf:
+   „Organisation" allein braucht 103px von den 80px, die eine Spalte bekommt.
+   Zwei Reihen à zwei geben jedem Label Platz, ohne die Schrift zu verkleinern. */
+@media (max-width: 560px) {
+  .tom-tablist { grid-template-columns: repeat(2, 1fr); gap: 12px 16px; }
 }
 
 /* fall back to non-pinned layout on narrow viewports --------- */
@@ -327,7 +395,9 @@ button { font: inherit; }
 
 /* container padding tightens on small phones --------------- */
 @media (max-width: 600px) {
-  .container, .container-wide, .container-narrow { padding: 0 20px; }
+  .container, .container-wide, .container-narrow {
+    padding-inline: max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-right));
+  }
 }
 
 /* section rhythm scales down on small screens -------------- */
@@ -344,9 +414,89 @@ button { font: inherit; }
 .promise-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
 @media (min-width: 720px) { .promise-grid { grid-template-columns: repeat(3, 1fr); gap: 48px; } }
 
-/* Services — three open columns ----------------------------- */
-.service-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
-@media (min-width: 860px) { .service-grid { grid-template-columns: repeat(3, 1fr); } }
+/* Leistungen — Startseiten-Teaser: drei Säulen-Türöffner ----- */
+.pillar-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 720px) { .pillar-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.pillar-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px 24px;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  transition: box-shadow var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+/* teal Hairline oben — greift den .eyebrow::before-Akzent auf.
+   Breite via scaleX animiert (transform statt Layout-Property). */
+.pillar-card::before {
+  content: "";
+  position: absolute;
+  left: 26px; top: 0;
+  width: 52px; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0.538);
+  transform-origin: left center;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.pillar-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-2);
+  transform: translateY(-2px);
+}
+.pillar-card:hover::before { transform: scaleX(1); }
+.pillar-card:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+.pillar-card .mono-label { color: var(--fg-muted); }
+.pillar-card-more {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-ink);
+}
+.pillar-card:hover .pillar-card-more .arrow { transform: translateX(3px); }
+
+/* Leistungen-Seite — Hero + Säulen-Abschnitte ---------------- */
+.leistungen-hero-inner { padding-top: 200px; padding-bottom: 96px; }
+@media (max-width: 900px) { .leistungen-hero-inner { padding-top: 168px; padding-bottom: 72px; } }
+@media (max-width: 600px) { .leistungen-hero-inner { padding-top: 148px; padding-bottom: 60px; } }
+
+.pillar-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.pillar-count { color: var(--fg-muted); white-space: nowrap; }
+
+.leistung-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.leistung-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  min-width: 0;
+  transition: box-shadow var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+}
+.leistung-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pillar-card, .pillar-card::before { transition: none; }
+  .pillar-card:hover { transform: none; }
+}
 
 /* Referenzen — client name wall ----------------------------- */
 .client-grid {
@@ -361,6 +511,11 @@ button { font: inherit; }
 .client-cell {
   background: #fff;
   padding: 36px 24px;
+  /* Reserve the tallest cell up front (66px logo at scale 1.5 + 2×36 padding).
+     The logos load lazily, and without a reservation each arrival re-flowed the
+     grid — measured CLS 0.0987 on a throttled 390px viewport, nearly all of it
+     from these cells. Uniform cells also read better as a logo wall. */
+  min-height: 138px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -377,6 +532,21 @@ button { font: inherit; }
   width: auto;
   object-fit: contain;
 }
+/* Referenz-Logos verlinkt: füllt die Zelle, dezenter Hover/Fokus. */
+.client-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.client-link:hover { opacity: 0.6; }
+.client-link:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
 @media (min-width: 560px)  { .client-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .client-grid { grid-template-columns: repeat(5, 1fr); } }
 
@@ -386,19 +556,6 @@ button { font: inherit; }
 @media (min-width: 860px)  { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1024px) { .steps-grid { grid-template-columns: repeat(5, 1fr); } }
 
-/* TOM service row — hairline dividers via 1px gap, any column count */
-.services-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-.service-cell { background: #fff; padding: 28px 24px; min-width: 0; }
-@media (min-width: 600px)  { .services-row { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .services-row { grid-template-columns: repeat(4, 1fr); } }
 
 /* Cases — copy + metric ------------------------------------- */
 .case-row {
@@ -428,10 +585,21 @@ button { font: inherit; }
 h1, h2, h3, h4, .h-display, .h-section, .h-card { overflow-wrap: break-word; }
 h1, h2, h3 { text-wrap: balance; }
 
+/* Standalone text links that are also tap targets: e-mail and phone in the
+   Kontakt address block and under each team portrait. As plain inline links
+   they measured 18.8–22px tall, under the 24px minimum (WCAG 2.2 SC 2.5.8).
+   inline-flex + min-height grows the hit area without moving the baseline. */
+.link-target {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
 /* Touch ergonomics: enlarge tap targets on coarse pointers -- */
 @media (pointer: coarse) {
   .nav-link, .footer-link { padding-top: 10px; padding-bottom: 10px; }
   .btn { padding-top: 15px; padding-bottom: 15px; }
+  .link-target { min-height: 44px; }
 }
 
 /* ---- Mobile navigation ------------------------------------ */
@@ -444,29 +612,43 @@ h1, h2, h3 { text-wrap: balance; }
 }
 .nav-toggle:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 .nav-desktop { display: flex; align-items: center; gap: 36px; }
+/* Desktop nav links sit in a 72px flex row, so vertical padding grows only the
+   hit area, not the header. Gets them past the 24px target minimum. */
+.nav-link { padding-block: 12px; }
 .nav-panel { display: none; }
 
 @media (max-width: 820px) {
   .nav-desktop { display: none; }
   .nav-toggle { display: inline-flex; }
+  /* `block`, not `grid`: as a grid parent, the inner .container-wide's
+     `margin: 0 auto` overrides stretch and shrink-wraps the whole menu to
+     max-content (measured 128px of a 390px viewport), centring it. */
   .nav-panel {
-    display: grid;
+    display: block;
     position: fixed;
-    inset: 72px 0 auto 0;
+    inset: var(--nav-h) 0 auto 0;
+    z-index: var(--z-overlay);
     background: rgba(255,255,255,.97);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
-    padding: 12px 0 20px;
-    gap: 2px;
+    padding: 12px 0 max(20px, env(safe-area-inset-bottom));
     box-shadow: var(--shadow-2);
     animation: nav-panel-in 240ms var(--ease-out);
+    max-height: calc(100dvh - var(--nav-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
-  .nav-panel a { padding: 14px 0; font-size: 17px; color: var(--fg); font-weight: 500; }
+  /* `:not(.btn)` — the CTA carries its own dark fill; recolouring its label to
+     --fg painted 60,60,60 on 60,60,60 and the button read as a blank slab. */
+  .nav-panel a:not(.btn) { padding: 14px 0; font-size: 17px; color: var(--fg); font-weight: 500; }
   .nav-panel .btn { margin-top: 10px; justify-content: center; }
 }
 @keyframes nav-panel-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .nav-panel { animation: none; } }
+
+/* Body scroll lock while the mobile menu is open (set from Nav.jsx). */
+body.nav-open { overflow: hidden; }
 
 /* ---- Form fields: visible focus, no removed outline ------- */
 .field {
@@ -528,7 +710,7 @@ button:focus-visible,
   background: var(--onexis-anthrazit);
   color: #fff;
   border-radius: var(--radius-md);
-  z-index: 9999;
+  z-index: var(--z-skip);
   font-size: 15px; font-weight: 500;
   outline: 2px solid var(--accent);
   outline-offset: 2px;

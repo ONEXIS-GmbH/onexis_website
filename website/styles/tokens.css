@@ -125,9 +125,30 @@
   /* ---- Motion ------------------------------------------- */
   --ease-out:                cubic-bezier(.22,.61,.36,1);
   --ease-in-out:             cubic-bezier(.65,0,.35,1);
+
+  /* Interaction scale — feedback on hover, focus, state change.
+     Short enough that the UI feels immediate. */
   --dur-fast:                120ms;
   --dur-base:                200ms;
   --dur-slow:                360ms;
+
+  /* Orchestration scale — first-load reveals and scroll-triggered draws.
+     Deliberately longer than the interaction scale: these are choreography,
+     not feedback, and are read as pacing rather than latency. */
+  --dur-entrance:            700ms;
+  --dur-reveal:              900ms;
+  --dur-draw:                1400ms;
+
+  /* ---- Layering ----------------------------------------- */
+  /* Semantic scale. Never write a raw z-index; add a rung instead. */
+  --z-base:                  0;
+  --z-raised:                10;   /* cards / marks lifted off their section */
+  --z-sticky:                100;  /* the site header */
+  --z-overlay:               200;  /* mobile nav panel */
+  --z-skip:                  300;  /* skip link — must beat everything */
+
+  /* ---- Layout constants --------------------------------- */
+  --nav-h:                   72px; /* header height; heroes bleed under it */
 
   /* ---- Error / validation state ------------------------ */
   --color-error:             #C0453B; /* border on invalid fields */
@@ -237,11 +258,15 @@ a {
   transition: color var(--dur-base) var(--ease-out);
 }
 a:hover { color: var(--accent-ink-hover); }
-/* On dark surfaces the bright brand teal is legible (5:1) and on-brand */
-.section.inverse a,
-.on-dark a { color: var(--accent); }
-.section.inverse a:hover,
-.on-dark a:hover { color: var(--accent-hover); }
+/* On dark surfaces the bright brand teal is legible (5:1) and on-brand.
+   `:not(.btn)` is load-bearing: a button carries its own background, so
+   recolouring its label from the surrounding surface produces teal-on-teal
+   (or worse, ink-on-ink). Any container rule that recolours `a` in bulk must
+   carry this exclusion — see `.nav-panel a:not(.btn)` in site.css. */
+.section.inverse a:not(.btn),
+.on-dark a:not(.btn) { color: var(--accent); }
+.section.inverse a:not(.btn):hover,
+.on-dark a:not(.btn):hover { color: var(--accent-hover); }
 
 code, .mono {
   font-family: var(--font-mono);

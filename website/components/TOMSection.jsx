@@ -2,7 +2,6 @@ import React from 'react'
 import CONTENT from '../content/de.js'
 
 const TOM_QUADRANTS = CONTENT.tom.quadrants
-const SERVICES = CONTENT.tom.services
 
 /* ------------------------------------------------------------------ */
 /*  Geometry helpers                                                  */
@@ -81,7 +80,7 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
         <g style={{
           transformOrigin: `${CX}px ${CY}px`,
           transform: (mounted || prefersReduced) ? 'scale(1)' : 'scale(0)',
-          transition: prefersReduced ? 'none' : 'transform 700ms cubic-bezier(.22,.61,.36,1) 250ms',
+          transition: prefersReduced ? 'none' : 'transform 700ms var(--ease-out) 250ms',
         }}>
           <line x1={CX - R_RING} y1={CY} x2={CX + R_RING} y2={CY}
             stroke="var(--onexis-blau-50)" strokeWidth="1.5" />
@@ -102,7 +101,7 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
                 style={{
                   strokeDasharray: circumQuarter,
                   strokeDashoffset: (mounted || prefersReduced) ? 0 : circumQuarter,
-                  transition: prefersReduced ? 'none' : `stroke-dashoffset 900ms cubic-bezier(.22,.61,.36,1) ${i * 140}ms`,
+                  transition: prefersReduced ? 'none' : `stroke-dashoffset 900ms var(--ease-out) ${i * 140}ms`,
                 }}
               />
               <path
@@ -114,7 +113,7 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
                 style={{
                   strokeDasharray: circumQuarter,
                   strokeDashoffset: isActive ? 0 : circumQuarter,
-                  transition: prefersReduced ? 'none' : 'stroke-dashoffset 600ms cubic-bezier(.22,.61,.36,1)',
+                  transition: prefersReduced ? 'none' : 'stroke-dashoffset 600ms var(--ease-out)',
                   filter: isActive ? 'drop-shadow(0 4px 12px rgba(98,189,204,.35))' : 'none',
                 }}
               />
@@ -218,7 +217,7 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
           opacity: (mounted || prefersReduced) ? 1 : 0,
           transform: (mounted || prefersReduced) ? 'scale(1)' : 'scale(.4)',
           transformOrigin: `${CX}px ${CY}px`,
-          transition: prefersReduced ? 'none' : 'opacity 500ms, transform 700ms cubic-bezier(.22,.61,.36,1)',
+          transition: prefersReduced ? 'none' : 'opacity 500ms, transform 700ms var(--ease-out)',
           transitionDelay: prefersReduced ? '0ms' : '950ms',
         }}>
           <circle cx={CX} cy={CY} r="50" fill="var(--bg-muted)" />
@@ -237,8 +236,13 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
 function NarrationPanel({ q, idx, tabId }) {
   return (
     <div
+      id="tom-panel"
       role="tabpanel"
       aria-labelledby={tabId}
+      /* No focusable children of its own, so the panel takes focus itself —
+         otherwise a keyboard user tabbing off the tablist skips the text the
+         tablist exists to reveal. */
+      tabIndex={0}
       className="tom-narration"
     >
       <div style={{
@@ -297,6 +301,7 @@ function TOMSection() {
   const [mounted, setMounted] = React.useState(false)
   const userOverrideRef = React.useRef(null)
   const [pinned, setPinned] = React.useState(false)
+  const [paused, setPaused] = React.useState(false)
 
   React.useEffect(() => {
     const el = sectionRef.current
@@ -344,15 +349,18 @@ function TOMSection() {
     }
   }, [])
 
+  // Auto-advance is a hint that the circle is interactive, not a slideshow.
+  // It yields to anything the visitor does: pointer inside the section,
+  // keyboard focus within it, an explicit pick, or the pinned scroll phase.
+  // That doubles as the pause mechanism WCAG 2.2.2 asks of moving content.
   React.useEffect(() => {
-    if (!mounted || prefersReduced) return
+    if (!mounted || prefersReduced || paused || pinned) return
     const id = setInterval(() => {
       if (userOverrideRef.current === 'user') return
-      if (pinned) return
       setActiveIdx(i => (i + 1) % 4)
     }, 2800)
     return () => clearInterval(id)
-  }, [mounted, pinned, prefersReduced])
+  }, [mounted, pinned, paused, prefersReduced])
 
   const pick = (i, source) => {
     userOverrideRef.current = source === 'click' ? 'user' : userOverrideRef.current
@@ -375,122 +383,101 @@ function TOMSection() {
   }
 
   return (
-    <>
-      <section
-        id="erfolgsmodell"
-        ref={sectionRef}
-        className="tom-scroll-section"
+    <section
+      id="erfolgsmodell"
+      ref={sectionRef}
+      className="tom-scroll-section"
+      style={{
+        position: 'relative',
+        background: 'var(--bg-muted)',
+        height: 'calc(100vh + 240vh)',
+      }}
+    >
+      <div
+        className="tom-sticky"
         style={{
-          position: 'relative',
-          background: 'var(--bg-muted)',
-          height: 'calc(100vh + 240vh)',
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => { setPaused(false); clearOverride() }}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false)
         }}
       >
-        <div
-          className="tom-sticky"
-          style={{
-            position: 'sticky',
-            top: 0,
-            height: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-          onMouseLeave={clearOverride}
-        >
-          <div className="container-wide" style={{
-            display: 'grid', gridTemplateColumns: 'minmax(0, 0.95fr) minmax(0, 1.05fr)',
-            gap: 64, alignItems: 'center', width: '100%',
-          }}>
-            <div>
-              <div className="eyebrow">{CONTENT.tom.eyebrow}</div>
-              <h2 className="h-section" style={{
-                marginTop: 14, marginBottom: 32, maxWidth: 540,
-              }}>
-                {CONTENT.tom.heading[0]}<br />
-                {CONTENT.tom.heading[1]}
-              </h2>
+        <div className="container-wide" style={{
+          display: 'grid', gridTemplateColumns: 'minmax(0, 0.95fr) minmax(0, 1.05fr)',
+          gap: 64, alignItems: 'center', width: '100%',
+        }}>
+          <div>
+            <div className="eyebrow">{CONTENT.tom.eyebrow}</div>
+            <h2 className="h-section" style={{
+              marginTop: 14, marginBottom: 32, maxWidth: 540,
+            }}>
+              {CONTENT.tom.heading[0]}<br />
+              {CONTENT.tom.heading[1]}
+            </h2>
 
-              {/* Tablist — the primary keyboard control for the TOM diagram */}
-              <div
-                role="tablist"
-                aria-label="TOM-Dimensionen"
-                style={{
-                  display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8,
-                  marginBottom: 28,
-                }}
-              >
-                {TOM_QUADRANTS.map((q, i) => (
-                  <button
-                    key={q.title}
-                    id={`tom-tab-${i}`}
-                    role="tab"
-                    aria-selected={activeIdx === i}
-                    tabIndex={activeIdx === i ? 0 : -1}
-                    onClick={() => pick(i, 'click')}
-                    onMouseEnter={() => pick(i, 'hover')}
-                    onKeyDown={(e) => handleTabKeyDown(e, i)}
-                    style={{
-                      appearance: 'none', background: 'transparent', border: 0,
-                      padding: 0, cursor: 'pointer', textAlign: 'left',
-                    }}
-                  >
-                    <div style={{
-                      height: 2,
-                      background: activeIdx === i ? 'var(--accent)' : 'var(--border-strong)',
-                      transition: prefersReduced ? 'none' : 'background 300ms var(--ease-out)',
-                    }} />
-                    <div style={{
-                      marginTop: 8,
-                      fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
-                      fontWeight: 600,
-                      color: activeIdx === i ? 'var(--fg)' : 'var(--fg-muted)',
-                      transition: prefersReduced ? 'none' : 'color 300ms',
-                    }}>{q.short}</div>
-                  </button>
-                ))}
-              </div>
-
-              <NarrationPanel
-                q={TOM_QUADRANTS[activeIdx]}
-                idx={activeIdx}
-                tabId={`tom-tab-${activeIdx}`}
-              />
+            {/* Tablist — the primary keyboard control for the TOM diagram */}
+            <div
+              role="tablist"
+              aria-label="TOM-Dimensionen"
+              className="tom-tablist"
+            >
+              {TOM_QUADRANTS.map((q, i) => (
+                <button
+                  key={q.title}
+                  id={`tom-tab-${i}`}
+                  role="tab"
+                  aria-selected={activeIdx === i}
+                  aria-controls="tom-panel"
+                  tabIndex={activeIdx === i ? 0 : -1}
+                  onClick={() => pick(i, 'click')}
+                  onMouseEnter={() => pick(i, 'hover')}
+                  onKeyDown={(e) => handleTabKeyDown(e, i)}
+                  style={{
+                    appearance: 'none', background: 'transparent', border: 0,
+                    padding: 0, cursor: 'pointer', textAlign: 'left',
+                  }}
+                >
+                  <div style={{
+                    height: 2,
+                    background: activeIdx === i ? 'var(--accent)' : 'var(--border-strong)',
+                    transition: prefersReduced ? 'none' : 'background 300ms var(--ease-out)',
+                  }} />
+                  <div style={{
+                    marginTop: 8,
+                    fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
+                    fontWeight: 600,
+                    color: activeIdx === i ? 'var(--fg)' : 'var(--fg-muted)',
+                    transition: prefersReduced ? 'none' : 'color 300ms',
+                  }}>{q.short}</div>
+                </button>
+              ))}
             </div>
 
-            <div>
-              <TOMCircle
-                activeIdx={activeIdx}
-                onPick={pick}
-                mounted={mounted}
-                prefersReduced={prefersReduced}
-              />
-            </div>
+            <NarrationPanel
+              q={TOM_QUADRANTS[activeIdx]}
+              idx={activeIdx}
+              tabId={`tom-tab-${activeIdx}`}
+            />
           </div>
-        </div>
-      </section>
 
-      <section className="section muted" style={{
-        paddingTop: 0, paddingBottom: 120, background: 'var(--bg-muted)',
-        marginTop: -1,
-      }}>
-        <div className="container-wide">
-          <div className="services-row">
-            {SERVICES.map((s) => (
-              <div key={s.name} className="service-cell">
-                <h4 style={{
-                  margin: 0, fontWeight: 500, fontSize: 20,
-                  letterSpacing: '-0.005em',
-                }}>{s.name}</h4>
-                <p style={{
-                  margin: '10px 0 0', fontSize: 15, lineHeight: 1.55,
-                  color: 'var(--fg-muted)',
-                }}>{s.body}</p>
-              </div>
-            ))}
+          <div>
+            <TOMCircle
+              activeIdx={activeIdx}
+              onPick={pick}
+              mounted={mounted}
+              prefersReduced={prefersReduced}
+            />
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
 

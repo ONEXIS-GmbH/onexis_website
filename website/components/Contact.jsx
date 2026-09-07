@@ -27,8 +27,9 @@ function Contact() {
   const c = CONTENT.contact
   const [submitted, setSubmitted] = React.useState(false)
   const [sending, setSending] = React.useState(false)
+  const [sendError, setSendError] = React.useState(false)
   const [form, setForm] = React.useState({
-    vorname: '', nachname: '', email: '', mitteilung: '',
+    vorname: '', nachname: '', email: '', mitteilung: '', company: '',
   })
   const [errors, setErrors] = React.useState({})
   const [touched, setTouched] = React.useState({})
@@ -53,7 +54,7 @@ function Contact() {
     setErrors(validate(form))
   }
 
-  const onSubmit = (ev) => {
+  const onSubmit = async (ev) => {
     ev.preventDefault()
     if (sending) return
     const e = validate(form)
@@ -65,9 +66,28 @@ function Contact() {
       if (el) el.focus()
       return
     }
+    setSendError(false)
     setSending(true)
-    // No backend wired yet — simulate the request so the UI is honest about state.
-    setTimeout(() => { setSending(false); setSubmitted(true) }, 600)
+    // Ohne Timeout bleibt der Button bei einer hängenden Verbindung dauerhaft
+    // auf "Wird gesendet …" stehen — der Absender weiss dann nicht, ob die
+    // Anfrage angekommen ist. 15s, dann ehrlicher Fehler mit Mail-Adresse.
+    const abort = new AbortController()
+    const timeout = setTimeout(() => abort.abort(), 15000)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(form),
+        signal: abort.signal,
+      })
+      if (!res.ok) throw new Error('send failed')
+      setSubmitted(true)
+    } catch {
+      setSendError(true)
+    } finally {
+      clearTimeout(timeout)
+      setSending(false)
+    }
   }
 
   return (
@@ -94,8 +114,8 @@ function Contact() {
             <strong style={{ fontWeight: 600 }}>{c.companyName}</strong><br />
             {c.street}<br />
             {c.city}<br />
-            <a href={c.phoneHref}>{c.phone}</a><br />
-            <a href={c.emailHref}>{c.email}</a>
+            <a className="link-target" href={c.phoneHref}>{c.phone}</a><br />
+            <a className="link-target" href={c.emailHref} style={{ overflowWrap: 'anywhere' }}>{c.email}</a>
           </address>
         </div>
 
@@ -121,6 +141,13 @@ function Contact() {
             </div>
           ) : (
             <>
+              {/* Alle vier Felder sind Pflicht — das einmal zu sagen ist
+                  ruhiger als vier Sternchen. */}
+              <p style={{
+                margin: '0 0 18px', fontSize: 13, color: 'var(--fg-muted)',
+              }}>
+                {c.requiredNote}
+              </p>
               <div className="field-row" style={{ marginBottom: 14 }}>
                 <ContactField id="contact-vorname" label={c.labelFirstName} autoComplete="given-name"
                   value={form.vorname} onChange={set('vorname')} onBlur={blur('vorname')}
@@ -139,10 +166,25 @@ function Contact() {
                   value={form.mitteilung} onChange={set('mitteilung')} onBlur={blur('mitteilung')}
                   error={touched.mitteilung && errors.mitteilung} />
               </div>
+              {/* Honeypot: für Menschen unsichtbar, Bots füllen es oft aus. */}
+              <div aria-hidden="true" style={{
+                position: 'absolute', left: '-9999px', width: 1, height: 1,
+                overflow: 'hidden',
+              }}>
+                <label htmlFor="contact-company">Firma</label>
+                <input id="contact-company" name="company" type="text"
+                  tabIndex={-1} autoComplete="off"
+                  value={form.company} onChange={set('company')} />
+              </div>
               <button type="submit" className="btn btn-dark" disabled={sending}
                 style={{ opacity: sending ? 0.7 : 1, cursor: sending ? 'wait' : 'pointer' }}>
                 {sending ? c.sending : c.labelSubmit} <Arrow />
               </button>
+              {sendError && (
+                <p className="field-error" role="alert" style={{ marginTop: 12 }}>
+                  {c.errSend}
+                </p>
+              )}
             </>
           )}
         </form>

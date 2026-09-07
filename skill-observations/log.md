@@ -77,3 +77,48 @@ potential skill improvement or new skill opportunity.
 **Suggested improvement:** In layout/typeset guidance on aligning bottom-border rules or baselines across grid columns of unequal content, note: reserving min-height alone aligns the rules but can detach them from short content. Pair the reservation with bottom-alignment (flex column + justify-content:flex-end, or align-content:end) so the rule stays attached and the slack collects as neutral whitespace on the opposite side.
 
 **Principle:** When you reserve space to force alignment, also decide where the slack goes. Put it where it reads as intentional whitespace, not between an element and the rule/label that belongs to it.
+
+### Observation 6: Pixel-sampling contrast checks produce false positives on elements with their own background
+
+**Date:** 2026-08-17
+**Session context:** `/impeccable audit` of a marketing site whose hero sits on a radial-gradient background; wrote a puppeteer script that hides hero text, screenshots the bare background, and samples pixels under each text bounding box to compute contrast.
+
+**Skill:** impeccable (reference/audit.md)
+**Type:** open-source
+**Phase/Area:** Dimension 1 (Accessibility) — measuring text contrast over gradients and images
+
+**Issue:** The technique is the only reliable way to measure contrast over a gradient (a DOM walk for `background-color` returns the gradient's fallback solid and understates the problem). But the selector also matched a CTA button that carries its own solid background. Hiding it exposed the *page* background behind it, so the script reported the button's dark label at 1.37:1 — a fabricated P0. Hand-computing the button's real pair (label on its own accent fill) gave 6.92:1, a pass. Separately, sampling the full bounding box and taking the single brightest pixel overstated the real failure; re-measuring per line-box with `Range.getClientRects()` and reporting the *percentage of the line area* below threshold turned a vague "brightest pixel fails" into a precise, defensible finding (12–20% of the subtitle line below 4.5:1, phones only).
+
+**Suggested improvement:** In audit.md's contrast check, add: when measuring contrast over gradients or images by sampling a screenshot with the text hidden, first exclude any element whose own computed `background-color` has alpha > 0 or that has its own `background-image` — those must be measured against their own background, not the page's. And quantify partial failures by line box (`Range.getClientRects()`) plus percent-of-area below threshold, rather than by the single worst pixel in a bounding box.
+
+**Principle:** A measurement technique that changes the scene in order to observe it must be scoped to the cases where the removed thing was not part of the answer. And when a background varies across a text run, the honest unit of measurement is "how much of the text fails", not "does any pixel fail" — the first is actionable, the second is either alarmist or dismissible.
+
+### Observation 7: A downstream guard for a too-greedy selector doesn't travel to the next container
+
+**Date:** 2026-08-17
+**Session context:** `/impeccable polish` on a marketing site; the mobile menu's primary CTA rendered dark-on-dark (1.00:1) and read as a blank slab.
+
+**Skill:** impeccable (reference/polish.md, reference/audit.md)
+**Type:** open-source
+**Phase/Area:** Design System Discovery — "identify drift, then name the root cause"
+
+**Issue:** A container rule recoloured every descendant link (`.nav-panel a { color: var(--fg) }`), which also captured a button that carries its own background — label and fill resolved to the same value. The codebase had already hit this exact bug in a different container months earlier and fixed it *downstream*, with a follow-up rule re-asserting each button's label colour inside that one container. The greedy selector itself was never narrowed, so when a second container with the same shape was added, the bug reappeared and the guard was not there to catch it. The root fix was `a:not(.btn)` on the selector, after which the downstream guard could be deleted entirely.
+
+**Suggested improvement:** In polish.md's drift classification, add a fourth failure shape alongside missing token / one-off implementation / conceptual misalignment: a **compensating rule** — an existing fix that neutralises a symptom downstream instead of correcting the rule that caused it. Flag these on sight: they are evidence the causing rule is still wrong, and they predict a recurrence at the next site with the same shape. The fix is to narrow the original selector and delete the compensator. In audit.md's theming checks, add the concrete detector: any bulk descendant rule that sets `color` on `a` or `button` should be checked for elements that carry their own background.
+
+**Principle:** A compensating rule is a bug report someone wrote in CSS instead of in the tracker. Finding one means the real defect is still upstream and unfixed — and the next instance of that pattern will ship broken, because compensators protect one location while root fixes protect the shape.
+
+### Observation 8: 390px is not the narrow end of the responsive sweep
+
+**Date:** 2026-08-17
+**Session context:** `/impeccable audit` reported zero horizontal overflow across 390/768/1024/1440; the follow-up `/impeccable adapt` pass found a 3px overflow at 360px caused by four uppercase tab labels in four equal grid columns.
+
+**Skill:** impeccable (reference/audit.md, reference/adapt.md)
+**Type:** open-source
+**Phase/Area:** Dimension 4 (Responsive Design) — viewport selection
+
+**Issue:** The audit's viewport set started at 390 (modal iPhone) and reported the responsive dimension as clean. The only layout defect on the entire site lived at 360 — the common Android floor, and the width where a fixed-column grid of long words finally runs out of room. Reporting "no overflow at any tested width" was accurate about what was tested and misleading about the site, because the set omitted the width most likely to fail. adapt.md's own reference text says to test 320px; the audit flow did not inherit that.
+
+**Suggested improvement:** In audit.md's responsive checks, specify the minimum sweep explicitly: 320, 360, 390, 768, 1024, 1440. Call out *why* the narrow end matters — 360 is the Android floor and 320 the historical iPhone SE — so the set is not trimmed to "the phone I picture". When reporting the responsive dimension, state the widths tested in the finding itself, so a clean result is legible as scoped rather than absolute.
+
+**Principle:** A sweep that omits the extreme reports the absence of evidence as evidence of absence. Breakpoint bugs live at the edges by construction, so a viewport set that starts at the comfortable case is testing where failure is least likely — and any clean result must name its own range to stay honest.

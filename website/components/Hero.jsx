@@ -1,6 +1,5 @@
 import CONTENT from '../content/de.js'
 import RotatingWord from './RotatingWord.jsx'
-import HeroX from './HeroX.jsx'
 
 export function Arrow() {
   return (
@@ -17,23 +16,20 @@ function Hero() {
   // so the sentence reads as two scannable tiers instead of one dense block.
   const [titleLead, ...titleRest] = c.title.split(' - ')
   const titleTail = titleRest.join(' - ')
+  // .hero-dark carries the anthracite band and the negative bleed under the
+  // nav. .hero-dark--image shows the photo plain, full-bleed, no tint — the
+  // photo itself runs light, so the copy here uses the light-surface (dark)
+  // color set instead of the white one the rest of .hero-dark assumes.
   return (
-    <section id="top" className="hero" style={{
-      position: 'relative',
-      marginTop: -72,   /* full-bleed dark behind the transparent nav (72px) */
-      background: 'radial-gradient(62% 78% at 76% 50%, ' +
-        'color-mix(in srgb, var(--onexis-blau) 42%, transparent) 0%, ' +
-        'color-mix(in srgb, var(--onexis-blau) 9%, transparent) 44%, ' +
-        'transparent 68%), var(--onexis-anthrazit)',
-      color: 'var(--fg-on-dark)',
-      overflow: 'hidden',
-    }}>
-      <div className="hero-x-wrap" aria-hidden="true">
-        <HeroX />
-      </div>
+    <section id="top" className="hero hero-dark hero-dark--image">
+      <picture className="hero-bg" aria-hidden="true">
+        <source type="image/webp" sizes="100vw"
+          srcSet="/assets/hero-bg-1200.webp 1200w, /assets/hero-bg-1800.webp 1800w, /assets/hero-bg-2800.webp 2800w" />
+        <img src="/assets/hero-bg-1800.jpg" alt="" fetchPriority="high" decoding="async" />
+      </picture>
 
       <div className="container-wide hero-inner" style={{ position: 'relative' }}>
-        <img src="/assets/logo-negativ.svg" alt="ONEXIS"
+        <img src="/assets/logo.svg" alt="ONEXIS"
           className="hero-line"
           style={{
             '--d': '0.05s',
@@ -51,7 +47,7 @@ function Hero() {
           fontWeight: 400,
           lineHeight: 1.2,
           letterSpacing: '-0.01em',
-          color: 'var(--fg-on-dark)',
+          color: 'var(--fg)',
         }}>
           <span aria-hidden="true">{c.partnerPrefix} </span>
           <RotatingWord words={c.rotatingWords} />
@@ -68,7 +64,7 @@ function Hero() {
             fontSize: 'clamp(31px, 4.4vw, 58px)',
             lineHeight: 1.12,
             letterSpacing: '-0.03em',
-            color: 'var(--fg-on-dark)',
+            color: 'var(--fg)',
             textWrap: 'balance',
             maxWidth: 840,
           }}>
@@ -83,7 +79,7 @@ function Hero() {
               fontWeight: 300,
               lineHeight: 1.3,
               letterSpacing: '-0.015em',
-              color: 'var(--fg-on-dark)',
+              color: 'var(--fg)',
               textWrap: 'pretty',
               maxWidth: 620,
             }}>
@@ -95,7 +91,7 @@ function Hero() {
         <p className="hero-line" style={{
           '--d': '0.5s',
           marginTop: 52, fontSize: 19, lineHeight: 1.6,
-          color: 'var(--fg-on-dark-muted)', maxWidth: 620,
+          color: 'var(--fg-muted)', maxWidth: 620,
           textWrap: 'pretty',
         }}>
           {c.subtitle}
@@ -108,7 +104,7 @@ function Hero() {
           <a href="#leistungen" className="btn btn-primary">
             {c.ctaPrimary} <Arrow />
           </a>
-          <a href="#kontakt" className="btn btn-ghost-inverse">
+          <a href="#kontakt" className="btn btn-ghost">
             {c.ctaSecondary}
           </a>
         </div>

@@ -3,10 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <title>ONEXIS — Projects in Motion</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- viewport-fit=cover: die Container federn den Notch per env(safe-area-inset-*) ab -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description"
     content="ONEXIS GmbH — Schweizer Partner für IT-Beratung, Projekt-Management, IT-Architektur und Seminare. Wir bringen kritische IT-Vorhaben sicher ins Ziel." />
+  <link rel="canonical" href="https://www.onexis.ch/" />
+  <meta name="theme-color" content="#3C3C3C" />
+
+  <!-- Social-Vorschau. Diese Tags sind statisch, weil LinkedIn, Slack und
+       WhatsApp kein JavaScript ausführen: Was hier steht, ist die Karte, die
+       beim Teilen erscheint. content/meta.js aktualisiert Titel/Description
+       danach im Browser für Tab, Lesezeichen und JS-fähige Crawler. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ONEXIS" />
+  <meta property="og:locale" content="de_CH" />
+  <meta property="og:url" content="https://www.onexis.ch/" />
+  <meta property="og:title" content="ONEXIS — Projects in Motion" />
+  <meta property="og:description"
+    content="Schweizer Partner für IT-Beratung, Projekt-Management, IT-Architektur und Seminare. Wir bringen kritische IT-Vorhaben sicher ins Ziel." />
+  <meta property="og:image" content="https://www.onexis.ch/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ONEXIS — Projects in Motion" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ONEXIS — Projects in Motion" />
+  <meta name="twitter:description"
+    content="Schweizer Partner für IT-Beratung, Projekt-Management, IT-Architektur und Seminare. Wir bringen kritische IT-Vorhaben sicher ins Ziel." />
+  <meta name="twitter:image" content="https://www.onexis.ch/assets/og-image.png" />
+
   <link rel="icon" href="/assets/logo-x.svg" />
+  <link rel="apple-touch-icon" href="/assets/logo-x.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ONEXIS GmbH",
+    "url": "https://www.onexis.ch/",
+    "logo": "https://www.onexis.ch/assets/logo.svg",
+    "description": "ONEXIS GmbH führt und steuert IT-Vorhaben von der Planung bis zur Betriebsübergabe — national und international.",
+    "email": "kontakt@onexis.ch",
+    "telephone": "+41 61 556 10 10",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Sissacherstrasse 20",
+      "postalCode": "4460",
+      "addressLocality": "Gelterkinden",
+      "addressCountry": "CH"
+    }
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="sr-only">Zum Inhalt springen</a>

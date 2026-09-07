@@ -1,41 +1,49 @@
 import CONTENT from '../content/de.js'
+import { Arrow } from './Hero.jsx'
 
+// Startseiten-Teaser: die drei Leistungs-Säulen als Türöffner zur
+// Übersichtsseite /leistungen. Inhalt aus CONTENT.leistungen (Single
+// Source of Truth) — die Service-Anzahl wird aus den Säulen abgeleitet.
 function Services() {
-  const c = CONTENT.services
+  const { teaser, pillars } = CONTENT.leistungen
   return (
     <section id="leistungen" className="section">
       <div className="container-wide">
-        <div className="eyebrow">{c.eyebrow}</div>
-        <h2 className="h-section" style={{ marginTop: 16, maxWidth: 980 }}>
-          {c.heading[0]}<br />
-          {c.heading[1]}
+        <div className="eyebrow">{teaser.eyebrow}</div>
+        <h2 className="h-section" style={{ marginTop: 16, maxWidth: 900 }}>
+          {teaser.heading[0]}<br />
+          {teaser.heading[1]}
         </h2>
+        <p style={{
+          marginTop: 22, maxWidth: 560,
+          fontSize: 19, lineHeight: 1.6, color: 'var(--fg-muted)',
+        }}>
+          {teaser.intro}
+        </p>
 
-        <div className="service-grid" style={{ marginTop: 56 }}>
-          {c.items.map((s) => (
-            <article key={s.name}>
-              <h3 className="h-card" style={{
-                paddingBottom: 16,
-                borderBottom: '1px solid var(--border-strong)',
+        <div className="pillar-grid" style={{ marginTop: 56 }}>
+          {pillars.map((p) => (
+            <a key={p.id} href={`${teaser.href}#${p.id}`} className="pillar-card">
+              <span className="mono-label">
+                {p.services.length} {p.services.length === 1 ? 'Leistung' : 'Leistungen'}
+              </span>
+              <h3 className="h-card" style={{ marginTop: 14 }}>{p.name}</h3>
+              <p style={{
+                marginTop: 12, fontSize: 15, lineHeight: 1.55, color: 'var(--fg-muted)',
               }}>
-                {s.name}
-              </h3>
-              <ul style={{
-                margin: '28px 0 0', padding: 0, listStyle: 'none',
-                display: 'flex', flexDirection: 'column', gap: 18,
-              }}>
-                {s.points.map((p, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                    <img src="/assets/logo-x.svg" alt="" aria-hidden="true"
-                      style={{ width: 14, height: 14, flex: '0 0 auto', marginTop: 4 }} />
-                    <span style={{ fontSize: 14.5, lineHeight: 1.55, color: 'var(--fg)' }}>
-                      {p}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </article>
+                {p.tagline}
+              </p>
+              <span className="pillar-card-more" aria-hidden="true">
+                Ansehen <Arrow />
+              </span>
+            </a>
           ))}
+        </div>
+
+        <div style={{ marginTop: 44 }}>
+          <a href={teaser.href} className="btn btn-dark">
+            {teaser.cta} <Arrow />
+          </a>
         </div>
       </div>
     </section>
