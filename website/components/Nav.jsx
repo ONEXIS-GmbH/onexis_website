@@ -1,7 +1,7 @@
 import React from 'react'
 import CONTENT from '../content/de.js'
 
-function Nav({ hrefPrefix = '', heroLight = false }) {
+function Nav({ hrefPrefix = '', heroLight = false, photoLogo = false }) {
   const c = CONTENT.nav
   const [scrolled, setScrolled] = React.useState(false)
   const [open, setOpen] = React.useState(false)
@@ -69,10 +69,19 @@ function Nav({ hrefPrefix = '', heroLight = false }) {
   }
 
   const solidBg = scrolled || open
-  // Startseite's hero is a plain, mostly light photo now (see Hero.jsx) — the
-  // white-on-transparent treatment below assumes a dark backdrop, so it reads
-  // dark from the first frame there even before the background solidifies.
+  // heroLight: the backdrop behind most of the nav (links, toggle) reads
+  // light before it solidifies — Startseite's photo and the plain white
+  // /leistungen page both qualify — so dark text/logo is used from frame one.
   const dark = solidBg || heroLight
+  // The Startseite photo is the one exception: its dark curve sits under the
+  // logo mark specifically (top-left), even though the rest of the bar sits
+  // on the photo's light side — so the logo alone needs the light/negativ
+  // mark there until the nav solidifies, regardless of `dark`.
+  const logoDark = solidBg || (heroLight && !photoLogo)
+  // The photo's contrast at that spot varies as it's cropped per viewport, so
+  // no single logo color reads reliably against it. Simplest fix: don't show
+  // the mark at all until the nav solidifies onto its own guaranteed-light bg.
+  const logoHidden = photoLogo && !solidBg
 
   return (
     <header
@@ -90,8 +99,9 @@ function Nav({ hrefPrefix = '', heroLight = false }) {
         height: 'var(--nav-h)', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <a href={`${hrefPrefix}#top`} aria-label="ONEXIS — Startseite" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={dark ? '/assets/logo-x.svg' : '/assets/logo-x-negativ.svg'}
-            alt="" aria-hidden="true" style={{ height: 24 }} />
+          <img src={logoDark ? '/assets/logo-x.svg' : '/assets/logo-x-negativ.svg'}
+            alt="" aria-hidden="true"
+            style={{ height: 32, opacity: logoHidden ? 0 : 1, transition: 'opacity 200ms' }} />
         </a>
 
         <nav className="nav-desktop" aria-label="Hauptnavigation">

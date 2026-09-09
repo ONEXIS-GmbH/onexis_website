@@ -26,7 +26,7 @@ const LEGAL_ROUTES = {
 function Home() {
   return (
     <>
-      <Nav heroLight />
+      <Nav heroLight photoLogo />
       <main id="main-content">
         <Hero />
         <Services />

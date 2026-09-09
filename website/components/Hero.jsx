@@ -1,15 +1,6 @@
 import CONTENT from '../content/de.js'
 import RotatingWord from './RotatingWord.jsx'
 
-export function Arrow() {
-  return (
-    <svg className="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor"
-      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M2 7h10M8 3l4 4-4 4" />
-    </svg>
-  )
-}
-
 function Hero() {
   const c = CONTENT.hero
   // Split the long headline at its dash into a strong lead + a lighter tail,
@@ -29,16 +20,20 @@ function Hero() {
       </picture>
 
       <div className="container-wide hero-inner" style={{ position: 'relative' }}>
-        <img src="/assets/logo.svg" alt="ONEXIS"
-          className="hero-line"
-          style={{
-            '--d': '0.05s',
-            height: 'clamp(44px, 6vw, 76px)',
-            width: 'auto',
-            /* cancel the SVG's ~8% left whitespace so the "O" sits flush
-               with the text below (offset scales with the logo height) */
-            marginLeft: 'calc(clamp(44px, 6vw, 76px) * -0.273)',
-          }} />
+        {/* Wrapper carries the hero-line entrance animation (which also
+            animates `transform`); .hero-logo's own mobile-only nudge lives
+            on the img so the two transforms don't collide on one element. */}
+        <div className="hero-line" style={{ '--d': '0.05s' }}>
+          <img src="/assets/logo.svg" alt="ONEXIS"
+            className="hero-logo"
+            style={{
+              height: 'clamp(64px, 8vw, 76px)',
+              width: 'auto',
+              /* cancel the SVG's ~8% left whitespace so the "O" sits flush
+                 with the text below (offset scales with the logo height) */
+              marginLeft: 'calc(clamp(64px, 8vw, 76px) * -0.273)',
+            }} />
+        </div>
 
         <p className="hero-line hero-kicker" style={{
           '--d': '0.15s',
@@ -91,7 +86,7 @@ function Hero() {
         <p className="hero-line" style={{
           '--d': '0.5s',
           marginTop: 52, fontSize: 19, lineHeight: 1.6,
-          color: 'var(--fg-muted)', maxWidth: 620,
+          color: 'var(--fg)', maxWidth: 620,
           textWrap: 'pretty',
         }}>
           {c.subtitle}
@@ -102,7 +97,7 @@ function Hero() {
           display: 'flex', gap: 12, marginTop: 28, flexWrap: 'wrap',
         }}>
           <a href="#leistungen" className="btn btn-primary">
-            {c.ctaPrimary} <Arrow />
+            {c.ctaPrimary}
           </a>
           <a href="#kontakt" className="btn btn-ghost">
             {c.ctaSecondary}

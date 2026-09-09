@@ -1,5 +1,4 @@
 import CONTENT from '../content/de.js'
-import { Arrow } from './Hero.jsx'
 
 // Startseiten-Teaser: die drei Leistungs-Säulen als Türöffner zur
 // Übersichtsseite /leistungen. Inhalt aus CONTENT.leistungen (Single
@@ -34,15 +33,15 @@ function Services() {
                 {p.tagline}
               </p>
               <span className="pillar-card-more" aria-hidden="true">
-                Ansehen <Arrow />
+                Ansehen
               </span>
             </a>
           ))}
         </div>
 
         <div style={{ marginTop: 44 }}>
-          <a href={teaser.href} className="btn btn-dark">
-            {teaser.cta} <Arrow />
+          <a href={teaser.href} className="btn btn-primary">
+            {teaser.cta}
           </a>
         </div>
       </div>

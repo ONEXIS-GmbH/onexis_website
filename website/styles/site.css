@@ -108,11 +108,13 @@ button { font: inherit; }
 }
 .btn-dark:hover { background: #2a2a2a; }
 .btn-ghost {
-  background: transparent;
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--fg);
   border: 1px solid var(--border-strong);
 }
-.btn-ghost:hover { background: var(--bg-muted); }
+.btn-ghost:hover { background: rgba(255,255,255,.92); }
 .btn-ghost-inverse {
   background: transparent;
   color: #fff;
@@ -123,14 +125,6 @@ button { font: inherit; }
 /* (Der frühere .section.inverse-Button-Guard ist weggefallen: tokens.css
    färbt dort jetzt nur noch `a:not(.btn)`, also an der Wurzel statt im
    Nachhinein.) */
-
-/* arrow glyph used in CTAs --------------------------------- */
-.arrow {
-  width: 14px; height: 14px;
-  display: inline-block;
-  transition: transform var(--dur-base) var(--ease-out);
-}
-.btn:hover .arrow { transform: translateX(3px); }
 
 /* anchor link in copy --------------------------------------- */
 .text-link {
@@ -168,35 +162,17 @@ button { font: inherit; }
 }
 
 /* ============================================================
-   Dark hero band — shared by the Startseite and /leistungen.
-   The teal glow is positioned per instance via --glow-*; the band
-   bleeds up under the transparent nav so the negative logo reads.
+   Dark hero band — used by the Startseite.
+   The band bleeds up under the transparent nav so the negative
+   logo reads. (Only .hero-dark--image consumes this now — the
+   /leistungen hero and its teal-glow variant were removed.)
    ============================================================ */
 .hero-dark {
   position: relative;
   margin-top: calc(-1 * var(--nav-h));
   color: var(--fg-on-dark);
   overflow: hidden;
-  background:
-    radial-gradient(var(--glow-w, 62%) var(--glow-h, 78%)
-        at var(--glow-x, 76%) var(--glow-y, 50%),
-      color-mix(in srgb, var(--onexis-blau) var(--glow-core, 42%), transparent) 0%,
-      color-mix(in srgb, var(--onexis-blau) var(--glow-mid, 9%), transparent) 44%,
-      transparent 68%),
-    var(--onexis-anthrazit);
-}
-.hero-dark--leistungen {
-  --glow-w: 58%; --glow-h: 74%;
-  --glow-x: 78%; --glow-y: 42%;
-  --glow-core: 34%; --glow-mid: 7%;
-}
-/* On /leistungen, under 900px the glow washes straight through the copy —
-   measured 4.09:1 on a 390px viewport, below the 4.5:1 floor. Lift it above
-   the text block: atmosphere overhead, clean ground under the type. (The
-   Startseite hero replaces this background entirely — see
-   .hero-dark--image — so this only affects .hero-dark--leistungen.) */
-@media (max-width: 900px) {
-  .hero-dark { --glow-y: 10%; }
+  background: var(--onexis-anthrazit);
 }
 
 /* Startseite hero: photo, shown plain --------------------- */
@@ -221,6 +197,12 @@ button { font: inherit; }
   height: 100%;
   object-fit: cover;
   object-position: 72% 50%;
+}
+/* On narrow, tall viewports `cover` crops the 16:9 photo hard — at the
+   desktop crop the X-swoosh lands square on the logo/copy. Shift it right
+   so it clears the text column and reads as a clean accent up top. */
+@media (max-width: 600px) {
+  .hero-bg img { object-position: 65% 50%; }
 }
 .hero-dark--image .hero-inner { position: relative; z-index: 1; }
 
@@ -410,6 +392,13 @@ button { font: inherit; }
 @media (max-width: 900px) { .hero-inner { padding-top: 180px; padding-bottom: 96px; } }
 @media (max-width: 600px) { .hero-inner { padding-top: 164px; padding-bottom: 80px; } }
 
+/* Pulls just the wordmark closer to the nav on mobile. `transform` (not
+   margin) so the shift doesn't reflow the copy below — margin would move
+   the image's box in normal flow and drag the next sibling up with it;
+   transform only repaints it, the reserved layout space stays put.
+   Negative = up. Mobile-only — untouched above 600px. */
+@media (max-width: 600px) { .hero-logo { transform: translateY(-96px); } }
+
 /* Promises — was/wie/warum three-up ------------------------- */
 .promise-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
 @media (min-width: 720px) { .promise-grid { grid-template-columns: repeat(3, 1fr); gap: 48px; } }
@@ -461,13 +450,8 @@ button { font: inherit; }
   font-weight: 500;
   color: var(--accent-ink);
 }
-.pillar-card:hover .pillar-card-more .arrow { transform: translateX(3px); }
 
-/* Leistungen-Seite — Hero + Säulen-Abschnitte ---------------- */
-.leistungen-hero-inner { padding-top: 200px; padding-bottom: 96px; }
-@media (max-width: 900px) { .leistungen-hero-inner { padding-top: 168px; padding-bottom: 72px; } }
-@media (max-width: 600px) { .leistungen-hero-inner { padding-top: 148px; padding-bottom: 60px; } }
-
+/* Leistungen-Seite — Säulen-Abschnitte ----------------------- */
 .pillar-head {
   display: flex;
   align-items: baseline;
@@ -568,7 +552,7 @@ button { font: inherit; }
 
 /* Team — four portraits ------------------------------------- */
 .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-@media (min-width: 860px) { .team-grid { grid-template-columns: repeat(4, 1fr); gap: 28px; } }
+@media (min-width: 860px) { .team-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
 
 /* Generic two-column split (Team, Contact, Sectors) --------- */
 /* Per-instance columns/gap via --split-cols / --split-gap. */

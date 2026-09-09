@@ -349,12 +349,6 @@ const CONTENT = {
         email: 'gabriel.wey@onexis.ch',
       },
       {
-        name: 'Philipp Brunner',
-        title: 'Projektleiter',
-        img: '/team/philipp-brunner.jpg',
-        email: 'philipp.brunner@onexis.ch',
-      },
-      {
         name: 'Nico Clerici',
         title: 'Junior Data Engineer',
         img: '/team/nico-clerici.jpg',

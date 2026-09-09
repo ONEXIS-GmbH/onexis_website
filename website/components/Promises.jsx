@@ -13,7 +13,7 @@ function Promises() {
   const c = CONTENT.promises
   return (
     <section className="section" style={{ paddingTop: 120, paddingBottom: 120 }}>
-      <div className="container">
+      <div className="container-wide">
         <div className="eyebrow">{c.eyebrow}</div>
         <h2 className="h-section" style={{ marginTop: 16, maxWidth: 720 }}>
           {c.heading[0]}<br />

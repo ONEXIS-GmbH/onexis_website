@@ -11,14 +11,14 @@ SRC="${1:?Pfad zum Originalbild angeben}"
 cd "$(dirname "$0")/.."
 OUT=public/assets
 
-# Das Bild liegt im Hero unter einem dunklen Overlay (multiply + Verlauf) —
-# niedrige Qualität ist unkritisch, das leichte Korn des Originals verschwindet
-# ohnehin. method=6 = langsamste, beste WebP-Kompression (einmaliger Lauf).
-magick "$SRC" -strip -resize 2800x -quality 45 -define webp:method=6 "$OUT/hero-bg-2800.webp"
-magick "$SRC" -strip -resize 1800x -quality 60 -define webp:method=6 "$OUT/hero-bg-1800.webp"
-magick "$SRC" -strip -resize 1200x -quality 60 -define webp:method=6 "$OUT/hero-bg-1200.webp"
+# Das Foto wird im Hero mittlerweile ohne Overlay/Tint gezeigt (plain,
+# full-bleed) — die Kompression muss also für sich stehen. method=6 =
+# langsamste, beste WebP-Kompression (einmaliger Lauf).
+magick "$SRC" -strip -resize 2800x -quality 82 -define webp:method=6 "$OUT/hero-bg-2800.webp"
+magick "$SRC" -strip -resize 1800x -quality 84 -define webp:method=6 "$OUT/hero-bg-1800.webp"
+magick "$SRC" -strip -resize 1200x -quality 86 -define webp:method=6 "$OUT/hero-bg-1200.webp"
 
 # Fallback für Browser ohne WebP.
-magick "$SRC" -strip -resize 1800x -quality 72 -interlace Plane "$OUT/hero-bg-1800.jpg"
+magick "$SRC" -strip -resize 1800x -quality 85 -interlace Plane "$OUT/hero-bg-1800.jpg"
 
 ls -lh "$OUT"/hero-bg-*

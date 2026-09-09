@@ -23,8 +23,8 @@ function Team() {
                 src={m.img}
                 alt={`Porträt von ${m.name}`}
                 loading="lazy"
-                width="747"
-                height="800"
+                width="845"
+                height="845"
                 style={{
                   width: '100%', height: 'auto',
                   borderRadius: 'var(--radius-lg)',

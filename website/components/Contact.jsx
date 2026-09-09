@@ -1,6 +1,5 @@
 import React from 'react'
 import CONTENT from '../content/de.js'
-import { Arrow } from './Hero.jsx'
 
 function ContactField({ id, label, value, onChange, onBlur, error, type, textarea, autoComplete }) {
   const describedBy = error ? id + '-err' : undefined
@@ -178,7 +177,7 @@ function Contact() {
               </div>
               <button type="submit" className="btn btn-dark" disabled={sending}
                 style={{ opacity: sending ? 0.7 : 1, cursor: sending ? 'wait' : 'pointer' }}>
-                {sending ? c.sending : c.labelSubmit} <Arrow />
+                {sending ? c.sending : c.labelSubmit}
               </button>
               {sendError && (
                 <p className="field-error" role="alert" style={{ marginTop: 12 }}>
