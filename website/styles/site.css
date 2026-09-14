@@ -400,6 +400,16 @@ button { font: inherit; }
   height: var(--hero-logo-h);
   width: auto;
   margin-left: calc(var(--hero-logo-h) * -0.273);
+  /* The wordmark's X has a fixed teal fill (brand colour, see logo.svg) —
+     wherever the hero photo is itself teal-ish, that stroke loses almost
+     all contrast against it. A silhouette-following drop-shadow (not a
+     boxy box-shadow) darkens the edge regardless of the photo underneath,
+     so both the anthracite letters and the teal X stay legible no matter
+     which part of the photo sits behind them — including future photo
+     swaps, which this has already been through once. */
+  filter:
+    drop-shadow(0 1px 2px rgba(0, 0, 0, .22))
+    drop-shadow(0 4px 14px rgba(0, 0, 0, .18));
 }
 /* Grown on desktop only, per feedback — mobile keeps the original scale. */
 @media (min-width: 901px) { .hero-logo { --hero-logo-h: clamp(76px, 9vw, 112px); } }
