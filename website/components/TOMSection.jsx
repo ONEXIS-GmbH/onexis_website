@@ -1,5 +1,6 @@
 import React from 'react'
 import CONTENT from '../content/de.js'
+import { TOM_ICONS } from './TomIcons.jsx'
 
 const TOM_QUADRANTS = CONTENT.tom.quadrants
 
@@ -44,13 +45,7 @@ const ICON_CENTERS = [
   polar(135, R_ICON),
 ]
 
-const ICON_SRCS = [
-  '/assets/icon-tom-organisation.svg',
-  '/assets/icon-tom-prozesse.svg',
-  '/assets/icon-tom-people.svg',
-  '/assets/icon-tom-infrastruktur.svg',
-]
-const ICON_SIZE = 78
+const ICON_SIZE = 62
 
 /* ------------------------------------------------------------------ */
 /*  Diagram — aria-hidden; keyboard control lives in the tab buttons  */
@@ -185,6 +180,7 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
 
         {ICON_CENTERS.map(([x, y], i) => {
           const isActive = activeIdx === i
+          const Icon = TOM_ICONS[i]
           return (
             <g
               key={'icn-' + i}
@@ -196,19 +192,22 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
                 pointerEvents: 'none',
               }}
             >
-              <image
-                href={ICON_SRCS[i]}
+              {/* `color` drives the icons' currentColor stroke — a real
+                  colour swap instead of the old grayscale-filter hack, so
+                  the active icon reads as brand teal, not just "less faded". */}
+              <svg
                 x={-ICON_SIZE / 2}
                 y={-ICON_SIZE / 2}
                 width={ICON_SIZE}
                 height={ICON_SIZE}
+                viewBox="0 0 24 24"
                 style={{
-                  filter: isActive
-                    ? 'none'
-                    : 'grayscale(1) brightness(1.1) opacity(.55)',
-                  transition: prefersReduced ? 'none' : 'filter 400ms var(--ease-out)',
+                  color: isActive ? 'var(--accent)' : 'var(--onexis-anthrazit-25)',
+                  transition: prefersReduced ? 'none' : 'color 400ms var(--ease-out)',
                 }}
-              />
+              >
+                <Icon />
+              </svg>
             </g>
           )
         })}

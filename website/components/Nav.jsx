@@ -101,7 +101,7 @@ function Nav({ hrefPrefix = '', heroLight = false, photoLogo = false }) {
         <a href={`${hrefPrefix}#top`} aria-label="ONEXIS — Startseite" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={logoDark ? '/assets/logo-x.svg' : '/assets/logo-x-negativ.svg'}
             alt="" aria-hidden="true"
-            style={{ height: 32, opacity: logoHidden ? 0 : 1, transition: 'opacity 200ms' }} />
+            style={{ height: 48, opacity: logoHidden ? 0 : 1, transition: 'opacity 200ms' }} />
         </a>
 
         <nav className="nav-desktop" aria-label="Hauptnavigation">

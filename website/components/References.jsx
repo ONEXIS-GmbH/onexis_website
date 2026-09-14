@@ -25,7 +25,7 @@ function References() {
                 decoding="async"
                 width={client.w}
                 height={client.h}
-                style={client.scale ? { maxHeight: `${44 * client.scale}px` } : undefined}
+                style={client.scale ? { maxHeight: `calc(var(--client-logo-h) * ${client.scale})` } : undefined}
               />
             )
             return (

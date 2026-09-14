@@ -28,10 +28,18 @@
   --onexis-blau:             #62BDCC; /* accent — fills, strokes, rules, button bg */
   --onexis-blau-50:          #B0DEE5; /* subtle accent / hover bg */
   --onexis-blau-25:          #D8EEF2; /* tint backgrounds / chips */
-  /* Darkened teal for accent-coloured TEXT on light backgrounds.
-     AA on white (5.4:1) and on paper (5.0:1); #62BDCC as text is only 2.2:1. */
-  --onexis-blau-text:        #197585;
-  --onexis-blau-text-hover:  #0F5C68;
+  /* ONEXIS-Petrol (official name per the 2026 brandsheet — was named
+     "blau-text" before that sheet arrived). Darkened teal for
+     accent-coloured TEXT on light backgrounds: AA on white (5.4:1) and on
+     paper (5.0:1); #62BDCC as text is only 2.2:1. */
+  --onexis-petrol:           #197585;
+  --onexis-petrol-hover:     #0F5C68;
+
+  /* ONEXIS-Ziegelrot, the brandsheet's other accent colour. Used only on the
+     hero's rotating word for now — NOT wired into --accent-ink, since as
+     text on white it measures ~2.9:1 (fails WCAG AA's 4.5:1 normal-text /
+     3:1 large-text minimum). */
+  --onexis-ziegelrot:        #FA6666; /* RGB 250/102/102, CMYK 0/72/50/0 */
 
   /* ---- Neutrals (derived) ------------------------------- */
   --onexis-white:            #FFFFFF;
@@ -57,8 +65,8 @@
   --accent:                  var(--onexis-blau);       /* graphic use: fills, strokes, rules */
   --accent-hover:            #4FAFC0;
   --accent-soft:             var(--onexis-blau-25);
-  --accent-ink:              var(--onexis-blau-text);       /* teal as TEXT on light */
-  --accent-ink-hover:        var(--onexis-blau-text-hover);
+  --accent-ink:              var(--onexis-petrol);       /* teal as TEXT on light */
+  --accent-ink-hover:        var(--onexis-petrol-hover);
 
   --border:                  var(--onexis-line);
   --border-strong:           var(--onexis-anthrazit-25);

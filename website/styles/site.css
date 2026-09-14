@@ -235,9 +235,9 @@ button { font: inherit; }
 .rotator-word { grid-area: 1 / 1; }
 .rotator-ghost { visibility: hidden; }
 .rotator-word {
-  /* --accent (#62BDCC) is only 2.2:1 as text — see tokens.css — so the
-     rotating word uses the darkened, AA-safe ink variant instead */
-  color: var(--accent-ink);
+  /* Chef-Feedback 20260913: neue Ziegelrot-Akzentfarbe statt Teal — siehe
+     Kontrast-Hinweis bei --onexis-ziegelrot in tokens.css. */
+  color: var(--onexis-ziegelrot);
   font-weight: 500;
   will-change: transform, opacity;
 }
@@ -287,8 +287,8 @@ button { font: inherit; }
 
 .x-divider-mark {
   flex: none;
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   overflow: visible;
   transform: scale(0.9) rotate(-8deg);
   opacity: 0;
@@ -301,7 +301,7 @@ button { font: inherit; }
   fill: currentColor;
   fill-opacity: 0;
   stroke: currentColor;
-  stroke-width: 1.2;
+  stroke-width: 1.4;
   stroke-linejoin: round;
   stroke-linecap: round;
   transition:
@@ -314,7 +314,7 @@ button { font: inherit; }
 
 @media (max-width: 600px) {
   .x-divider { padding-left: 20px; padding-right: 20px; gap: 16px; }
-  .x-divider-mark { width: 26px; height: 26px; }
+  .x-divider-mark { width: 44px; height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -388,9 +388,21 @@ button { font: inherit; }
 
 /* hero padding ---------------------------------------------- */
 /* top padding includes the 72px nav that now overlays the hero */
-.hero-inner { padding-top: 212px; padding-bottom: 140px; }
-@media (max-width: 900px) { .hero-inner { padding-top: 180px; padding-bottom: 96px; } }
-@media (max-width: 600px) { .hero-inner { padding-top: 164px; padding-bottom: 80px; } }
+.hero-inner { padding-top: 140px; padding-bottom: 140px; }
+@media (max-width: 900px) { .hero-inner { padding-top: 130px; padding-bottom: 96px; } }
+@media (max-width: 600px) { .hero-inner { padding-top: 120px; padding-bottom: 80px; } }
+
+/* Hero wordmark size. `margin-left` cancels the SVG's ~27% left whitespace
+   so the "O" sits flush with the text below — it's derived from the height,
+   so it stays correct as --hero-logo-h changes per breakpoint. */
+.hero-logo {
+  --hero-logo-h: clamp(64px, 8vw, 76px);
+  height: var(--hero-logo-h);
+  width: auto;
+  margin-left: calc(var(--hero-logo-h) * -0.273);
+}
+/* Grown on desktop only, per feedback — mobile keeps the original scale. */
+@media (min-width: 901px) { .hero-logo { --hero-logo-h: clamp(76px, 9vw, 112px); } }
 
 /* Pulls just the wordmark closer to the nav on mobile. `transform` (not
    margin) so the shift doesn't reflow the copy below — margin would move
@@ -491,15 +503,19 @@ button { font: inherit; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  /* Base logo height; React.jsx reads it via calc() for the scaled logos
+     (Alpiq, AEW) so both stay proportional to one source of truth. */
+  --client-logo-h: 56px;
 }
 .client-cell {
   background: #fff;
   padding: 36px 24px;
-  /* Reserve the tallest cell up front (66px logo at scale 1.5 + 2×36 padding).
-     The logos load lazily, and without a reservation each arrival re-flowed the
-     grid — measured CLS 0.0987 on a throttled 390px viewport, nearly all of it
-     from these cells. Uniform cells also read better as a logo wall. */
-  min-height: 138px;
+  /* Reserve the tallest cell up front (84px logo at scale 1.5 + 2×36
+     padding). The logos load lazily, and without a reservation each arrival
+     re-flowed the grid — measured CLS 0.0987 on a throttled 390px viewport,
+     nearly all of it from these cells. Uniform cells also read better as a
+     logo wall. */
+  min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -511,7 +527,7 @@ button { font: inherit; }
   min-width: 0;
 }
 .client-logo {
-  max-height: 44px;
+  max-height: var(--client-logo-h);
   max-width: 100%;
   width: auto;
   object-fit: contain;
@@ -532,7 +548,11 @@ button { font: inherit; }
   border-radius: 6px;
 }
 @media (min-width: 560px)  { .client-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .client-grid { grid-template-columns: repeat(5, 1fr); } }
+/* 3 columns (not 5): with 6 clients this divides evenly into two full rows —
+   5 columns left a 4/5-empty second row showing the grid's grey background
+   as a stray bar. Revisit the column count if the client list stops being a
+   multiple of 3. */
+@media (min-width: 1024px) { .client-grid { grid-template-columns: repeat(3, 1fr); } }
 
 /* Vorgehen — five ordered steps ----------------------------- */
 .steps-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
@@ -599,6 +619,24 @@ h1, h2, h3 { text-wrap: balance; }
 /* Desktop nav links sit in a 72px flex row, so vertical padding grows only the
    hit area, not the header. Gets them past the 24px target minimum. */
 .nav-link { padding-block: 12px; }
+
+/* Hover/focus underline for the desktop nav links (Leistungen/Referenzen/
+   Team) — Kontakt is its own CTA button and sits outside .nav-link, so it
+   never gets this. `currentColor` (not a fixed color) because the link's own
+   color flips light/dark inline depending on what's behind the header. */
+.nav-desktop .nav-link { position: relative; }
+.nav-desktop .nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 6px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.nav-desktop .nav-link:hover::after,
+.nav-desktop .nav-link:focus-visible::after { transform: scaleX(1); }
 .nav-panel { display: none; }
 
 @media (max-width: 820px) {
@@ -633,31 +671,6 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* Body scroll lock while the mobile menu is open (set from Nav.jsx). */
 body.nav-open { overflow: hidden; }
-
-/* ---- Form fields: visible focus, no removed outline ------- */
-.field {
-  font-family: var(--font-sans); font-size: 15px;
-  padding: 12px 14px; background: #fff;
-  border: 1px solid var(--border); border-radius: var(--radius-md);
-  width: 100%; color: var(--fg); box-sizing: border-box;
-  transition: border-color var(--dur-base) var(--ease-out),
-              box-shadow var(--dur-base) var(--ease-out);
-}
-.field:hover { border-color: var(--border-strong); }
-.field:focus-visible,
-.field:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
-}
-.field[aria-invalid="true"] {
-  border-color: var(--color-error);
-  box-shadow: 0 0 0 3px var(--color-error-subtle);
-}
-.field-error { margin: 6px 0 0; font-size: 13px; color: var(--color-error-text); }
-.field-row { display: grid; grid-template-columns: 1fr; gap: 14px; }
-@media (min-width: 480px) { .field-row { grid-template-columns: 1fr 1fr; } }
-.field-label { font-size: 13px; font-weight: 500; color: var(--fg); margin-bottom: 6px; display: block; }
 
 /* ---- Global keyboard focus ring --------------------------- */
 a:focus-visible,

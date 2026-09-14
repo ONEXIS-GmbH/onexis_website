@@ -1,10 +1,11 @@
 import CONTENT from '../content/de.js'
 
-// Startseiten-Teaser: die drei Leistungs-Säulen als Türöffner zur
-// Übersichtsseite /leistungen. Inhalt aus CONTENT.leistungen (Single
-// Source of Truth) — die Service-Anzahl wird aus den Säulen abgeleitet.
+// Startseiten-Teaser: drei feste Karten (Chef-Feedback 20260913), die alle
+// auf die Übersichtsseite /leistungen führen. Bewusst NICHT aus `pillars`
+// abgeleitet — andere Namen, anderer Zuschnitt als die Assess&Design/
+// Execute&Deliver/Empower-Struktur der Unterseite.
 function Services() {
-  const { teaser, pillars } = CONTENT.leistungen
+  const { teaser } = CONTENT.leistungen
   return (
     <section id="leistungen" className="section">
       <div className="container-wide">
@@ -21,16 +22,18 @@ function Services() {
         </p>
 
         <div className="pillar-grid" style={{ marginTop: 56 }}>
-          {pillars.map((p) => (
-            <a key={p.id} href={`${teaser.href}#${p.id}`} className="pillar-card">
-              <span className="mono-label">
-                {p.services.length} {p.services.length === 1 ? 'Leistung' : 'Leistungen'}
-              </span>
-              <h3 className="h-card" style={{ marginTop: 14 }}>{p.name}</h3>
+          {teaser.cards.map((card) => (
+            <a key={card.name} href={teaser.href} className="pillar-card">
+              <h3 className="h-card">{card.name}</h3>
               <p style={{
-                marginTop: 12, fontSize: 15, lineHeight: 1.55, color: 'var(--fg-muted)',
+                marginTop: 14, fontSize: 15, fontWeight: 500, color: 'var(--fg)',
               }}>
-                {p.tagline}
+                {card.lead}
+              </p>
+              <p style={{
+                marginTop: 8, fontSize: 15, lineHeight: 1.55, color: 'var(--fg-muted)',
+              }}>
+                {card.body}
               </p>
               <span className="pillar-card-more" aria-hidden="true">
                 Ansehen

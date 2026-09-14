@@ -21,18 +21,11 @@ function Hero() {
 
       <div className="container-wide hero-inner" style={{ position: 'relative' }}>
         {/* Wrapper carries the hero-line entrance animation (which also
-            animates `transform`); .hero-logo's own mobile-only nudge lives
-            on the img so the two transforms don't collide on one element. */}
+            animates `transform`); .hero-logo's own size and mobile-only nudge
+            live on the img (site.css) so the two transforms don't collide on
+            one element. */}
         <div className="hero-line" style={{ '--d': '0.05s' }}>
-          <img src="/assets/logo.svg" alt="ONEXIS"
-            className="hero-logo"
-            style={{
-              height: 'clamp(64px, 8vw, 76px)',
-              width: 'auto',
-              /* cancel the SVG's ~8% left whitespace so the "O" sits flush
-                 with the text below (offset scales with the logo height) */
-              marginLeft: 'calc(clamp(64px, 8vw, 76px) * -0.273)',
-            }} />
+          <img src="/assets/logo.svg" alt="ONEXIS" className="hero-logo" />
         </div>
 
         <p className="hero-line hero-kicker" style={{
@@ -56,12 +49,15 @@ function Hero() {
             display: 'block',
             '--d': '0.2s',
             fontWeight: 400,
-            fontSize: 'clamp(31px, 4.4vw, 58px)',
-            lineHeight: 1.12,
-            letterSpacing: '-0.03em',
+            // Three short clauses read best balanced across a few lines
+            // rather than pushed to the 58px ceiling the old single-clause
+            // title used — capped lower so it doesn't dwarf the layout.
+            fontSize: 'clamp(28px, 3.6vw, 46px)',
+            lineHeight: 1.2,
+            letterSpacing: '-0.02em',
             color: 'var(--fg)',
             textWrap: 'balance',
-            maxWidth: 840,
+            maxWidth: 780,
           }}>
             {titleLead}{titleTail ? ' —' : ''}
           </span>

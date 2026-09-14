@@ -1,25 +1,32 @@
 import CONTENT from '../content/de.js'
+import { renderPoint } from './richText.jsx'
 
 function CaseRow({ c }) {
   return (
     <article className="case-row">
       <div>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16,
-          fontSize: 13, color: 'var(--fg-muted)',
-        }}>
-          <span>{c.sector}</span>
-          <span style={{ color: 'var(--accent-ink)' }}>·</span>
-          <span style={{ color: 'var(--accent-ink)' }}>{c.role}</span>
-        </div>
         <h3 style={{
           margin: 0, fontWeight: 300, fontSize: 'clamp(26px, 2.6vw, 34px)',
           lineHeight: 1.2, letterSpacing: '-0.02em', maxWidth: 640,
         }}>{c.headline}</h3>
         <p style={{
-          marginTop: 20, fontSize: 16, lineHeight: 1.65, color: 'var(--fg)',
+          marginTop: 20, fontSize: 16, fontWeight: 500, color: 'var(--fg)',
+          maxWidth: 640,
+        }}>{c.lead}</p>
+        <p style={{
+          marginTop: 10, fontSize: 16, lineHeight: 1.65, color: 'var(--fg-muted)',
           maxWidth: 640,
         }}>{c.body}</p>
+        <ul style={{
+          marginTop: 16, paddingLeft: 20, display: 'flex', flexDirection: 'column',
+          gap: 10, maxWidth: 640,
+        }}>
+          {c.bullets.map((b, i) => (
+            <li key={i} style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--fg)' }}>
+              {renderPoint(b)}
+            </li>
+          ))}
+        </ul>
       </div>
 
       <div style={{
@@ -42,16 +49,6 @@ function Cases() {
     <section id="use-cases" className="section">
       <div className="container-wide">
         <div className="eyebrow">{c.eyebrow}</div>
-        <h2 className="h-section" style={{ marginTop: 16, maxWidth: 760 }}>
-          {c.heading[0]}<br />
-          {c.heading[1]}
-        </h2>
-        <p style={{
-          marginTop: 20, fontSize: 17, lineHeight: 1.6, color: 'var(--fg-muted)',
-          maxWidth: 640,
-        }}>
-          {c.intro}
-        </p>
 
         <div style={{ marginTop: 40 }}>
           {c.items.map((item, i) => <CaseRow key={i} c={item} />)}

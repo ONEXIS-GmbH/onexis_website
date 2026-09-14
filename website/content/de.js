@@ -20,7 +20,7 @@ const CONTENT = {
     partnerPrefix: 'Ihr Partner für',
     rotatingWords: ['IT-Beratung', 'Projektmanagement', 'IT-Architektur', 'Seminare'],
     title:
-      'Ihre IT-Architektur durchdacht, Ihre Projekte sicher realisiert.',
+      'IT-Architektur, die trägt. Projekte, die ankommen. Modernisierung, die voranbringt.',
     subtitle:
       'Wir übersetzen herausfordernde IT-Strategien in funktionierende Realität.',
     ctaPrimary: 'Leistungen ansehen',
@@ -28,29 +28,29 @@ const CONTENT = {
   },
   promises: {
     eyebrow: 'Was uns auszeichnet',
-    heading: ['Wir verkaufen', 'Vertrauen und Expertise.'],
+    heading: ['Wir stehen für', 'Vertrauen und Expertise.'],
+    intro:
+      'Mit bewährtem Projektmanagement, zukunftsfähiger Architektur und intelligentem KI-Einsatz zum messbaren Vorsprung.',
     columns: [
       {
         n: '1',
         label: 'Was wir tun',
         points: [
-          '**Zukunftsfähige IT-Architekturen** - massgeschneidert, präzise und skalierbar.',
-          'Zielbild, Blueprint, Realisierung - ein Partner für Ihre gesamte IT-Wertschöpfung.',
+          'Wir führen Sie sicher zu Ihrer modernen IT-Ziel-Architektur. Von der Konzeption bis zur Realisierung verbinden wir erstklassiges Architektur-Design mit zielgerichtetem Projektmanagement.',
         ],
       },
       {
         n: '2',
         label: 'Wie wir arbeiten',
         points: [
-          '**Pragmatisch** im Ansatz, fokussiert im Handeln, partnerschaftlich im Erfolg.',
+          'Aus zahlreichen Architektur-Herausforderungen mit Infra, Daten, Apps und Enterprise Architekturen – gestützt auf über 30 erfolgreich umgesetzte Projekte – wissen wir, worauf es ankommt. Wir agieren methodisch strukturiert und pragmatisch im Vorgehen, bleiben fokussiert im Handeln und arbeiten stets partnerschaftlich mit Ihnen zusammen, für echten Erfolg.',
         ],
       },
       {
         n: '3',
         label: 'Warum wir',
         points: [
-          'Mit **20+ Jahren Projekterfolg** bringen wir agile Methoden und klassische Verlässlichkeit auf den Punkt.',
-          'Wo Ausfallsicherheit auf Innovation trifft - State-of-the-Art-Lösungen für kritische Infrastrukturen.',
+          'Komplexe Vorhaben, kritische Infrastrukturen und höchste Security-Anforderungen verlangen nach mehr als Standardlösungen. Mit fundierter Erfahrung aus Projekten im zweistelligen Millionenbereich designen wir kompromisslose Architekturen – und setzen sie als erfahrene Projektleiter erfolgreich um.',
         ],
       },
     ],
@@ -63,11 +63,32 @@ const CONTENT = {
     // -- Startseiten-Teaser (#leistungen) --------------------
     teaser: {
       eyebrow: 'Leistungen',
-      heading: ['Ein Partner', 'für Ihre gesamte IT-Wertschöpfung.'],
+      heading: ['IT-Beratung, die Weichen stellt.', 'Architektur, die trägt. Management, das liefert.'],
       intro:
-        'Von der Analyse über die Umsetzung bis zur Befähigung - drei Felder, ein durchgängiger Ansatz.',
+        'Analyse, Umsetzung, Befähigung: End-to-End für Ihren Vorsprung.',
       cta: 'Alle Leistungen ansehen',
       href: '/leistungen',
+      // Feste Startseiten-Karten (Chef-Feedback 20260913) — bewusst NICHT
+      // aus `pillars` unten abgeleitet: andere Namen, anderer Zuschnitt.
+      // /leistungen selbst bleibt auf der Assess&Design/Execute&Deliver/
+      // Empower-Struktur.
+      cards: [
+        {
+          name: 'IT-Beratung',
+          lead: 'Strategie, die Richtung gibt.',
+          body: 'Wir analysieren Ihre Ausgangslage, schärfen Ihre IT-Roadmap und legen das Fundament für zukunftsfähige Entscheidungen.',
+        },
+        {
+          name: 'IT-Architektur',
+          lead: 'Strukturen, die tragen.',
+          body: 'Wir designen skalierbare, sichere und performante Systemlandschaften, die perfekt auf Ihre Geschäftsprozesse abgestimmt sind.',
+        },
+        {
+          name: 'Projektmanagement',
+          lead: 'Umsetzung, die ankommt.',
+          body: 'Wir steuern Ihre IT-Projekte transparent, effizient und termingerecht – von der Konzeption bis zum erfolgreichen Go-Live.',
+        },
+      ],
     },
     // -- Übersichtsseite /leistungen -------------------------
     hero: {
@@ -272,38 +293,40 @@ const CONTENT = {
   },
   cases: {
     eyebrow: 'Use Cases',
-    heading: ['Drei Mandate.', 'Drei sehr unterschiedliche Lagen.'],
-    intro: 'Exemplarisch und anonymisiert - was wir in konkreten Mandaten bewirkt haben.',
     items: [
       {
-        sector: 'Versicherungen',
-        role: 'Interim - PMO',
-        headline: 'Eskaliertes Kernsystem-Programm stabilisiert.',
-        body: 'Schadenplattform-Programm 11 Monate hinter Plan, Reporting unbrauchbar, vier Lieferanten im Konflikt. Wir haben Interim-Programmleitung übernommen, ein schlankes PMO aufgesetzt und auf ein realistisches 18-Monats-Fenster re-geplant.',
-        metric: {
-          v: '90 Tage',
-          l: 'bis Stabilisierung',
-        },
+        headline: 'Erweiterte Digitalstrategie & jährlicher Review',
+        metric: { v: '90 Tage', l: 'zur Umsetzung' },
+        lead: 'Strategische Klarheit, die nachhaltig trägt.',
+        body: 'Für einen Kunden haben wir den Weg von der Bestandsaufnahme bis zur fertigen Roadmap erfolgreich gestaltet:',
+        bullets: [
+          '**Stakeholder-Integration:** Gezielte Interviews mit den wichtigsten Entscheidungsträgern zur Erfassung aller Anforderungen.',
+          '**Ist-Architektur & Datenflüsse:** Lückenlose und transparente Dokumentation der bestehenden Systemlandschaft.',
+          '**Ziel-Design & Roadmap:** Konzeption der neuen Architektur, aufgeteilt in klare, umsetzbare Arbeitspakete (Work Packages).',
+          '**Kontinuierliche Ausrichtung:** Etablierung eines festen jährlichen Review-Zyklus, der die Strategie dauerhaft auf Kurs hält und wo nötig adaptiert.',
+        ],
       },
       {
-        sector: 'Öffentliche Verwaltung',
-        role: 'IT-Architektur',
-        headline: 'Architektur-Zielbild für ein Bürgerportal.',
-        body: 'Fachseite und IT diskutierten seit über einem Jahr ohne tragfähige Entscheidung. Wir haben drei Szenarien sauber gerechnet, eine Roadmap inkl. TCO erstellt - einstimmig im Lenkungsausschuss verabschiedet.',
-        metric: {
-          v: '8 Wochen',
-          l: 'bis Entscheid',
-        },
+        headline: 'Integrationsplattform für kritische Infrastrukturen',
+        metric: { v: '300 Tage', l: 'bis zum Go-Live' },
+        lead: 'Höchste Sicherheit und Konsolidierung für systemrelevante Landschaften.',
+        body: 'Als Gesamt-Projektleiter mit unseren spezialisierten Architekten verantworteten wir den kompletten Lebenszyklus – vom ersten Design bis zur schlüsselfertigen Übergabe an den Betrieb:',
+        bullets: [
+          '**Harmonisierung:** Erfolgreiche Zusammenführung von drei separaten Integrationsplattformen in ein einziges, sauberes Ziel-Design.',
+          '**Security by Design:** Konsequente Verankerung strengster Cyber-Security-Anforderungen direkt im Fundament der Architektur.',
+          '**Zukunftsfähige Technologie:** Erfolgreiche Evaluation und Implementierung des optimalen Produkts für einen modernen, eventbasierten Data-Streaming-Ansatz.',
+        ],
       },
       {
-        sector: 'Energie',
-        role: 'PMO - Projektleitung',
-        headline: 'Portfolio-Cockpit aufgebaut und übergeben.',
-        body: 'Vierzehn parallele IT-Vorhaben ohne gemeinsame Methodik. Wir haben ein PMO aufgebaut, das Portfolio-Cockpit etabliert und nach neun Monaten an die interne Leitung übergeben.',
-        metric: {
-          v: '9 Monate',
-          l: 'bis interne Übergabe',
-        },
+        headline: 'RPA-Einführung im Energiebereich',
+        metric: { v: '120 Tage', l: 'bis zur Übergabe' },
+        lead: 'Prozessautomatisierung mit messbarem Business-Nutzen.',
+        body: 'Für ein Energieunternehmen haben wir eine Robotic Process Automation (RPA)-Lösung für den Corporate-Services-Bereich konzipiert und erfolgreich realisiert:',
+        bullets: [
+          '**Potenzialanalyse:** Identifikation und smarte Priorisierung von Automatisierungschancen mittels interaktiver Process Discovery Workshops.',
+          '**Technologie & Ressourcen:** Gesamtleitung für den Aufbau der gesamten technologischen Infrastruktur und erfolgreiche Steuerung der Projektressourcen.',
+          '**End-to-End-Projektleitung:** Komplette Begleitung der Umsetzung bis zum punktgenauen und erfolgreichen Go-Live.',
+        ],
       },
     ],
   },
@@ -318,6 +341,7 @@ const CONTENT = {
       { name: 'Alpiq', logo: '/referenzen/Alpiq_intec_logo.png', w: 1654, h: 791, scale: 1.3, url: 'https://www.alpiq.com' },
       { name: 'AEW', logo: '/referenzen/Logo_der_AEW_Energie_AG.png', w: 2011, h: 1394, scale: 1.5, url: 'https://www.aew.ch' },
       { name: 'Immobilien Aargau' },
+      { name: 'etuna', logo: '/referenzen/kommpakt_stiftung_etuna.png', w: 439, h: 182, url: 'https://www.etuna.ch' },
     ],
   },
   sectors: {
@@ -334,7 +358,7 @@ const CONTENT = {
   team: {
     eyebrow: 'Team',
     heading: ['Ein Team aus', 'Professionals.'],
-    body: 'Wir durften in unserer Laufbahn mehr als 30 Kunden national und international bedienen und viele Mandate zum Erfolg bringen. Unser Rezept: ziel- und lösungsorientiert, klar, strukturiert und pragmatisch.',
+    body: 'Unser Rezept: ziel- und lösungsorientiert, klar, strukturiert und pragmatisch.',
     members: [
       {
         name: 'Stefan Büttler',
@@ -359,26 +383,17 @@ const CONTENT = {
   contact: {
     eyebrow: 'Kontakt',
     heading: 'Sprechen wir.',
-    intro: 'Erstgespräch innerhalb von 48 Stunden, ohne Vertriebsschleife. Wir hören zu - und sagen ehrlich, ob wir die Richtigen sind.',
+    intro: 'Schnell und unkompliziert zum Erstgespräch. Wir hören zu und sagen Ihnen ehrlich, ob wir die Richtigen sind.',
     companyName: 'ONEXIS GmbH',
     street: 'Sissacherstrasse 20',
     city: '4460 Gelterkinden',
     phone: '061 556 10 10',
     phoneHref: 'tel:+41615561010',
-    email: 'kontakt@onexis.ch',
-    emailHref: 'mailto:kontakt@onexis.ch',
-    labelFirstName: 'Vorname',
-    labelLastName: 'Nachname',
-    labelEmail: 'E-Mail',
-    labelMessage: 'Mitteilung',
-    requiredNote: 'Alle Felder werden benötigt.',
-    labelSubmit: 'Senden',
-    sending: 'Wird gesendet …',
-    errRequired: 'Bitte ausfüllen.',
-    errEmail: 'Bitte eine gültige E-Mail-Adresse angeben.',
-    errSend: 'Senden fehlgeschlagen. Bitte später erneut versuchen oder direkt an kontakt@onexis.ch schreiben.',
-    successTitle: 'Vielen Dank.',
-    successBody: 'Wir melden uns innerhalb von 48 Stunden.',
+    // Kontaktformular wurde entfernt (Chef-Feedback 20260913) — stattdessen
+    // direkter Mail-Kontakt zu Stefan.
+    contactPerson: 'Stefan Büttler',
+    contactEmail: 'stefan.buettler@onexis.ch',
+    contactEmailHref: 'mailto:stefan.buettler@onexis.ch',
   },
   footer: {
     tagline: 'Ihr Partner für IT-Beratung, Projekt-Management, IT-Architektur & Seminare.',
