@@ -11,7 +11,7 @@ const P_TEAL =
  * Recurring "X" thread ornament between sections.
  * Draws itself (stroke) then fills in when scrolled into view.
  */
-export default function XDivider() {
+export default function XDivider({ muted = false }) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -54,17 +54,25 @@ export default function XDivider() {
   }, [])
 
   return (
-    <div className="x-divider" ref={ref} role="presentation" aria-hidden="true">
-      <span className="x-divider-rule" />
-      <svg
-        className="x-divider-mark"
-        viewBox="0 0 170.17128 168.88503"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path className="x-stroke x-dark" d={P_DARK} vectorEffect="non-scaling-stroke" />
-        <path className="x-stroke x-teal" d={P_TEAL} vectorEffect="non-scaling-stroke" />
-      </svg>
-      <span className="x-divider-rule" />
+    <div
+      className="x-divider-band"
+      ref={ref}
+      role="presentation"
+      aria-hidden="true"
+      style={{ background: muted ? 'var(--bg-muted)' : 'var(--bg)' }}
+    >
+      <div className="x-divider">
+        <span className="x-divider-rule" />
+        <svg
+          className="x-divider-mark"
+          viewBox="0 0 170.17128 168.88503"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path className="x-stroke x-dark" d={P_DARK} vectorEffect="non-scaling-stroke" />
+          <path className="x-stroke x-teal" d={P_TEAL} vectorEffect="non-scaling-stroke" />
+        </svg>
+        <span className="x-divider-rule" />
+      </div>
     </div>
   )
 }

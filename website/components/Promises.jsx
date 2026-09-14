@@ -1,24 +1,21 @@
 import CONTENT from '../content/de.js'
 
-// Renders **...** spans in a statement as semibold emphasis.
-function renderPoint(text) {
-  return text.split('**').map((seg, i) =>
-    i % 2 === 1
-      ? <strong key={i} style={{ fontWeight: 600 }}>{seg}</strong>
-      : seg
-  )
-}
-
 function Promises() {
   const c = CONTENT.promises
   return (
     <section className="section" style={{ paddingTop: 120, paddingBottom: 120 }}>
-      <div className="container">
+      <div className="container-wide">
         <div className="eyebrow">{c.eyebrow}</div>
         <h2 className="h-section" style={{ marginTop: 16, maxWidth: 720 }}>
           {c.heading[0]}<br />
           {c.heading[1]}
         </h2>
+        <p style={{
+          marginTop: 22, maxWidth: 620,
+          fontSize: 19, lineHeight: 1.6, color: 'var(--fg-muted)',
+        }}>
+          {c.intro}
+        </p>
 
         <div className="promise-grid" style={{ marginTop: 56 }}>
           {c.columns.map((col) => (
@@ -39,10 +36,10 @@ function Promises() {
               }}>
                 {col.points.map((p, i) => (
                   <p key={i} style={{
-                    fontSize: 17, lineHeight: 1.5, letterSpacing: '-0.005em',
+                    fontSize: 16, lineHeight: 1.6, letterSpacing: '-0.005em',
                     color: 'var(--fg)',
                   }}>
-                    {renderPoint(p)}
+                    {p}
                   </p>
                 ))}
               </div>

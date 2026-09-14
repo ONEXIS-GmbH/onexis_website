@@ -23,8 +23,8 @@ function Team() {
                 src={m.img}
                 alt={`Porträt von ${m.name}`}
                 loading="lazy"
-                width="747"
-                height="800"
+                width="845"
+                height="845"
                 style={{
                   width: '100%', height: 'auto',
                   borderRadius: 'var(--radius-lg)',
@@ -41,9 +41,12 @@ function Team() {
                 {m.email && (
                   <a
                     href={`mailto:${m.email}`}
+                    className="link-target"
                     style={{
-                      display: 'inline-block', marginTop: 6, fontSize: 13,
+                      marginTop: 4, fontSize: 13,
                       color: 'var(--accent-ink)', textDecoration: 'none',
+                      /* long addresses must break rather than widen the card */
+                      overflowWrap: 'anywhere',
                     }}
                   >
                     {m.email}

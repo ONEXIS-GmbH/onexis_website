@@ -6,10 +6,6 @@ const CONTENT = {
         label: 'Leistungen',
       },
       {
-        href: '#vorgehen',
-        label: 'Vorgehen',
-      },
-      {
         href: '#referenzen',
         label: 'Referenzen',
       },
@@ -24,7 +20,7 @@ const CONTENT = {
     partnerPrefix: 'Ihr Partner für',
     rotatingWords: ['IT-Beratung', 'Projektmanagement', 'IT-Architektur', 'Seminare'],
     title:
-      'Ihre IT-Architektur durchdacht, Ihre Projekte sicher realisiert.',
+      'IT-Architektur, die trägt. Projekte, die ankommen. Modernisierung, die voranbringt.',
     subtitle:
       'Wir übersetzen herausfordernde IT-Strategien in funktionierende Realität.',
     ctaPrimary: 'Leistungen ansehen',
@@ -32,63 +28,188 @@ const CONTENT = {
   },
   promises: {
     eyebrow: 'Was uns auszeichnet',
-    heading: ['Wir verkaufen', 'Vertrauen und Expertise.'],
+    heading: ['Wir stehen für', 'Vertrauen und Expertise.'],
+    intro:
+      'Mit bewährtem Projektmanagement, zukunftsfähiger Architektur und intelligentem KI-Einsatz zum messbaren Vorsprung.',
     columns: [
       {
         n: '1',
         label: 'Was wir tun',
         points: [
-          '**Zukunftsfähige IT-Architekturen** - massgeschneidert, präzise und skalierbar.',
-          'Zielbild, Blueprint, Realisierung - ein Partner für Ihre gesamte IT-Wertschöpfung.',
+          'Wir führen Sie sicher zu Ihrer modernen IT-Ziel-Architektur. Von der Konzeption bis zur Realisierung verbinden wir erstklassiges Architektur-Design mit zielgerichtetem Projektmanagement.',
         ],
       },
       {
         n: '2',
         label: 'Wie wir arbeiten',
         points: [
-          '**Pragmatisch** im Ansatz, fokussiert im Handeln, partnerschaftlich im Erfolg.',
+          'Aus zahlreichen Architektur-Herausforderungen mit Infra, Daten, Apps und Enterprise Architekturen – gestützt auf über 30 erfolgreich umgesetzte Projekte – wissen wir, worauf es ankommt. Wir agieren methodisch strukturiert und pragmatisch im Vorgehen, bleiben fokussiert im Handeln und arbeiten stets partnerschaftlich mit Ihnen zusammen, für echten Erfolg.',
         ],
       },
       {
         n: '3',
         label: 'Warum wir',
         points: [
-          'Mit **20+ Jahren Projekterfolg** bringen wir agile Methoden und klassische Verlässlichkeit auf den Punkt.',
-          'Wo Ausfallsicherheit auf Innovation trifft - State-of-the-Art-Lösungen für kritische Infrastrukturen.',
+          'Komplexe Vorhaben, kritische Infrastrukturen und höchste Security-Anforderungen verlangen nach mehr als Standardlösungen. Mit fundierter Erfahrung aus Projekten im zweistelligen Millionenbereich designen wir kompromisslose Architekturen – und setzen sie als erfahrene Projektleiter erfolgreich um.',
         ],
       },
     ],
   },
-  services: {
-    eyebrow: 'Leistungen',
-    heading: ['Unsere Services -', 'von der Strategie bis zum Go-live.'],
-    items: [
+  // Leistungen: Single Source of Truth für den Startseiten-Teaser
+  // (Services.jsx) UND die Übersichtsseite /leistungen (LeistungenPage.jsx).
+  // Struktur: 3 Säulen → Services. `items` = Leaf-Themen aus dem Board;
+  // sie sind erfasst, werden aktuell aber nicht gerendert (Q3: Name + Satz).
+  leistungen: {
+    // -- Startseiten-Teaser (#leistungen) --------------------
+    teaser: {
+      eyebrow: 'Leistungen',
+      heading: ['IT-Beratung, die Weichen stellt.', 'Architektur, die trägt. Management, das liefert.'],
+      intro:
+        'Analyse, Umsetzung, Befähigung: End-to-End für Ihren Vorsprung.',
+      cta: 'Alle Leistungen ansehen',
+      href: '/leistungen',
+      // Feste Startseiten-Karten (Chef-Feedback 20260913) — bewusst NICHT
+      // aus `pillars` unten abgeleitet: andere Namen, anderer Zuschnitt.
+      // /leistungen selbst bleibt auf der Assess&Design/Execute&Deliver/
+      // Empower-Struktur.
+      cards: [
+        {
+          name: 'IT-Beratung',
+          lead: 'Strategie, die Richtung gibt.',
+          body: 'Wir analysieren Ihre Ausgangslage, schärfen Ihre IT-Roadmap und legen das Fundament für zukunftsfähige Entscheidungen.',
+        },
+        {
+          name: 'IT-Architektur',
+          lead: 'Strukturen, die tragen.',
+          body: 'Wir designen skalierbare, sichere und performante Systemlandschaften, die perfekt auf Ihre Geschäftsprozesse abgestimmt sind.',
+        },
+        {
+          name: 'Projektmanagement',
+          lead: 'Umsetzung, die ankommt.',
+          body: 'Wir steuern Ihre IT-Projekte transparent, effizient und termingerecht – von der Konzeption bis zum erfolgreichen Go-Live.',
+        },
+      ],
+    },
+    // -- Übersichtsseite /leistungen -------------------------
+    hero: {
+      eyebrow: 'Leistungen',
+      title: 'Projects in Motion',
+      subtitle:
+        'Von der Analyse über die Umsetzung bis zur Befähigung - unser Leistungsspektrum entlang Ihrer IT-Wertschöpfung.',
+    },
+    contact: {
+      text: 'Nicht sicher, welche Leistung zu Ihrem Vorhaben passt?',
+      button: 'Erstgespräch vereinbaren',
+      href: '/#kontakt',
+    },
+    pillars: [
       {
-        name: 'IT Beratung',
-        points: [
-          'Assessments in den Bereichen IT Organisation, Architektur & Technologie, Prozesse, Skills & Profile',
-          'IT-Strategien inkl. KI',
-          'IT-Zielmodelle, Zielbild-Erarbeitung für künftiges Betriebsmodell',
-          'Technische Blueprints in den Bereichen Event-Mesh, Agentic-AI, Cloud, DevSecOps, etc',
+        id: 'assess-design',
+        name: 'Assess & Design',
+        tagline: 'Standortbestimmung und Zielbild - bevor investiert wird.',
+        intro:
+          'Wir klären, wo Ihre IT steht und wohin sie soll - mit belastbaren Assessments und einem Zielbild, auf das sich investieren lässt.',
+        services: [
+          {
+            name: 'IT Orga',
+            body: 'Service-Orientierung, Zielmodelle und IT-Strategie - die Organisation, die Ihre Vorhaben trägt.',
+            items: ['Service-Orientierung', 'Zielmodelle', 'IT-Strategie'],
+          },
+          {
+            name: 'IT Prozess & Daten',
+            body: 'Prozesse und Datenhaushalt, die verlässlich liefern - von ITIL bis Data Governance.',
+            items: [
+              'IT-Service Management',
+              'ITIL',
+              'Business Process Automation - Konzept',
+              'Data Governance',
+              'Data Management',
+            ],
+          },
+          {
+            name: 'IT Arch. & Technologie',
+            body: 'Architektur, die das nächste Vorhaben trägt - und die fünf danach.',
+            items: [
+              'Tech-Radar',
+              'Blueprints (Integration, Daten, Application, Cloud)',
+              'Enterprise Architekturen',
+              'Architektur-Disziplinen',
+              'Architektur-Assessments & Zielbild',
+            ],
+          },
+          {
+            name: 'People & Skills',
+            body: 'Die richtigen Profile, gezielt aufgebaut - Zielprofile, Hiring und Change.',
+            items: ['Zielprofile', 'Up-Skilling & Hiring', 'Transformation & Change Management'],
+          },
         ],
       },
       {
-        name: 'Projekt Management',
-        points: [
-          'Agiles & hybrides Projekt- und Programm-Management für Vorstudien, Konzeption, Umsetzung, Betriebsübergabe',
-          'IT-Themenfelder: Organisation, Technologie, Prozesse, Profile & Skills',
-          'Projekt Health Checks & Reviews',
-          'Leitung eskalierter Projekte',
-          'A.i. Leitung von IT-Management-Positionen, Projektleitungs- oder PMO-Funktionen',
+        id: 'execute-deliver',
+        name: 'Execute & Deliver',
+        tagline: 'Umsetzung mit ruhiger Hand, sauber in den Betrieb übergeben.',
+        intro:
+          'Wir führen Vorhaben ins Ziel - mit Steuerung, die trägt, und einer Übergabe, die den Betrieb nicht überrascht.',
+        services: [
+          {
+            name: 'Projekt & Programm Management',
+            body: 'Von der Vorstudie bis zur Betriebsübergabe - klassisch, agil oder hybrid.',
+            items: [
+              'Health-Check & Reviews',
+              'Projekt-Rettung',
+              'Projekt/Programm-Leitung',
+              'Strategie & Blueprint umsetzen',
+            ],
+          },
+          {
+            name: 'Projekt Management Office',
+            body: 'Steuerung, Reporting, Eskalation - das PMO, das Ordnung ins Portfolio bringt.',
+            items: [],
+          },
+          {
+            name: 'Product & Service Ownership',
+            body: 'Verantwortung für Produkt und Service - mit klarem Mandat und Übergabe.',
+            items: [],
+          },
+          {
+            name: 'Talent-Pool',
+            body: 'Senior-Köpfe auf Zeit - a.i.-Positionen, Personalverleih, Dienstleistung.',
+            items: ['ad interim - IT-Positionen', 'Personalverleih', 'Dienstleistung basiert'],
+          },
+          {
+            name: 'Architecture as a Service',
+            body: 'Flexibles Architektur-Modell on demand - Kompetenz, wenn Sie sie brauchen.',
+            items: ['flexibles Architekturmodell - on demand'],
+          },
+          {
+            name: 'Data & AI',
+            body: 'Von der Datenanalyse zum produktiven KI-Einsatz - Engineering, Dashboards, Automation.',
+            items: ['AI Engineering', 'Datenanalyse', 'Dashboards', 'Business Process Automation'],
+          },
+          {
+            name: 'Product Evaluation',
+            body: 'Die richtige Lösung, objektiv gewählt - Market Screening und Empfehlung.',
+            items: ['Market Screening', 'Product Recommendation'],
+          },
         ],
       },
       {
-        name: 'IT Architektur',
-        points: [
-          'Unterstützung beim Aufbau agil orientierter Enterprise Architekturen. Z. B. Governance, Prozesse, Prinzipien, Methodik etc.',
-          'Aufbau und Integration von Architektur-Disziplinen im Unternehmen',
-          'Erstellung von Architektur Blueprints & Konzepten für verschiedene Architektur-Disziplinen wie z. B. Integration, Applikation, Cloud, Daten etc.',
-          'Standortbestimmung IST vs Zielbild inkl. Architektur-Roadmaps, abgestimmt mit dem IT-Projekt Portfolio',
+        id: 'empower',
+        name: 'Empower',
+        tagline: 'Wissen, das bleibt - befähigen statt Abhängigkeit.',
+        intro:
+          'Wir bringen Senior-Wissen ins Team und lassen es dort - als Seminar oder als Workshop, der Bewegung erzeugt.',
+        services: [
+          {
+            name: 'Seminare',
+            body: 'Resilienz, Leadership, Empowerment - Senior-Wissen als Inhouse-Seminar.',
+            items: ['Resilienz', 'Leadership', 'Empowerment'],
+          },
+          {
+            name: 'Workshops',
+            body: 'Vom TOM Canvas bis Lego Serious Play - Workshops, die Bewegung bringen.',
+            items: ['Lego Serious Play', 'AI Potential & Ideation', 'Process Discovery', 'TOM Canvas'],
+          },
         ],
       },
     ],
@@ -138,24 +259,6 @@ const CONTENT = {
         ],
       },
     ],
-    services: [
-      {
-        name: 'Projektleitung',
-        body: 'Von der Planung bis zur Betriebsübergabe - verlässlich zum Ziel.',
-      },
-      {
-        name: 'Health Check',
-        body: 'Klarheit in zwei bis vier Wochen, wenn ein Projekt wackelt.',
-      },
-      {
-        name: 'Interim',
-        body: 'Verantwortung auf Zeit, mit klarem Mandat und Übergabe.',
-      },
-      {
-        name: 'PMO',
-        body: 'Aufbau und Betrieb eines wirkungsvollen Portfolio-Cockpits.',
-      },
-    ],
   },
   vorgehen: {
     eyebrow: 'Vorgehen',
@@ -190,50 +293,55 @@ const CONTENT = {
   },
   cases: {
     eyebrow: 'Use Cases',
-    heading: ['Drei Mandate.', 'Drei sehr unterschiedliche Lagen.'],
-    intro: 'Exemplarisch und anonymisiert - was wir in konkreten Mandaten bewirkt haben.',
     items: [
       {
-        sector: 'Versicherungen',
-        role: 'Interim - PMO',
-        headline: 'Eskaliertes Kernsystem-Programm stabilisiert.',
-        body: 'Schadenplattform-Programm 11 Monate hinter Plan, Reporting unbrauchbar, vier Lieferanten im Konflikt. Wir haben Interim-Programmleitung übernommen, ein schlankes PMO aufgesetzt und auf ein realistisches 18-Monats-Fenster re-geplant.',
-        metric: {
-          v: '90 Tage',
-          l: 'bis Stabilisierung',
-        },
+        headline: 'Erweiterte Digitalstrategie & jährlicher Review',
+        metric: { v: '90 Tage', l: 'zur Umsetzung' },
+        lead: 'Strategische Klarheit, die nachhaltig trägt.',
+        body: 'Für einen Kunden haben wir den Weg von der Bestandsaufnahme bis zur fertigen Roadmap erfolgreich gestaltet:',
+        bullets: [
+          '**Stakeholder-Integration:** Gezielte Interviews mit den wichtigsten Entscheidungsträgern zur Erfassung aller Anforderungen.',
+          '**Ist-Architektur & Datenflüsse:** Lückenlose und transparente Dokumentation der bestehenden Systemlandschaft.',
+          '**Ziel-Design & Roadmap:** Konzeption der neuen Architektur, aufgeteilt in klare, umsetzbare Arbeitspakete (Work Packages).',
+          '**Kontinuierliche Ausrichtung:** Etablierung eines festen jährlichen Review-Zyklus, der die Strategie dauerhaft auf Kurs hält und wo nötig adaptiert.',
+        ],
       },
       {
-        sector: 'Öffentliche Verwaltung',
-        role: 'IT-Architektur',
-        headline: 'Architektur-Zielbild für ein Bürgerportal.',
-        body: 'Fachseite und IT diskutierten seit über einem Jahr ohne tragfähige Entscheidung. Wir haben drei Szenarien sauber gerechnet, eine Roadmap inkl. TCO erstellt - einstimmig im Lenkungsausschuss verabschiedet.',
-        metric: {
-          v: '8 Wochen',
-          l: 'bis Entscheid',
-        },
+        headline: 'Integrationsplattform für kritische Infrastrukturen',
+        metric: { v: '300 Tage', l: 'bis zum Go-Live' },
+        lead: 'Höchste Sicherheit und Konsolidierung für systemrelevante Landschaften.',
+        body: 'Als Gesamt-Projektleiter mit unseren spezialisierten Architekten verantworteten wir den kompletten Lebenszyklus – vom ersten Design bis zur schlüsselfertigen Übergabe an den Betrieb:',
+        bullets: [
+          '**Harmonisierung:** Erfolgreiche Zusammenführung von drei separaten Integrationsplattformen in ein einziges, sauberes Ziel-Design.',
+          '**Security by Design:** Konsequente Verankerung strengster Cyber-Security-Anforderungen direkt im Fundament der Architektur.',
+          '**Zukunftsfähige Technologie:** Erfolgreiche Evaluation und Implementierung des optimalen Produkts für einen modernen, eventbasierten Data-Streaming-Ansatz.',
+        ],
       },
       {
-        sector: 'Energie',
-        role: 'PMO - Projektleitung',
-        headline: 'Portfolio-Cockpit aufgebaut und übergeben.',
-        body: 'Vierzehn parallele IT-Vorhaben ohne gemeinsame Methodik. Wir haben ein PMO aufgebaut, das Portfolio-Cockpit etabliert und nach neun Monaten an die interne Leitung übergeben.',
-        metric: {
-          v: '9 Monate',
-          l: 'bis interne Übergabe',
-        },
+        headline: 'RPA-Einführung im Energiebereich',
+        metric: { v: '120 Tage', l: 'bis zur Übergabe' },
+        lead: 'Prozessautomatisierung mit messbarem Business-Nutzen.',
+        body: 'Für ein Energieunternehmen haben wir eine Robotic Process Automation (RPA)-Lösung für den Corporate-Services-Bereich konzipiert und erfolgreich realisiert:',
+        bullets: [
+          '**Potenzialanalyse:** Identifikation und smarte Priorisierung von Automatisierungschancen mittels interaktiver Process Discovery Workshops.',
+          '**Technologie & Ressourcen:** Gesamtleitung für den Aufbau der gesamten technologischen Infrastruktur und erfolgreiche Steuerung der Projektressourcen.',
+          '**End-to-End-Projektleitung:** Komplette Begleitung der Umsetzung bis zum punktgenauen und erfolgreichen Go-Live.',
+        ],
       },
     ],
   },
   references: {
     eyebrow: 'Referenzen',
     heading: ['Unternehmen,', 'die auf uns zählen.'],
+    // w/h = Originalmasse der Datei. Nur damit der Browser das Seitenverhältnis
+    // kennt, bevor das (lazy geladene) Logo da ist — sonst springt das Raster.
     clients: [
-      { name: 'Swissgrid', logo: '/referenzen/sg_logo_standard_rgb_100mm.png' },
-      { name: 'Repower', logo: '/referenzen/repower_RGB.jpg' },
-      { name: 'Alpiq', logo: '/referenzen/Alpiq_intec_logo.png', scale: 1.3 },
-      { name: 'AEW', logo: '/referenzen/Logo_der_AEW_Energie_AG.png', scale: 1.5 },
+      { name: 'Swissgrid', logo: '/referenzen/sg_logo_standard_rgb_100mm.png', w: 1182, h: 288, url: 'https://www.swissgrid.ch' },
+      { name: 'Repower', logo: '/referenzen/repower_RGB.jpg', w: 1181, h: 213, url: 'https://www.repower.ch' },
+      { name: 'Alpiq', logo: '/referenzen/Alpiq_intec_logo.png', w: 1654, h: 791, scale: 1.3, url: 'https://www.alpiq.com' },
+      { name: 'AEW', logo: '/referenzen/Logo_der_AEW_Energie_AG.png', w: 2011, h: 1394, scale: 1.5, url: 'https://www.aew.ch' },
       { name: 'Immobilien Aargau' },
+      { name: 'etuna', logo: '/referenzen/kommpakt_stiftung_etuna.png', w: 439, h: 182, url: 'https://www.etuna.ch' },
     ],
   },
   sectors: {
@@ -250,7 +358,7 @@ const CONTENT = {
   team: {
     eyebrow: 'Team',
     heading: ['Ein Team aus', 'Professionals.'],
-    body: 'Wir durften in unserer Laufbahn mehr als 30 Kunden national und international bedienen und viele Mandate zum Erfolg bringen. Unser Rezept: ziel- und lösungsorientiert, klar, strukturiert und pragmatisch.',
+    body: 'Unser Rezept: ziel- und lösungsorientiert, klar, strukturiert und pragmatisch.',
     members: [
       {
         name: 'Stefan Büttler',
@@ -259,46 +367,33 @@ const CONTENT = {
         email: 'stefan.buettler@onexis.ch',
       },
       {
-        name: 'Nico Clerici',
-        title: 'Junior Data Engineer',
-        img: '/team/nico-clerici.jpg',
-        email: 'nico.clerici@onexis.ch',
-      },
-      {
         name: 'Gabriel Wey',
         title: 'Projektleiter',
         img: '/team/gabriel-wey.jpg',
         email: 'gabriel.wey@onexis.ch',
       },
       {
-        name: 'Philipp Brunner',
-        title: 'Projektleiter',
-        img: '/team/philipp-brunner.jpg',
-        email: 'philipp.brunner@onexis.ch',
+        name: 'Nico Clerici',
+        title: 'Junior Data Engineer',
+        img: '/team/nico-clerici.jpg',
+        email: 'nico.clerici@onexis.ch',
       },
     ],
   },
   contact: {
     eyebrow: 'Kontakt',
     heading: 'Sprechen wir.',
-    intro: 'Erstgespräch innerhalb von 48 Stunden, ohne Vertriebsschleife. Wir hören zu - und sagen ehrlich, ob wir die Richtigen sind.',
+    intro: 'Schnell und unkompliziert zum Erstgespräch. Wir hören zu und sagen Ihnen ehrlich, ob wir die Richtigen sind.',
     companyName: 'ONEXIS GmbH',
     street: 'Sissacherstrasse 20',
     city: '4460 Gelterkinden',
     phone: '061 556 10 10',
     phoneHref: 'tel:+41615561010',
-    email: 'kontakt@onexis.ch',
-    emailHref: 'mailto:kontakt@onexis.ch',
-    labelFirstName: 'Vorname',
-    labelLastName: 'Nachname',
-    labelEmail: 'E-Mail',
-    labelMessage: 'Mitteilung',
-    labelSubmit: 'Senden',
-    sending: 'Wird gesendet …',
-    errRequired: 'Bitte ausfüllen.',
-    errEmail: 'Bitte eine gültige E-Mail-Adresse angeben.',
-    successTitle: 'Vielen Dank.',
-    successBody: 'Wir melden uns innerhalb von 48 Stunden.',
+    // Kontaktformular wurde entfernt (Chef-Feedback 20260913) — stattdessen
+    // direkter Mail-Kontakt zu Stefan.
+    contactPerson: 'Stefan Büttler',
+    contactEmail: 'stefan.buettler@onexis.ch',
+    contactEmailHref: 'mailto:stefan.buettler@onexis.ch',
   },
   footer: {
     tagline: 'Ihr Partner für IT-Beratung, Projekt-Management, IT-Architektur & Seminare.',

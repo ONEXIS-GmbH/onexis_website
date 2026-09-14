@@ -19,6 +19,7 @@ function reducedNow() {
 export default function RotatingWord({ words, interval = 2600 }) {
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState('in') // 'in' | 'out'
+  const [paused, setPaused] = useState(false)
   const reduceRef = useRef(reducedNow())
 
   useEffect(() => {
@@ -27,6 +28,22 @@ export default function RotatingWord({ words, interval = 2600 }) {
     const sync = () => { reduceRef.current = mq.matches }
     sync()
     mq.addEventListener?.('change', sync)
+
+    // Pause while the tab is in the background: an unwatched setInterval
+    // burning renders is pure waste, and it comes back mid-cycle otherwise.
+    const onVisibility = () => setPaused(document.hidden)
+    onVisibility()
+    document.addEventListener('visibilitychange', onVisibility)
+
+    return () => {
+      mq.removeEventListener?.('change', sync)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
+  }, [words])
+
+  useEffect(() => {
+    if (!Array.isArray(words) || words.length < 2) return
+    if (paused) return
 
     let swapTimer
     const cycle = setInterval(() => {
@@ -41,13 +58,19 @@ export default function RotatingWord({ words, interval = 2600 }) {
     return () => {
       clearInterval(cycle)
       clearTimeout(swapTimer)
-      mq.removeEventListener?.('change', sync)
     }
-  }, [words, interval])
+  }, [words, interval, paused])
 
   const reduce = reduceRef.current
   return (
-    <span className="rotator-slot">
+    // Hovering or focusing the line holds the current word. The rotation is
+    // decorative, but it is still moving content the visitor must be able to
+    // stop (WCAG 2.2.2) — and a word that swaps mid-read is just irritating.
+    <span
+      className="rotator-slot"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(document.hidden)}
+    >
       {words.map((w) => (
         <span key={w} className="rotator-ghost" aria-hidden="true">{w}</span>
       ))}

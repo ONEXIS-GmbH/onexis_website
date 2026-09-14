@@ -28,10 +28,18 @@
   --onexis-blau:             #62BDCC; /* accent — fills, strokes, rules, button bg */
   --onexis-blau-50:          #B0DEE5; /* subtle accent / hover bg */
   --onexis-blau-25:          #D8EEF2; /* tint backgrounds / chips */
-  /* Darkened teal for accent-coloured TEXT on light backgrounds.
-     AA on white (5.4:1) and on paper (5.0:1); #62BDCC as text is only 2.2:1. */
-  --onexis-blau-text:        #197585;
-  --onexis-blau-text-hover:  #0F5C68;
+  /* ONEXIS-Petrol (official name per the 2026 brandsheet — was named
+     "blau-text" before that sheet arrived). Darkened teal for
+     accent-coloured TEXT on light backgrounds: AA on white (5.4:1) and on
+     paper (5.0:1); #62BDCC as text is only 2.2:1. */
+  --onexis-petrol:           #197585;
+  --onexis-petrol-hover:     #0F5C68;
+
+  /* ONEXIS-Ziegelrot, the brandsheet's other accent colour. Used only on the
+     hero's rotating word for now — NOT wired into --accent-ink, since as
+     text on white it measures ~2.9:1 (fails WCAG AA's 4.5:1 normal-text /
+     3:1 large-text minimum). */
+  --onexis-ziegelrot:        #FA6666; /* RGB 250/102/102, CMYK 0/72/50/0 */
 
   /* ---- Neutrals (derived) ------------------------------- */
   --onexis-white:            #FFFFFF;
@@ -57,8 +65,8 @@
   --accent:                  var(--onexis-blau);       /* graphic use: fills, strokes, rules */
   --accent-hover:            #4FAFC0;
   --accent-soft:             var(--onexis-blau-25);
-  --accent-ink:              var(--onexis-blau-text);       /* teal as TEXT on light */
-  --accent-ink-hover:        var(--onexis-blau-text-hover);
+  --accent-ink:              var(--onexis-petrol);       /* teal as TEXT on light */
+  --accent-ink-hover:        var(--onexis-petrol-hover);
 
   --border:                  var(--onexis-line);
   --border-strong:           var(--onexis-anthrazit-25);
@@ -125,9 +133,30 @@
   /* ---- Motion ------------------------------------------- */
   --ease-out:                cubic-bezier(.22,.61,.36,1);
   --ease-in-out:             cubic-bezier(.65,0,.35,1);
+
+  /* Interaction scale — feedback on hover, focus, state change.
+     Short enough that the UI feels immediate. */
   --dur-fast:                120ms;
   --dur-base:                200ms;
   --dur-slow:                360ms;
+
+  /* Orchestration scale — first-load reveals and scroll-triggered draws.
+     Deliberately longer than the interaction scale: these are choreography,
+     not feedback, and are read as pacing rather than latency. */
+  --dur-entrance:            700ms;
+  --dur-reveal:              900ms;
+  --dur-draw:                1400ms;
+
+  /* ---- Layering ----------------------------------------- */
+  /* Semantic scale. Never write a raw z-index; add a rung instead. */
+  --z-base:                  0;
+  --z-raised:                10;   /* cards / marks lifted off their section */
+  --z-sticky:                100;  /* the site header */
+  --z-overlay:               200;  /* mobile nav panel */
+  --z-skip:                  300;  /* skip link — must beat everything */
+
+  /* ---- Layout constants --------------------------------- */
+  --nav-h:                   72px; /* header height; heroes bleed under it */
 
   /* ---- Error / validation state ------------------------ */
   --color-error:             #C0453B; /* border on invalid fields */
@@ -237,11 +266,15 @@ a {
   transition: color var(--dur-base) var(--ease-out);
 }
 a:hover { color: var(--accent-ink-hover); }
-/* On dark surfaces the bright brand teal is legible (5:1) and on-brand */
-.section.inverse a,
-.on-dark a { color: var(--accent); }
-.section.inverse a:hover,
-.on-dark a:hover { color: var(--accent-hover); }
+/* On dark surfaces the bright brand teal is legible (5:1) and on-brand.
+   `:not(.btn)` is load-bearing: a button carries its own background, so
+   recolouring its label from the surrounding surface produces teal-on-teal
+   (or worse, ink-on-ink). Any container rule that recolours `a` in bulk must
+   carry this exclusion — see `.nav-panel a:not(.btn)` in site.css. */
+.section.inverse a:not(.btn),
+.on-dark a:not(.btn) { color: var(--accent); }
+.section.inverse a:not(.btn):hover,
+.on-dark a:not(.btn):hover { color: var(--accent-hover); }
 
 code, .mono {
   font-family: var(--font-mono);
