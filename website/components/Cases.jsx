@@ -6,15 +6,11 @@ function CaseRow({ c }) {
     <article className="case-row">
       <div>
         <h3 style={{
-          margin: 0, fontWeight: 300, fontSize: 'clamp(26px, 2.6vw, 34px)',
+          margin: 0, fontWeight: 500, fontSize: 'clamp(26px, 2.6vw, 34px)',
           lineHeight: 1.2, letterSpacing: '-0.02em', maxWidth: 640,
         }}>{c.headline}</h3>
         <p style={{
-          marginTop: 20, fontSize: 16, fontWeight: 500, color: 'var(--fg)',
-          maxWidth: 640,
-        }}>{c.lead}</p>
-        <p style={{
-          marginTop: 10, fontSize: 16, lineHeight: 1.65, color: 'var(--fg-muted)',
+          marginTop: 20, fontSize: 16, lineHeight: 1.65, color: 'var(--fg-muted)',
           maxWidth: 640,
         }}>{c.body}</p>
         <ul style={{
@@ -48,7 +44,10 @@ function Cases() {
   return (
     <section id="use-cases" className="section">
       <div className="container-wide">
-        <div className="eyebrow">{c.eyebrow}</div>
+        {/* h2 statt div: die Section hatte sonst einen Sprung von h1 (Hero)
+            direkt zu h3 (CaseRow) — eyebrow sieht dank Klassen-basiertem CSS
+            optisch identisch aus. */}
+        <h2 className="eyebrow">{c.eyebrow}</h2>
 
         <div style={{ marginTop: 40 }}>
           {c.items.map((item, i) => <CaseRow key={i} c={item} />)}

@@ -16,7 +16,11 @@ function Hero() {
       <picture className="hero-bg" aria-hidden="true">
         <source type="image/webp" sizes="100vw"
           srcSet="/assets/hero-bg-1200.webp 1200w, /assets/hero-bg-1800.webp 1800w, /assets/hero-bg-2800.webp 2800w" />
-        <img src="/assets/hero-bg-1800.jpg" alt="" fetchPriority="high" decoding="async" />
+        {/* lowercase fetchpriority, nicht fetchPriority: react-dom/server in
+            dieser Version kennt die camelCase-Prop nicht und würde bei jedem
+            Prerender-Build warnen. Der DOM-Attributname ist ohnehin
+            case-insensitiv, Browser lesen beide Schreibweisen gleich. */}
+        <img src="/assets/hero-bg-1800.jpg" alt="" fetchpriority="high" decoding="async" />
       </picture>
 
       <div className="container-wide hero-inner" style={{ position: 'relative' }}>
@@ -88,17 +92,6 @@ function Hero() {
           {c.subtitle}
         </p>
 
-        <div className="hero-line" style={{
-          '--d': '0.62s',
-          display: 'flex', gap: 12, marginTop: 28, flexWrap: 'wrap',
-        }}>
-          <a href="#leistungen" className="btn btn-primary">
-            {c.ctaPrimary}
-          </a>
-          <a href="#kontakt" className="btn btn-ghost">
-            {c.ctaSecondary}
-          </a>
-        </div>
       </div>
     </section>
   )

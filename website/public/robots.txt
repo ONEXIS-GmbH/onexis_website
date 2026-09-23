@@ -1,3 +1,8 @@
+# Bewusste Entscheidung: alle Crawler erlaubt, ausdrücklich auch KI-Crawler
+# (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …). Die Website ist
+# Verkaufsmaterial für eine Beratung — sie soll gelesen und zitiert werden,
+# nicht verborgen bleiben. Vor einer Änderung hier bitte mit dem Chef
+# abstimmen, das war eine explizite Entscheidung, kein Standardwert.
 User-agent: *
 Allow: /
 

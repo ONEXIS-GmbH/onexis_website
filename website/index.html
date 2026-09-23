@@ -53,10 +53,75 @@
     }
   }
   </script>
+
+  <!-- WebSite + ProfessionalService: ergänzen die Organization-Entität um
+       eine durchsuchbare Site-Identität sowie Leistungsangebot und
+       Einsatzgebiet — für Suchmaschinen wie für KI-Crawler, die JSON-LD
+       stark gewichten, um Angebot und Kontaktdaten eindeutig zuzuordnen.
+       hasOfferCatalog bewusst nur auf Säulen-Ebene (/leistungen), nicht bis
+       zu den einzelnen Leaf-Themen in content/de.js — sonst müsste dieser
+       statische Block bei jeder Content-Änderung von Hand nachgezogen
+       werden. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ONEXIS",
+    "url": "https://www.onexis.ch/",
+    "inLanguage": "de-CH"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "ONEXIS GmbH",
+    "url": "https://www.onexis.ch/",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Schweiz"
+    },
+    "knowsAbout": [
+      "IT-Architektur",
+      "IT-Beratung",
+      "Projektmanagement",
+      "Target Operating Model",
+      "Data & AI",
+      "IT-Governance"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Leistungen",
+      "itemListElement": [
+        {
+          "@type": "OfferCatalog",
+          "name": "Assess & Design",
+          "url": "https://www.onexis.ch/leistungen#assess-design"
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Execute & Deliver",
+          "url": "https://www.onexis.ch/leistungen#execute-deliver"
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Empower",
+          "url": "https://www.onexis.ch/leistungen#empower"
+        }
+      ]
+    }
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="sr-only">Zum Inhalt springen</a>
   <div id="app"></div>
   <script type="module" src="/main.jsx"></script>
+
+  <!-- Cloudflare Web Analytics: cookielos, keine Wiedererkennung von
+       Besuchern über Seiten oder Zeit hinweg, keine IP-Speicherung —
+       braucht deshalb keine Einwilligung und keinen Cookie-Banner. -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token": "a4ca4e13a3c846a49c392ef0857a43ba"}'></script>
 </body>
 </html>

@@ -9,19 +9,14 @@ function Services() {
   return (
     <section id="leistungen" className="section">
       <div className="container-wide">
-        <div className="eyebrow">{teaser.eyebrow}</div>
-        <h2 className="h-section" style={{ marginTop: 16, maxWidth: 900 }}>
-          {teaser.heading[0]}<br />
-          {teaser.heading[1]}
-        </h2>
-        <p style={{
-          marginTop: 22, maxWidth: 560,
-          fontSize: 19, lineHeight: 1.6, color: 'var(--fg-muted)',
-        }}>
-          {teaser.intro}
-        </p>
+        {/* Überschrift und Intro sind entfallen (Chef-Feedback 20260923) —
+            die drei Karten sollen für sich stehen. Damit die Sektion nicht
+            ohne Überschrift dasteht (h1 → h3-Sprung), trägt der eyebrow die
+            <h2>; optisch identisch, weil das CSS klassenbasiert ist. Gleiches
+            Muster wie in Cases.jsx. */}
+        <h2 className="eyebrow">{teaser.eyebrow}</h2>
 
-        <div className="pillar-grid" style={{ marginTop: 56 }}>
+        <div className="pillar-grid" style={{ marginTop: 40 }}>
           {teaser.cards.map((card) => (
             <a key={card.name} href={teaser.href} className="pillar-card">
               <h3 className="h-card">{card.name}</h3>

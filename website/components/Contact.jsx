@@ -1,7 +1,7 @@
 import CONTENT from '../content/de.js'
 
 // Kontaktformular wurde entfernt (Chef-Feedback 20260913) — direkter
-// Mail-Kontakt zu Stefan ersetzt es. Kein Backend mehr nötig
+// Mail-Kontakt über kontakt@onexis.ch ersetzt es. Kein Backend mehr nötig
 // (website/functions/api/contact.js wurde entsprechend gelöscht).
 function Contact() {
   const c = CONTENT.contact
@@ -41,11 +41,10 @@ function Contact() {
             borderRadius: 12,
             padding: 32,
           }}>
-          <span style={{ fontSize: 13, color: 'var(--fg-muted)' }}>
-            {c.contactPerson}
-          </span>
+          {/* Das "Kontakt"-Label über der Adresse ist entfallen (Feedback
+              20260923) — der eyebrow der Sektion sagt dasselbe schon. */}
           <span style={{
-            display: 'block', marginTop: 8,
+            display: 'block',
             fontSize: 'clamp(22px, 2.6vw, 28px)', fontWeight: 300,
             letterSpacing: '-0.01em', color: 'var(--fg)',
             overflowWrap: 'anywhere',

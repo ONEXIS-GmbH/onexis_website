@@ -3,6 +3,7 @@
 
 # Build output & dependencies
 website/dist/
+website/.prerender/
 website/node_modules/
 website/package-lock.json
 

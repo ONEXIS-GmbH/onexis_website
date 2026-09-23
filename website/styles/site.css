@@ -22,7 +22,7 @@ button { font: inherit; }
 .container-narrow { max-width: var(--container-narrow);  margin: 0 auto; padding-inline: max(32px, env(safe-area-inset-left)) max(32px, env(safe-area-inset-right)); }
 
 /* section spacing ------------------------------------------- */
-.section          { padding: 128px 0; position: relative; }
+.section          { padding: 112px 0; position: relative; }
 .section-sm       { padding: 80px 0; }
 .section.muted    { background: var(--bg-muted); }
 .section.inverse  { background: var(--onexis-anthrazit); color: #fff; }
@@ -230,6 +230,8 @@ button { font: inherit; }
   overflow: hidden;
   vertical-align: baseline;
   line-height: 1.2;
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
 }
 .rotator-ghost,
 .rotator-word { grid-area: 1 / 1; }
@@ -275,10 +277,15 @@ button { font: inherit; }
   margin: 0 auto;
   padding: 4px 32px;
 }
+/* --border (#E6E7E9) auf --bg-muted (#F7F8F9) ist praktisch unsichtbar —
+   genau die beiden gemeldeten Stellen ("der Strich fehlt", Feedback
+   20260923) sind die <XDivider muted/>-Instanzen vor TOM und vor dem Team.
+   --border-strong (#CECECE) liest sich auf beiden Hintergründen und bleibt
+   auf Weiss trotzdem eine Haarlinie. */
 .x-divider-rule {
   flex: 1;
   height: 1px;
-  background: var(--border);
+  background: var(--border-strong);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform var(--dur-reveal) var(--ease-out);
@@ -325,11 +332,14 @@ button { font: inherit; }
 
 /* TOM scrollytelling --------------------------------------- */
 @keyframes tom-narration-in {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateX(-24px); }
   to   { opacity: 1; transform: none; }
 }
+/* Feedback 20260923: der Wechsel zwischen den vier Dimensionen war kaum
+   wahrnehmbar. Längere Dauer und ein seitlicher statt vertikaler Versatz
+   machen ihn eindeutig — der Text kommt sichtbar "neu herein". */
 .tom-narration {
-  animation: tom-narration-in 360ms var(--ease-out) both;
+  animation: tom-narration-in 500ms var(--ease-out) both;
 }
 
 /* Grid-Spalten dürfen unter ihre min-content-Breite schrumpfen — sonst
@@ -383,8 +393,8 @@ button { font: inherit; }
 }
 
 /* section rhythm scales down on small screens -------------- */
-@media (max-width: 900px) { .section { padding: 80px 0; } }
-@media (max-width: 600px) { .section { padding: 64px 0; } .section-sm { padding: 56px 0; } }
+@media (max-width: 900px) { .section { padding: 72px 0; } }
+@media (max-width: 600px) { .section { padding: 56px 0; } .section-sm { padding: 48px 0; } }
 
 /* hero padding ---------------------------------------------- */
 /* top padding includes the 72px nav that now overlays the hero */
@@ -414,12 +424,12 @@ button { font: inherit; }
 /* Grown on desktop only, per feedback — mobile keeps the original scale. */
 @media (min-width: 901px) { .hero-logo { --hero-logo-h: clamp(76px, 9vw, 112px); } }
 
-/* Pulls just the wordmark closer to the nav on mobile. `transform` (not
-   margin) so the shift doesn't reflow the copy below — margin would move
-   the image's box in normal flow and drag the next sibling up with it;
-   transform only repaints it, the reserved layout space stays put.
-   Negative = up. Mobile-only — untouched above 600px. */
-@media (max-width: 600px) { .hero-logo { transform: translateY(-96px); } }
+/* Früher zog ein `transform: translateY(-96px)` die Wortmarke auf Mobile an
+   die Nav heran. Das sass zu hoch (Feedback 20260923) — und weil `transform`
+   den reservierten Layoutplatz stehen lässt, hinterliess jeder Zwischenwert
+   ein Loch zwischen Logo und Copy. Die Sonderregel ist deshalb ganz
+   entfallen: das Logo steht wieder im normalen Fluss direkt über dem Text,
+   der freie Raum liegt oben im Foto, wo er hingehört. */
 
 /* Promises — was/wie/warum three-up ------------------------- */
 .promise-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }

@@ -1,12 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const QUERY = '(prefers-reduced-motion: reduce)'
-
-function reducedNow() {
-  return typeof window !== 'undefined'
-    && typeof window.matchMedia === 'function'
-    && window.matchMedia(QUERY).matches
-}
 
 /**
  * A single word that cycles through `words` with a soft mask/slide swap.
@@ -20,12 +14,17 @@ export default function RotatingWord({ words, interval = 2600 }) {
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState('in') // 'in' | 'out'
   const [paused, setPaused] = useState(false)
-  const reduceRef = useRef(reducedNow())
+  // State, not a ref: a ref read at render time would start `false` under
+  // SSR/prerendering and could flip to `true` on a reduced-motion client's
+  // first client render — a hydration mismatch. State also means a later
+  // `change` on the media query (sync below) actually triggers a re-render,
+  // which the previous ref-only version silently didn't.
+  const [reduce, setReduce] = useState(false)
 
   useEffect(() => {
     if (!Array.isArray(words) || words.length < 2) return
     const mq = window.matchMedia(QUERY)
-    const sync = () => { reduceRef.current = mq.matches }
+    const sync = () => setReduce(mq.matches)
     sync()
     mq.addEventListener?.('change', sync)
 
@@ -47,7 +46,7 @@ export default function RotatingWord({ words, interval = 2600 }) {
 
     let swapTimer
     const cycle = setInterval(() => {
-      if (reduceRef.current) return
+      if (reduce) return
       setPhase('out')
       swapTimer = setTimeout(() => {
         setIndex((i) => (i + 1) % words.length)
@@ -59,9 +58,8 @@ export default function RotatingWord({ words, interval = 2600 }) {
       clearInterval(cycle)
       clearTimeout(swapTimer)
     }
-  }, [words, interval, paused])
+  }, [words, interval, paused, reduce])
 
-  const reduce = reduceRef.current
   return (
     // Hovering or focusing the line holds the current word. The rotation is
     // decorative, but it is still moving content the visitor must be able to

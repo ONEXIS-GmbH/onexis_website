@@ -2,7 +2,7 @@ const CONTENT = {
   nav: {
     links: [
       {
-        href: '#leistungen',
+        href: '/leistungen',
         label: 'Leistungen',
       },
       {
@@ -23,14 +23,12 @@ const CONTENT = {
       'IT-Architektur, die trägt. Projekte, die ankommen. Modernisierung, die voranbringt.',
     subtitle:
       'Wir übersetzen herausfordernde IT-Strategien in funktionierende Realität.',
-    ctaPrimary: 'Leistungen ansehen',
-    ctaSecondary: 'Gespräch vereinbaren',
   },
   promises: {
     eyebrow: 'Was uns auszeichnet',
     heading: ['Wir stehen für', 'Vertrauen und Expertise.'],
     intro:
-      'Mit bewährtem Projektmanagement, zukunftsfähiger Architektur und intelligentem KI-Einsatz zum messbaren Vorsprung.',
+      'Mit strukturiertem Projektmanagement, tragfähiger Architektur und einem pragmatischen Blick auf Technologie.',
     columns: [
       {
         n: '1',
@@ -50,7 +48,7 @@ const CONTENT = {
         n: '3',
         label: 'Warum wir',
         points: [
-          'Komplexe Vorhaben, kritische Infrastrukturen und höchste Security-Anforderungen verlangen nach mehr als Standardlösungen. Mit fundierter Erfahrung aus Projekten im zweistelligen Millionenbereich designen wir kompromisslose Architekturen – und setzen sie als erfahrene Projektleiter erfolgreich um.',
+          'Komplexe Vorhaben, kritische Infrastrukturen und höchste Security-Anforderungen verlangen nach mehr als Standardlösungen. Mit fundierter Erfahrung aus Projekten im zweistelligen Millionenbereich designen wir belastbare, umsetzbare Architekturen – und setzen sie als erfahrene Projektleiter erfolgreich um.',
         ],
       },
     ],
@@ -61,11 +59,14 @@ const CONTENT = {
   // sie sind erfasst, werden aktuell aber nicht gerendert (Q3: Name + Satz).
   leistungen: {
     // -- Startseiten-Teaser (#leistungen) --------------------
+    // Trägt die sr-only <h1> auf /leistungen (LeistungenPage.jsx). Früher kam
+    // sie aus teaser.heading — das ist mit dem Chef-Feedback 20260923 entfallen.
+    pageTitle: 'Unsere Leistungen: IT-Beratung, IT-Architektur und Projektmanagement',
     teaser: {
-      eyebrow: 'Leistungen',
-      heading: ['IT-Beratung, die Weichen stellt.', 'Architektur, die trägt. Management, das liefert.'],
-      intro:
-        'Analyse, Umsetzung, Befähigung: End-to-End für Ihren Vorsprung.',
+      // Überschrift und Intro wurden entfernt (Chef-Feedback 20260923) — die
+      // drei Leistungen sollen für sich stehen. `eyebrow` trägt seither die
+      // <h2> der Sektion, siehe Services.jsx.
+      eyebrow: 'Unsere Leistungen',
       cta: 'Alle Leistungen ansehen',
       href: '/leistungen',
       // Feste Startseiten-Karten (Chef-Feedback 20260913) — bewusst NICHT
@@ -75,18 +76,18 @@ const CONTENT = {
       cards: [
         {
           name: 'IT-Beratung',
-          lead: 'Strategie, die Richtung gibt.',
-          body: 'Wir analysieren Ihre Ausgangslage, schärfen Ihre IT-Roadmap und legen das Fundament für zukunftsfähige Entscheidungen.',
+          lead: 'Klarheit für gute Entscheidungen.',
+          body: 'Wir schaffen Orientierung in komplexen IT-Fragen, schärfen Ihre Ausgangslage und entwickeln tragfähige Strategien, Konzepte und Roadmaps.',
         },
         {
           name: 'IT-Architektur',
-          lead: 'Strukturen, die tragen.',
-          body: 'Wir designen skalierbare, sichere und performante Systemlandschaften, die perfekt auf Ihre Geschäftsprozesse abgestimmt sind.',
+          lead: 'Architektur, die trägt.',
+          body: 'Wir entwickeln Zielbilder, Blueprints und Lösungsdesigns, die Geschäftsanforderungen, Systeme und Technologie sinnvoll verbinden.',
         },
         {
           name: 'Projektmanagement',
-          lead: 'Umsetzung, die ankommt.',
-          body: 'Wir steuern Ihre IT-Projekte transparent, effizient und termingerecht – von der Konzeption bis zum erfolgreichen Go-Live.',
+          lead: 'Projekte, die ins Ziel kommen.',
+          body: 'Wir strukturieren und steuern IT-Projekte, schaffen Transparenz und managen Abhängigkeiten – von der Konzeption bis zur erfolgreichen Umsetzung.',
         },
       ],
     },
@@ -108,27 +109,12 @@ const CONTENT = {
         name: 'Assess & Design',
         tagline: 'Standortbestimmung und Zielbild - bevor investiert wird.',
         intro:
-          'Wir klären, wo Ihre IT steht und wohin sie soll - mit belastbaren Assessments und einem Zielbild, auf das sich investieren lässt.',
+          'Wir klären, wo Ihre IT steht, wohin sie soll und was es dafür braucht.',
+        // Reihenfolge: Architektur zuerst (Chef-Feedback 20260923, Kernservice).
         services: [
           {
-            name: 'IT Orga',
-            body: 'Service-Orientierung, Zielmodelle und IT-Strategie - die Organisation, die Ihre Vorhaben trägt.',
-            items: ['Service-Orientierung', 'Zielmodelle', 'IT-Strategie'],
-          },
-          {
-            name: 'IT Prozess & Daten',
-            body: 'Prozesse und Datenhaushalt, die verlässlich liefern - von ITIL bis Data Governance.',
-            items: [
-              'IT-Service Management',
-              'ITIL',
-              'Business Process Automation - Konzept',
-              'Data Governance',
-              'Data Management',
-            ],
-          },
-          {
-            name: 'IT Arch. & Technologie',
-            body: 'Architektur, die das nächste Vorhaben trägt - und die fünf danach.',
+            name: 'IT-Architektur & Technologie',
+            body: 'Wir übersetzen Unternehmensziele und Anforderungen in Zielarchitekturen und konkrete Lösungsdesigns.',
             items: [
               'Tech-Radar',
               'Blueprints (Integration, Daten, Application, Cloud)',
@@ -138,8 +124,24 @@ const CONTENT = {
             ],
           },
           {
+            name: 'IT-Prozesse & Daten',
+            body: 'Wir gestalten Prozesse, Schnittstellen und Datenverantwortlichkeiten - von der Serviceerbringung bis zur Daten-Governance.',
+            items: [
+              'IT-Service Management',
+              'ITIL',
+              'Business Process Automation - Konzept',
+              'Data Governance',
+              'Data Management',
+            ],
+          },
+          {
+            name: 'IT-Organisation',
+            body: 'Wir klären Organisation, Rollen und Verantwortlichkeiten und richten Ihre IT an den Anforderungen des Unternehmens aus.',
+            items: ['Service-Orientierung', 'Zielmodelle', 'IT-Strategie'],
+          },
+          {
             name: 'People & Skills',
-            body: 'Die richtigen Profile, gezielt aufgebaut - Zielprofile, Hiring und Change.',
+            body: 'Wir klären, welche Rollen und Kompetenzen benötigt werden, und unterstützen beim Aufbau, bei der Besetzung und bei Veränderungen.',
             items: ['Zielprofile', 'Up-Skilling & Hiring', 'Transformation & Change Management'],
           },
         ],
@@ -149,11 +151,11 @@ const CONTENT = {
         name: 'Execute & Deliver',
         tagline: 'Umsetzung mit ruhiger Hand, sauber in den Betrieb übergeben.',
         intro:
-          'Wir führen Vorhaben ins Ziel - mit Steuerung, die trägt, und einer Übergabe, die den Betrieb nicht überrascht.',
+          'Wir übernehmen Verantwortung in der Umsetzung - in der Projektleitung, im Projektmanagement Office sowie in Rollen für Produkte, Services und Architektur. Je nach Bedarf ergänzen wir Ihre Organisation dauerhaft, auf Zeit oder punktuell.',
         services: [
           {
-            name: 'Projekt & Programm Management',
-            body: 'Von der Vorstudie bis zur Betriebsübergabe - klassisch, agil oder hybrid.',
+            name: 'Projekt- & Programmmanagement',
+            body: 'Wir übernehmen Projekt- und Programmleitungsmandate - für neue Vorhaben, laufende Projekte oder Vorhaben, die wieder auf Kurs gebracht werden müssen. Klassisch, agil oder hybrid.',
             items: [
               'Health-Check & Reviews',
               'Projekt-Rettung',
@@ -162,33 +164,33 @@ const CONTENT = {
             ],
           },
           {
-            name: 'Projekt Management Office',
-            body: 'Steuerung, Reporting, Eskalation - das PMO, das Ordnung ins Portfolio bringt.',
+            name: 'Projektmanagement Office',
+            body: 'Wir übernehmen Aufgaben im Projektmanagement Office ad interim oder dauerhaft und schaffen Strukturen für Planung, Reporting, Steuerung und Entscheidungsfindung.',
             items: [],
           },
           {
-            name: 'Product & Service Ownership',
-            body: 'Verantwortung für Produkt und Service - mit klarem Mandat und Übergabe.',
+            name: 'Produkt- & Serviceverantwortung',
+            body: 'Wir verbinden Businessanforderungen mit dem Angebot der IT, koordinieren Prioritäten und planen die Weiterentwicklung von Produkten und Services.',
             items: [],
           },
           {
-            name: 'Talent-Pool',
-            body: 'Senior-Köpfe auf Zeit - a.i.-Positionen, Personalverleih, Dienstleistung.',
+            name: 'Interimprofile',
+            body: 'Wir übernehmen zeitlich begrenzte Schlüsselrollen - vom Interim-CIO über Projektleitungsmandate bis zur gezielten Unterstützung bei personellen oder fachlichen Engpässen.',
             items: ['ad interim - IT-Positionen', 'Personalverleih', 'Dienstleistung basiert'],
           },
           {
-            name: 'Architecture as a Service',
-            body: 'Flexibles Architektur-Modell on demand - Kompetenz, wenn Sie sie brauchen.',
+            name: 'Architecture as a Service (AaaS)',
+            body: 'Wir begleiten Ihre Architektur mit einem definierten Grundmandat und flexibel abrufbaren Zusatzleistungen. So steht Senior-Architekturkompetenz auch ohne eine feste Vollzeitstelle zur Verfügung.',
             items: ['flexibles Architekturmodell - on demand'],
           },
           {
             name: 'Data & AI',
-            body: 'Von der Datenanalyse zum produktiven KI-Einsatz - Engineering, Dashboards, Automation.',
+            body: 'Wir analysieren Daten, entwickeln Dashboards und automatisieren wiederkehrende Abläufe. Methoden der künstlichen Intelligenz setzen wir dort ein, wo sie fachlich sinnvoll sind und einen nachvollziehbaren Nutzen bringen.',
             items: ['AI Engineering', 'Datenanalyse', 'Dashboards', 'Business Process Automation'],
           },
           {
-            name: 'Product Evaluation',
-            body: 'Die richtige Lösung, objektiv gewählt - Market Screening und Empfehlung.',
+            name: 'Unabhängige Produktevaluation',
+            body: 'Wir erfassen Anforderungen und Rahmenbedingungen, betrachten die bestehende IT-Landschaft und bewerten Produkte unabhängig und herstellerneutral. Daraus leiten wir eine begründete Empfehlung (Second Opinion) für Ihr Vorhaben ab.',
             items: ['Market Screening', 'Product Recommendation'],
           },
         ],
@@ -198,16 +200,16 @@ const CONTENT = {
         name: 'Empower',
         tagline: 'Wissen, das bleibt - befähigen statt Abhängigkeit.',
         intro:
-          'Wir bringen Senior-Wissen ins Team und lassen es dort - als Seminar oder als Workshop, der Bewegung erzeugt.',
+          'Wir vermitteln Wissen und schaffen Räume für Reflexion, Austausch und neue Arbeitsweisen.',
         services: [
           {
-            name: 'Seminare',
-            body: 'Resilienz, Leadership, Empowerment - Senior-Wissen als Inhouse-Seminar.',
+            name: 'Seminare & Inhouse-Trainings',
+            body: 'Wir bieten Seminare und Trainings zu Resilienz, Leadership und Empowerment an. Die Formate richten sich an Einzelpersonen, Teams oder ganze Organisationen.',
             items: ['Resilienz', 'Leadership', 'Empowerment'],
           },
           {
             name: 'Workshops',
-            body: 'Vom TOM Canvas bis Lego Serious Play - Workshops, die Bewegung bringen.',
+            body: 'Wir entwickeln und moderieren Workshops passend zu Ihrer Fragestellung, Ihrem Ziel und Ihrer Organisation. Dabei kombinieren wir bewährte Vorgehensweisen mit Methoden wie LEGO\u00ae SERIOUS PLAY\u00ae oder TOM Canvas.',
             items: ['Lego Serious Play', 'AI Potential & Ideation', 'Process Discovery', 'TOM Canvas'],
           },
         ],
@@ -217,23 +219,25 @@ const CONTENT = {
   tom: {
     eyebrow: 'Unser Erfolgsmodell',
     heading: ['Vier Dimensionen.', 'Ein Target Operating Model.'],
+    intro:
+      'Organisation, Prozesse, Menschen und Technologie hängen zusammen. Erst die Betrachtung aller vier Dimensionen macht ein Vorhaben erfolgreich.',
     quadrants: [
       {
         title: 'Organisation & Governance',
         short: 'Organisation',
         sub: 'Struktur, Rollen, Steuerung.',
-        body: 'Wer entscheidet, wer berichtet, wer eskaliert? Wir setzen das PMO auf, definieren Rollen und Steuergremien - bis aus einem Projektwust wieder eine geführte Lieferung wird.',
+        body: 'Wie ist Ihre IT aufgestellt, wer entscheidet, wer verantwortet? Wir klären Organisationsform, Rollen und Steuerungsgremien - für die IT als Ganzes ebenso wie für einzelne Vorhaben.',
         items: [
-          'PMO und Projektorganisation aufsetzen',
-          'Steuerung, Reporting, Eskalation',
-          'Rollen und Verantwortung klären',
+          'IT- und Business-Organisation ausrichten',
+          'Rollen, Verantwortung und Entscheidungswege klären',
+          'Projektorganisation und PMO aufsetzen',
         ],
       },
       {
         title: 'Prozesse & Daten',
         short: 'Prozesse',
         sub: 'Methodik, Lieferung, Qualität.',
-        body: 'Klassisch, hybrid oder agil - wir wählen das Vorgehen, das zu Ihrem Vorhaben passt, und bauen die Quality Gates ein, die Sie schlafen lassen.',
+        body: 'Klassisch, hybrid oder agil - wir wählen das Vorgehen, das zu Ihrem Vorhaben passt, und verankern Qualitätssicherung und Datenverantwortung darin.',
         items: [
           'Projektmethodik - klassisch, hybrid, agil',
           'Daten- und Prozess-Health-Checks',
@@ -292,12 +296,11 @@ const CONTENT = {
     ],
   },
   cases: {
-    eyebrow: 'Use Cases',
+    eyebrow: 'Ausgewählte Use Cases',
     items: [
       {
         headline: 'Erweiterte Digitalstrategie & jährlicher Review',
         metric: { v: '90 Tage', l: 'zur Umsetzung' },
-        lead: 'Strategische Klarheit, die nachhaltig trägt.',
         body: 'Für einen Kunden haben wir den Weg von der Bestandsaufnahme bis zur fertigen Roadmap erfolgreich gestaltet:',
         bullets: [
           '**Stakeholder-Integration:** Gezielte Interviews mit den wichtigsten Entscheidungsträgern zur Erfassung aller Anforderungen.',
@@ -309,7 +312,6 @@ const CONTENT = {
       {
         headline: 'Integrationsplattform für kritische Infrastrukturen',
         metric: { v: '300 Tage', l: 'bis zum Go-Live' },
-        lead: 'Höchste Sicherheit und Konsolidierung für systemrelevante Landschaften.',
         body: 'Als Gesamt-Projektleiter mit unseren spezialisierten Architekten verantworteten wir den kompletten Lebenszyklus – vom ersten Design bis zur schlüsselfertigen Übergabe an den Betrieb:',
         bullets: [
           '**Harmonisierung:** Erfolgreiche Zusammenführung von drei separaten Integrationsplattformen in ein einziges, sauberes Ziel-Design.',
@@ -320,7 +322,6 @@ const CONTENT = {
       {
         headline: 'RPA-Einführung im Energiebereich',
         metric: { v: '120 Tage', l: 'bis zur Übergabe' },
-        lead: 'Prozessautomatisierung mit messbarem Business-Nutzen.',
         body: 'Für ein Energieunternehmen haben wir eine Robotic Process Automation (RPA)-Lösung für den Corporate-Services-Bereich konzipiert und erfolgreich realisiert:',
         bullets: [
           '**Potenzialanalyse:** Identifikation und smarte Priorisierung von Automatisierungschancen mittels interaktiver Process Discovery Workshops.',
@@ -337,11 +338,11 @@ const CONTENT = {
     // kennt, bevor das (lazy geladene) Logo da ist — sonst springt das Raster.
     clients: [
       { name: 'Swissgrid', logo: '/referenzen/sg_logo_standard_rgb_100mm.png', w: 1182, h: 288, url: 'https://www.swissgrid.ch' },
-      { name: 'Repower', logo: '/referenzen/repower_RGB.jpg', w: 1181, h: 213, url: 'https://www.repower.ch' },
-      { name: 'Alpiq', logo: '/referenzen/Alpiq_intec_logo.png', w: 1654, h: 791, scale: 1.3, url: 'https://www.alpiq.com' },
-      { name: 'AEW', logo: '/referenzen/Logo_der_AEW_Energie_AG.png', w: 2011, h: 1394, scale: 1.5, url: 'https://www.aew.ch' },
-      { name: 'Immobilien Aargau' },
-      { name: 'etuna', logo: '/referenzen/kommpakt_stiftung_etuna.png', w: 439, h: 182, url: 'https://www.etuna.ch' },
+      { name: 'Repower', logo: '/referenzen/repower_RGB.jpg', w: 1181, h: 213,scale: 0.8, url: 'https://www.repower.ch' },
+      { name: 'Alpiq', logo: '/referenzen/Alpiq_intec_logo.png', w: 1654, h: 791, scale: 1.9, url: 'https://www.alpiq.com' },
+      { name: 'AEW', logo: '/referenzen/Logo_der_AEW_Energie_AG.png', w: 2011, h: 1394, scale: 1.9, url: 'https://www.aew.ch' },
+      { name: 'Kanton Aargau', logo: '/referenzen/kanton-aargau-logo.gif', w: 720, h: 363, scale: 1.5, caption: 'Immobilien Aargau', url: 'https://www.ag.ch/de/ueber-uns/verwaltung/dfr/organisation/immobilien-aargau' },
+      { name: 'etuna', logo: '/referenzen/kommpakt_stiftung_etuna.png', w: 439, h: 182,scale: 1.5, url: 'https://www.etuna.ch' },
     ],
   },
   sectors: {
@@ -365,19 +366,29 @@ const CONTENT = {
         title: 'Gründer und Geschäftsführer',
         img: '/team/stefan-buettler.jpg',
         email: 'stefan.buettler@onexis.ch',
+        linkedin: 'https://www.linkedin.com/in/stefan-buettler-61915014a/',
       },
       {
         name: 'Gabriel Wey',
         title: 'Projektleiter',
         img: '/team/gabriel-wey.jpg',
         email: 'gabriel.wey@onexis.ch',
+        linkedin: 'https://www.linkedin.com/in/gabriel-wey-908a32251/',
       },
       {
         name: 'Nico Clerici',
         title: 'Junior Data Engineer',
         img: '/team/nico-clerici.jpg',
         email: 'nico.clerici@onexis.ch',
+        linkedin: 'https://www.linkedin.com/in/nico-clerici/',
       },
+    ],
+    partnersHeading: 'Partner',
+    partners: [
+      { name: 'Daniel Wiczynski', title: 'Partner', img: '/team/dani.jpg' },
+      { name: 'Heike Krause', title: 'Partner', img: '/team/heike.jpg' },
+      { name: 'Marc Bleuler', title: 'Partner', img: '/team/marc.jpg' },
+      { name: 'Markus Roth', title: 'Partner', img: '/team/markus.jpg' },
     ],
   },
   contact: {
@@ -390,10 +401,9 @@ const CONTENT = {
     phone: '061 556 10 10',
     phoneHref: 'tel:+41615561010',
     // Kontaktformular wurde entfernt (Chef-Feedback 20260913) — stattdessen
-    // direkter Mail-Kontakt zu Stefan.
-    contactPerson: 'Stefan Büttler',
-    contactEmail: 'stefan.buettler@onexis.ch',
-    contactEmailHref: 'mailto:stefan.buettler@onexis.ch',
+    // direkter Mail-Kontakt über die allgemeine Kontaktadresse.
+    contactEmail: 'kontakt@onexis.ch',
+    contactEmailHref: 'mailto:kontakt@onexis.ch',
   },
   footer: {
     tagline: 'Ihr Partner für IT-Beratung, Projekt-Management, IT-Architektur & Seminare.',
@@ -419,6 +429,13 @@ const CONTENT = {
     ],
     copyright: '© 2026 ONEXIS GmbH',
     slogan: 'Projects in Motion',
+  },
+  notFound: {
+    eyebrow: '404',
+    title: 'Diese Seite gibt es nicht.',
+    body: 'Der aufgerufene Link ist falsch oder veraltet. Vielleicht hilft einer dieser Wege weiter:',
+    homeLink: 'Zur Startseite',
+    servicesLink: 'Zu den Leistungen',
   },
   legal: {
     impressum: {
@@ -545,6 +562,7 @@ const CONTENT = {
           heading: 'Dienste von Dritten',
           body: [
             'Wir nutzen Dienste von spezialisierten Dritten, um unsere Aktivitäten dauerhaft, sicher und zuverlässig ausüben zu können. Wir nutzen insbesondere:',
+            'Dienste von Cloudflare: Cloudflare, Inc. (USA) / Cloudflare Germany GmbH betreibt unser Website-Hosting und die Reichweitenmessung (Cloudflare Web Analytics). Diese Messung erfolgt cookielos und ohne Wiedererkennung einzelner Besucher über Seiten oder Zeit hinweg.',
             'Dienste von Google: Google LLC (USA) / Google Ireland Limited (Irland)',
             'Dienste von Microsoft: Microsoft Ireland Operations Limited (Irland) / Microsoft Corporation (USA)',
             'Diese Datenschutzerklärung kann jederzeit aktualisiert werden. Aktualisierungen werden in geeigneter Form, insbesondere durch die Veröffentlichung der jeweils aktuellen Datenschutzerklärung, auf dieser Website mitgeteilt.',

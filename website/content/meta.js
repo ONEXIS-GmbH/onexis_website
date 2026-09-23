@@ -41,6 +41,25 @@ export const ROUTE_META = {
   },
 }
 
+export const NOT_FOUND_META = {
+  title: 'Seite nicht gefunden — ONEXIS',
+  description: 'Die aufgerufene Seite existiert nicht.',
+}
+
+/**
+ * Reine Datenfunktion: liefert Titel, Description und die kanonische URL für
+ * einen Pfad. Unbekannte Pfade fallen auf NOT_FOUND_META zurück — nicht auf
+ * die Startseite, damit diese Werte zu dem passen, was NotFoundPage rendert.
+ *
+ * Wird von zwei Stellen konsumiert, die dieselben Werte nie auseinanderlaufen
+ * lassen dürfen: applyRouteMeta() unten (DOM, zur Laufzeit im Browser) und
+ * scripts/prerender.mjs (String-Injektion ins statische HTML beim Build).
+ */
+export function routeMeta(path) {
+  const meta = ROUTE_META[path] ?? NOT_FOUND_META
+  return { ...meta, url: SITE_URL + (path === '/' ? '/' : path) }
+}
+
 /** Setzt (oder erstellt) ein <meta>-Tag anhand von name= oder property=. */
 function setMeta(attr, key, value) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`)
@@ -54,17 +73,18 @@ function setMeta(attr, key, value) {
 
 /**
  * Wendet Titel, Description und die kanonische URL für den aktuellen Pfad an.
- * Unbekannte Pfade fallen auf die Startseiten-Metadaten zurück.
+ * Nur für den Browser relevant (vite dev prerendert nicht) — in Production
+ * überschreibt applyRouteMeta Werte, die das Prerendering bereits korrekt
+ * gesetzt hat, mit identischen Werten (No-op).
  */
 export function applyRouteMeta(path) {
-  const meta = ROUTE_META[path] || ROUTE_META['/']
-  const url = SITE_URL + (path === '/' ? '/' : path)
+  const meta = routeMeta(path)
 
   document.title = meta.title
   setMeta('name', 'description', meta.description)
   setMeta('property', 'og:title', meta.title)
   setMeta('property', 'og:description', meta.description)
-  setMeta('property', 'og:url', url)
+  setMeta('property', 'og:url', meta.url)
   setMeta('name', 'twitter:title', meta.title)
   setMeta('name', 'twitter:description', meta.description)
 
@@ -74,5 +94,5 @@ export function applyRouteMeta(path) {
     link.setAttribute('rel', 'canonical')
     document.head.appendChild(link)
   }
-  link.setAttribute('href', url)
+  link.setAttribute('href', meta.url)
 }

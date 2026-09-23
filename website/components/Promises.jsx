@@ -3,7 +3,7 @@ import CONTENT from '../content/de.js'
 function Promises() {
   const c = CONTENT.promises
   return (
-    <section className="section" style={{ paddingTop: 120, paddingBottom: 120 }}>
+    <section className="section" style={{ paddingTop: 104, paddingBottom: 104 }}>
       <div className="container-wide">
         <div className="eyebrow">{c.eyebrow}</div>
         <h2 className="h-section" style={{ marginTop: 16, maxWidth: 720 }}>
@@ -27,7 +27,7 @@ function Promises() {
                 <span style={{
                   fontSize: 15, fontWeight: 600, color: 'var(--accent-ink)',
                 }}>{col.n}</span>
-                <span style={{ fontSize: 15, fontWeight: 500, color: 'var(--fg)' }}>
+                <span style={{ fontSize: 19, fontWeight: 500, color: 'var(--fg)' }}>
                   {col.label}
                 </span>
               </div>

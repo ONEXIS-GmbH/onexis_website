@@ -1,0 +1,42 @@
+# ONEXIS
+
+> ONEXIS GmbH ist ein Schweizer Beratungsunternehmen für IT-Architektur,
+> IT-Beratung, Projektmanagement und Seminare mit Sitz in Gelterkinden (Kanton
+> Basel-Landschaft). Referenzkunden liegen vor allem im Schweizer
+> Energiesektor sowie bei öffentlichen Verwaltungen.
+
+ONEXIS führt und steuert IT-Vorhaben von der Planung bis zur
+Betriebsübergabe — national und international. Die drei Leistungssäulen:
+
+- **Assess & Design** — IT-Organisation, IT-Prozesse & Daten, IT-Architektur
+  & Technologie, People & Skills: Standortbestimmung und Zielbild, bevor
+  investiert wird.
+- **Execute & Deliver** — Projekt- & Programm-Management, PMO, Product &
+  Service Ownership, Talent-Pool (Interim-Mandate), Architecture as a
+  Service, Data & AI, Product Evaluation: Umsetzung bis zur sauberen
+  Betriebsübergabe.
+- **Empower** — Seminare und Workshops zu Resilienz, Leadership und
+  Transformation: Senior-Wissen, das im Team bleibt.
+
+Branchenschwerpunkte: Energieversorger, öffentliche Verwaltung,
+Versicherungen, IT Service Providers.
+
+## Seiten
+
+- [Startseite](https://www.onexis.ch/): Überblick über Leistungen,
+  Erfolgsmodell (Target Operating Model), Referenzen und Team.
+- [Leistungen](https://www.onexis.ch/leistungen): Alle Services entlang der
+  drei Säulen Assess & Design, Execute & Deliver, Empower.
+- [Impressum](https://www.onexis.ch/impressum)
+- [Datenschutz](https://www.onexis.ch/datenschutz)
+- [AGB](https://www.onexis.ch/agb)
+
+## Referenzen
+
+Swissgrid, Alpiq, Repower, AEW Energie, Kanton Aargau (Immobilien Aargau),
+etuna.
+
+## Kontakt
+
+ONEXIS GmbH, Sissacherstrasse 20, CH-4460 Gelterkinden.
+Telefon +41 61 556 10 10, E-Mail kontakt@onexis.ch.

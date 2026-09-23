@@ -6,18 +6,21 @@ import Footer from './Footer.jsx'
 // eine Karte (Name + ein Satz). Leaf-Themen (p.services[].items) sind in
 // de.js erfasst, werden hier aber bewusst nicht gerendert.
 // Der Hero wurde entfernt (Grafik-Feedback) — die erste Säulen-Überschrift
-// trägt seither die einzige <h1> der Seite. CONTENT.leistungen.hero bleibt
-// in de.js stehen, wird hier aber nicht mehr gerendert.
+// trug seither die einzige <h1> der Seite, aber "Assess & Design" trägt
+// keinen Keyword-Wert. Eine sr-only-h1 mit dem eigentlichen Seitenthema
+// (CONTENT.leistungen.pageTitle) steht jetzt voran; alle Säulen-
+// Überschriften sind konsequent h2.
 function LeistungenPage() {
-  const { pillars, contact } = CONTENT.leistungen
+  const { pageTitle, pillars, contact } = CONTENT.leistungen
 
   return (
     <>
       <Nav hrefPrefix="/" heroLight />
       <main id="main-content">
+        <h1 className="sr-only">{pageTitle}</h1>
+
         {/* Säulen — abwechselnd hell / gedämpft für Rhythmus */}
         {pillars.map((p, i) => {
-          const Heading = i === 0 ? 'h1' : 'h2'
           return (
             <section
               key={p.id}
@@ -27,7 +30,7 @@ function LeistungenPage() {
             >
               <div className="container-wide">
                 <div className="pillar-head">
-                  <Heading className="h-section" style={{ maxWidth: 720 }}>{p.name}</Heading>
+                  <h2 className="h-section" style={{ maxWidth: 720 }}>{p.name}</h2>
                   <span className="mono-label pillar-count">
                     {p.services.length} {p.services.length === 1 ? 'Leistung' : 'Leistungen'}
                   </span>

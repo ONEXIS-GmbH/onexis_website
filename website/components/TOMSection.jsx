@@ -58,7 +58,7 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
     <div style={{
       position: 'relative',
       width: '100%',
-      maxWidth: 560,
+      maxWidth: 460,
       margin: '0 auto',
       aspectRatio: '1 / 1',
     }}>
@@ -232,12 +232,18 @@ function TOMCircle({ activeIdx, onPick, mounted, prefersReduced }) {
 /* ------------------------------------------------------------------ */
 /*  Narration panel                                                   */
 /* ------------------------------------------------------------------ */
-function NarrationPanel({ q, idx, tabId }) {
+function NarrationPanel({ q, idx, tabId, active }) {
   return (
     <div
-      id="tom-panel"
+      id={`tom-panel-${idx}`}
       role="tabpanel"
       aria-labelledby={tabId}
+      /* Alle vier Panels stehen im DOM (Crawler ohne CSS/JS — die meisten
+         Social- und KI-Crawler — lesen so alle vier Dimensionen statt nur
+         der aktiven). `hidden` blendet die drei inaktiven für Sehende und
+         Screenreader aus; das ist dasselbe Tabs-Muster, das Google explizit
+         als legitim einstuft, kein "hidden text". */
+      hidden={!active}
       /* No focusable children of its own, so the panel takes focus itself —
          otherwise a keyboard user tabbing off the tablist skips the text the
          tablist exists to reveal. */
@@ -251,8 +257,8 @@ function NarrationPanel({ q, idx, tabId }) {
         {String(idx + 1).padStart(2, '0')}&nbsp;·&nbsp;DIMENSION
       </div>
       <h3 style={{
-        margin: '14px 0 12px', fontWeight: 300,
-        fontSize: 'clamp(34px, 3.8vw, 50px)',
+        margin: '12px 0 10px', fontWeight: 300,
+        fontSize: 'clamp(28px, 3vw, 40px)',
         letterSpacing: '-0.025em', lineHeight: 1.05,
       }}>
         {q.title}.
@@ -291,9 +297,16 @@ function NarrationPanel({ q, idx, tabId }) {
 /*  Section                                                           */
 /* ------------------------------------------------------------------ */
 function TOMSection() {
-  const prefersReduced = React.useRef(
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  ).current
+  // State (not a ref read at render time): a ref would read `false` during
+  // SSR and prerendering, then `true` on a reduced-motion client's first
+  // client render — a hydration mismatch that React 18 does not repair in
+  // production, leaving the circle stuck at scale(0). The effect below
+  // syncs the real value after mount, on both server-rendered and
+  // client-only paths.
+  const [prefersReduced, setPrefersReduced] = React.useState(false)
+  React.useEffect(() => {
+    setPrefersReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  }, [])
 
   const sectionRef = React.useRef(null)
   const [activeIdx, setActiveIdx] = React.useState(0)
@@ -357,7 +370,7 @@ function TOMSection() {
     const id = setInterval(() => {
       if (userOverrideRef.current === 'user') return
       setActiveIdx(i => (i + 1) % 4)
-    }, 2800)
+    }, 6000)
     return () => clearInterval(id)
   }, [mounted, pinned, paused, prefersReduced])
 
@@ -394,10 +407,14 @@ function TOMSection() {
     >
       <div
         className="tom-sticky"
+        /* paddingTop = Navhöhe: der Inhalt zentriert sich sonst über die
+           volle Viewporthöhe und schiebt den eyebrow unter die sticky Nav,
+           sobald die linke Spalte hoch genug wird. */
         style={{
           position: 'sticky',
           top: 0,
           height: '100vh',
+          paddingTop: 'var(--nav-h)',
           display: 'flex',
           alignItems: 'center',
         }}
@@ -415,11 +432,18 @@ function TOMSection() {
           <div>
             <div className="eyebrow">{CONTENT.tom.eyebrow}</div>
             <h2 className="h-section" style={{
-              marginTop: 14, marginBottom: 32, maxWidth: 540,
+              marginTop: 14, marginBottom: 0, maxWidth: 560,
+              fontSize: 'clamp(30px, 3.2vw, 44px)',
             }}>
               {CONTENT.tom.heading[0]}<br />
               {CONTENT.tom.heading[1]}
             </h2>
+            <p style={{
+              marginTop: 14, marginBottom: 26, maxWidth: 540,
+              fontSize: 17, lineHeight: 1.55, color: 'var(--fg-muted)',
+            }}>
+              {CONTENT.tom.intro}
+            </p>
 
             {/* Tablist — the primary keyboard control for the TOM diagram */}
             <div
@@ -433,7 +457,7 @@ function TOMSection() {
                   id={`tom-tab-${i}`}
                   role="tab"
                   aria-selected={activeIdx === i}
-                  aria-controls="tom-panel"
+                  aria-controls={`tom-panel-${i}`}
                   tabIndex={activeIdx === i ? 0 : -1}
                   onClick={() => pick(i, 'click')}
                   onMouseEnter={() => pick(i, 'hover')}
@@ -459,11 +483,15 @@ function TOMSection() {
               ))}
             </div>
 
-            <NarrationPanel
-              q={TOM_QUADRANTS[activeIdx]}
-              idx={activeIdx}
-              tabId={`tom-tab-${activeIdx}`}
-            />
+            {TOM_QUADRANTS.map((q, i) => (
+              <NarrationPanel
+                key={q.title}
+                q={q}
+                idx={i}
+                tabId={`tom-tab-${i}`}
+                active={activeIdx === i}
+              />
+            ))}
           </div>
 
           <div>

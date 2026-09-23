@@ -3,7 +3,7 @@ import CONTENT from '../content/de.js'
 function References() {
   const c = CONTENT.references
   return (
-    <section id="referenzen" className="section" style={{ paddingTop: 96, paddingBottom: 96 }}>
+    <section id="referenzen" className="section" style={{ paddingTop: 88, paddingBottom: 88 }}>
       <div className="container-wide">
         <div className="eyebrow">{c.eyebrow}</div>
         <h2 className="h-section" style={{ marginTop: 16, maxWidth: 720 }}>
@@ -28,6 +28,14 @@ function References() {
                 style={client.scale ? { maxHeight: `calc(var(--client-logo-h) * ${client.scale})` } : undefined}
               />
             )
+            const content = client.caption
+              ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                  {logo}
+                  <div style={{ fontSize: 13, color: 'var(--fg-muted)' }}>{client.caption}</div>
+                </div>
+              )
+              : logo
             return (
               <div key={client.name} className="client-cell">
                 {client.url
@@ -38,9 +46,9 @@ function References() {
                       rel="noopener noreferrer"
                       aria-label={`${client.name} – Website öffnen (neuer Tab)`}
                     >
-                      {logo}
+                      {content}
                     </a>
-                  : logo}
+                  : content}
               </div>
             )
           })}

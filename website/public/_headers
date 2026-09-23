@@ -1,2 +1,23 @@
+# Security-Header gelten überall — Cloudflare Pages lässt spezifischere
+# Pfade (siehe /assets/* unten) für einzelne Header-Werte gewinnen, ohne
+# dass diese hier überschrieben werden.
+#
+# Cache-Control gilt hier ebenfalls "überall" und deckt damit auch die per
+# Cloudflare-Pages-Directory-Index ausgelieferten Routen ab (z. B. liefert
+# /leistungen die Datei dist/leistungen/index.html aus — die angefragte URL
+# endet nie auf .html, ein Pattern wie /*.html würde also nie greifen).
+# HTML wird seit dem Prerendering (siehe scripts/prerender.mjs) bei jedem
+# Deploy neu erzeugt — bewusst kurz gecacht, damit ein neuer Deploy nicht
+# hinter altem Browser-Cache steckenbleibt.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Cache-Control: public, max-age=0, must-revalidate
+
+# /assets/* trägt Vite-Hashes im Dateinamen und darf deshalb ein Jahr lang
+# unveränderlich bleiben — als spezifischerer Pfad überschreibt das die
+# kurze Cache-Control-Regel oben nur für diese Requests.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable

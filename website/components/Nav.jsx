@@ -63,6 +63,12 @@ function Nav({ hrefPrefix = '', heroLight = false, photoLogo = false }) {
     }
   }, [open])
 
+  // `hrefPrefix` macht aus einem Anker der Startseite (#kontakt) auf einer
+  // Unterseite einen absoluten Link (/#kontakt). Auf Links, die bereits
+  // absolut sind (/leistungen), darf er nicht angewendet werden — sonst
+  // entsteht dort //leistungen.
+  const href = (h) => (h.startsWith('#') ? `${hrefPrefix}${h}` : h)
+
   const close = () => {
     setOpen(false)
     toggleRef.current?.focus()
@@ -106,7 +112,7 @@ function Nav({ hrefPrefix = '', heroLight = false, photoLogo = false }) {
 
         <nav className="nav-desktop" aria-label="Hauptnavigation">
           {c.links.map(l => (
-            <a key={l.href} href={`${hrefPrefix}${l.href}`} className="nav-link" style={{
+            <a key={l.href} href={href(l.href)} className="nav-link" style={{
               fontSize: 14, color: dark ? 'var(--fg)' : 'var(--fg-on-dark)',
               fontWeight: 500, textDecoration: 'none',
             }}>{l.label}</a>
@@ -142,7 +148,7 @@ function Nav({ hrefPrefix = '', heroLight = false, photoLogo = false }) {
         <nav id="mobile-nav" ref={panelRef} className="nav-panel" aria-label="Hauptnavigation">
           <div className="container-wide" style={{ display: 'flex', flexDirection: 'column' }}>
             {c.links.map(l => (
-              <a key={l.href} href={`${hrefPrefix}${l.href}`} className="nav-link" onClick={() => setOpen(false)}>
+              <a key={l.href} href={href(l.href)} className="nav-link" onClick={() => setOpen(false)}>
                 {l.label}
               </a>
             ))}
