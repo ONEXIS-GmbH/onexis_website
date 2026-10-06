@@ -1,6 +1,5 @@
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
-import Promises from './components/Promises.jsx'
 import Services from './components/Services.jsx'
 import TOMSection from './components/TOMSection.jsx'
 import Cases from './components/Cases.jsx'
@@ -38,8 +37,6 @@ function Home() {
         <Hero />
         <Services />
         <XDivider />
-        <Promises />
-        <XDivider muted/>
         <TOMSection />
         <XDivider muted/>
         <Cases />

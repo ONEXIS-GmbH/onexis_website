@@ -19,8 +19,8 @@ const CONTENT = {
   hero: {
     partnerPrefix: 'Ihr Partner für',
     rotatingWords: ['IT-Beratung', 'Projektmanagement', 'IT-Architektur', 'Seminare'],
-    title:
-      'IT-Architektur, die trägt. Projekte, die ankommen. Modernisierung, die voranbringt.',
+    // Eine Zeile pro Eintrag (Hero.jsx bricht nach jedem Eintrag um).
+    title: ['IT-Architektur, die Orientierung gibt.', 'Projekte, die vorankommen.'],
     subtitle:
       'Wir übersetzen herausfordernde IT-Strategien in funktionierende Realität.',
   },

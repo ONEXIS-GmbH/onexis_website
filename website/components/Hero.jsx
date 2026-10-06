@@ -3,10 +3,6 @@ import RotatingWord from './RotatingWord.jsx'
 
 function Hero() {
   const c = CONTENT.hero
-  // Split the long headline at its dash into a strong lead + a lighter tail,
-  // so the sentence reads as two scannable tiers instead of one dense block.
-  const [titleLead, ...titleRest] = c.title.split(' - ')
-  const titleTail = titleRest.join(' - ')
   // .hero-dark carries the anthracite band and the negative bleed under the
   // nav. .hero-dark--image shows the photo plain, full-bleed, no tint — the
   // photo itself runs light, so the copy here uses the light-surface (dark)
@@ -53,9 +49,9 @@ function Hero() {
             display: 'block',
             '--d': '0.2s',
             fontWeight: 400,
-            // Three short clauses read best balanced across a few lines
-            // rather than pushed to the 58px ceiling the old single-clause
-            // title used — capped lower so it doesn't dwarf the layout.
+            // Two short clauses, one per line (c.title is an array) — capped
+            // below the 58px ceiling the old single-clause title used so it
+            // doesn't dwarf the layout.
             fontSize: 'clamp(28px, 3.6vw, 46px)',
             lineHeight: 1.2,
             letterSpacing: '-0.02em',
@@ -63,24 +59,10 @@ function Hero() {
             textWrap: 'balance',
             maxWidth: 780,
           }}>
-            {titleLead}{titleTail ? ' —' : ''}
+            {c.title.map((line) => (
+              <span key={line} style={{ display: 'block' }}>{line}</span>
+            ))}
           </span>
-          {titleTail && (
-            <span className="hero-line" style={{
-              display: 'block',
-              '--d': '0.32s',
-              marginTop: '0.5em',
-              fontSize: 'clamp(19px, 2.5vw, 28px)',
-              fontWeight: 300,
-              lineHeight: 1.3,
-              letterSpacing: '-0.015em',
-              color: 'var(--fg)',
-              textWrap: 'pretty',
-              maxWidth: 620,
-            }}>
-              {titleTail}
-            </span>
-          )}
         </h1>
 
         <p className="hero-line" style={{
