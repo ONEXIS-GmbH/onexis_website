@@ -538,6 +538,9 @@ button { font: inherit; }
 .lp-list { list-style: none; margin: 0; padding: 0; min-width: 0; }
 .lp-list li { padding: 22px 0; border-top: 1px solid var(--border); }
 .lp-list li:last-child { border-bottom: 1px solid var(--border); }
+/* Beraten und Umsetzen: keine Abschlusslinie unter dem letzten Eintrag */
+[data-pillar="beraten"] .lp-list li:last-child,
+[data-pillar="umsetzen"] .lp-list li:last-child { border-bottom: 0; }
 /* Umsetzen und Befähigen: die Säulen-Trennlinie sitzt schon direkt darüber */
 .lp-pillar + .lp-pillar .lp-list li:first-child { border-top: 0; }
 .lp-list p { margin-top: 8px; font-size: 16px; line-height: 1.55; color: var(--fg); }

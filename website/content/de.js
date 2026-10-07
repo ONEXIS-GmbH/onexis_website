@@ -93,7 +93,7 @@ const CONTENT = {
         services: [
           {
             name: 'IT-Strategie & Organisation',
-            body: 'IT, die das Geschäft trägt – mit klarer Strategie und Governance',
+            body: 'IT mit klarer Strategie und Governance',
           },
           {
             name: 'IT-Betriebsmodelle',
@@ -109,7 +109,7 @@ const CONTENT = {
           },
           {
             name: 'Technologiebewertung & Tech-Radar',
-            body: 'Fundierte Technologieentscheide – unabhängig und nachvollziehbar',
+            body: 'Fundierte Technologieentscheide: produktunabhängige Zweitmeinung',
           },
         ],
       },
@@ -119,23 +119,23 @@ const CONTENT = {
         name: 'Umsetzen',
         tagline: 'Verantwortung in der Umsetzung, sauber ins Ziel.',
         intro:
-          'Wir übernehmen Verantwortung in der Umsetzung – von der Projektleitung bis zur technischen Realisierung.',
+          'Wir übernehmen Verantwortung in der Umsetzung, von der Projektleitung bis zur technischen Realisierung.',
         services: [
           {
             name: 'Projekt- & Programmmanagement inkl. PMO',
-            body: 'Projekte sicher ins Ziel bringen – klassisch, agil oder hybrid',
+            body: 'Projekte sicher ins Ziel bringen: klassisch, agil oder hybrid',
           },
           {
             name: 'Projekt-Health-Check & Recovery',
-            body: 'Kritische Projekte schnell stabilisieren und wieder auf Kurs bringen',
+            body: 'Kritische Projekte stabilisieren und wieder auf Kurs bringen',
           },
           {
             name: 'Data Engineering, Analytics & BI',
-            body: 'Von Rohdaten zu Entscheidungen – Pipelines, Plattformen, Dashboards',
+            body: 'Von Rohdaten zu Entscheidungen: Pipelines, Plattformen, Dashboards',
           },
           {
             name: 'Integration',
-            body: 'Systeme und Services sicher verbinden – inkl. Identitäten und Zugriffe (IAM)',
+            body: 'Systeme und Services sicher verbinden, inkl. Identitäten und Zugriffe (IAM)',
           },
           {
             name: 'Prozess- & Testautomation',
@@ -143,7 +143,7 @@ const CONTENT = {
           },
           {
             name: 'KI-Use-Cases',
-            body: 'KI produktiv einsetzen – DSG- und DSGVO-konform',
+            body: 'KI produktiv einsetzen, DSG- und DSGVO-konform',
           },
         ],
       },
@@ -151,13 +151,13 @@ const CONTENT = {
         id: 'befaehigen',
         n: '03',
         name: 'Befähigen',
-        tagline: 'Wissen, das bleibt – befähigen statt Abhängigkeit.',
+        tagline: 'Wissen, das bleibt: befähigen statt Abhängigkeit.',
         intro:
           'Wir vermitteln Wissen und schaffen Räume für Reflexion, Austausch und neue Arbeitsweisen.',
         services: [
           {
             name: 'Transformation & Change',
-            body: 'Veränderung, die ankommt – durch Kommunikation und Begleitung',
+            body: 'Veränderung, die ankommt, durch Kommunikation und Begleitung',
           },
           {
             name: 'Rollen, Skills & Workforce Design',
@@ -165,7 +165,7 @@ const CONTENT = {
           },
           {
             name: 'Trainings & Workshops',
-            body: 'Teams stärken – von Leadership bis Lego Serious Play',
+            body: 'Teams stärken: von Leadership bis Lego Serious Play',
           },
         ],
       },
@@ -182,7 +182,7 @@ const CONTENT = {
         },
         {
           name: 'Mandat',
-          body: 'Eine feste Rolle in Ihrer Organisation – dauerhaft oder auf Zeit, mit klarer Verantwortung.',
+          body: 'Eine feste Rolle in Ihrer Organisation, dauerhaft oder auf Zeit, mit klarer Verantwortung.',
         },
         {
           name: 'On-Demand',
@@ -385,7 +385,7 @@ const CONTENT = {
     linkedinLabel: 'ONEXIS auf LinkedIn',
   },
   footer: {
-    tagline: 'Ihr Partner für IT – Beraten · Umsetzen · Befähigen.',
+    tagline: 'Ihr Partner für IT: Beraten · Umsetzen · Befähigen.',
     addressTitle: 'Adresse',
     company: 'ONEXIS GmbH',
     street: 'Sissacherstrasse 20',
