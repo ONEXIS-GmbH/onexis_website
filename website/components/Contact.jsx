@@ -1,4 +1,5 @@
 import CONTENT from '../content/de.js'
+import LinkedInIcon from './LinkedInIcon.jsx'
 
 // Kontaktformular wurde entfernt (Chef-Feedback 20260913) — direkter
 // Mail-Kontakt über kontakt@onexis.ch ersetzt es. Kein Backend mehr nötig
@@ -29,7 +30,18 @@ function Contact() {
             <strong style={{ fontWeight: 600 }}>{c.companyName}</strong><br />
             {c.street}<br />
             {c.city}<br />
-            <a className="link-target" href={c.phoneHref}>{c.phone}</a>
+            <a className="link-target" href={c.phoneHref}>{c.phone}</a><br />
+            <a
+              className="link-target"
+              href={c.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={c.linkedinLabel}
+              title={c.linkedinLabel}
+              style={{ color: 'var(--accent-ink)', textDecoration: 'none' }}
+            >
+              <LinkedInIcon size={22} />
+            </a>
           </address>
         </div>
 

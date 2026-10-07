@@ -1,8 +1,9 @@
 import CONTENT from '../content/de.js'
+import TrustIcon from './TrustIcons.jsx'
 
-// Startseiten-Teaser: eine Karte pro Säule (Beraten / Umsetzen / Befähigen),
-// abgeleitet aus `pillars`. Jede Karte springt direkt zum passenden Abschnitt
-// auf /leistungen.
+// Startseiten-Teaser: Vertrauensband über den Karten, darunter eine Karte pro
+// Säule (Beraten / Umsetzen / Befähigen), abgeleitet aus `pillars`. Jede Karte
+// springt direkt zum passenden Abschnitt auf /leistungen.
 function Services() {
   const { teaser, pillars } = CONTENT.leistungen
   return (
@@ -13,9 +14,18 @@ function Services() {
             Muster wie in Cases.jsx. */}
         <h2 className="eyebrow">{teaser.eyebrow}</h2>
 
-        <div className="pillar-grid" style={{ marginTop: 40 }}>
+        <ul className="trust-band">
+          {teaser.trust.map((t) => (
+            <li key={t.label}>
+              <TrustIcon name={t.icon} />
+              {t.label}
+            </li>
+          ))}
+        </ul>
+
+        <div className="pillar-grid" style={{ marginTop: 32 }}>
           {pillars.map((p) => (
-            <a key={p.id} href={`${teaser.href}#${p.id}`} className="pillar-card">
+            <a key={p.id} href={`${teaser.href}#${p.id}`} data-pillar={p.id} className="pillar-card">
               <span className="mono-label">{p.n}</span>
               <h3 className="h-card" style={{ marginTop: 10 }}>{p.name}</h3>
               <p style={{

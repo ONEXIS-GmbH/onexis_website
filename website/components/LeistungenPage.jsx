@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import CONTENT from '../content/de.js'
 import Nav from './Nav.jsx'
 import Footer from './Footer.jsx'
@@ -11,6 +12,24 @@ import Footer from './Footer.jsx'
 function LeistungenPage() {
   const { pageTitle, jumpLabel, pillars, collaboration, contact } = CONTENT.leistungen
 
+  // Aktiver Bereich der Sprungleiste. Beim SSR/Prerender ist die erste Säule
+  // aktiv; im Browser wechselt der Status mit dem Scrollen mit.
+  const [active, setActive] = useState(pillars[0].id)
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return undefined
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id) })
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+    pillars.forEach((p) => {
+      const el = document.getElementById(p.id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [pillars])
+
   return (
     <>
       <Nav hrefPrefix="/" heroLight />
@@ -23,7 +42,11 @@ function LeistungenPage() {
             <ul>
               {pillars.map((p) => (
                 <li key={p.id}>
-                  <a href={`#${p.id}`}>
+                  <a
+                    href={`#${p.id}`}
+                    className={active === p.id ? 'is-active' : undefined}
+                    aria-current={active === p.id ? 'location' : undefined}
+                  >
                     <span className="mono-label">{p.n}</span> {p.name}
                   </a>
                 </li>
@@ -36,6 +59,7 @@ function LeistungenPage() {
           <section
             key={p.id}
             id={p.id}
+            data-pillar={p.id}
             className="lp-pillar"
             aria-labelledby={`${p.id}-title`}
           >

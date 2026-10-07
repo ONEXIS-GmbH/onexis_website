@@ -35,16 +35,16 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
      zentriert sich in ihrer eigenen Box statt links am Fliesstext zu sitzen. */
   .inner { position: relative; padding: 92px 96px; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
   .logo { height: 74px; width: auto; margin-left: -20px; }
-  .claim { margin-top: 46px; font-size: 42px; font-weight: 400; line-height: 1.14; letter-spacing: -0.03em; max-width: 660px; }
+  .claim { margin-top: 46px; font-size: 42px; font-weight: 400; line-height: 1.14; letter-spacing: -0.03em; max-width: 760px; white-space: nowrap; }
   .sub { margin-top: 26px; font-size: 21px; font-weight: 300; line-height: 1.45; color: #CECECE; max-width: 680px; white-space: nowrap; }
   .rule { margin-top: 40px; width: 96px; height: 2px; background: #62BDCC; }
 </style></head><body>
   <img class="x" src="data:image/svg+xml;base64,${xmark}">
   <div class="inner">
     <img class="logo" src="data:image/svg+xml;base64,${logo}">
-    <div class="claim">Ihre IT-Architektur durchdacht,<br>Ihre Projekte sicher realisiert.</div>
+    <div class="claim">IT-Architektur, die Orientierung gibt.<br>Projekte, die vorankommen.</div>
     <div class="rule"></div>
-    <div class="sub">IT-Beratung · Projektmanagement · IT-Architektur · Seminare</div>
+    <div class="sub">IT-Beratung · Projektmanagement · IT-Architektur · Data &amp; KI</div>
   </div>
 </body></html>`
 

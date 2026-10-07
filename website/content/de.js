@@ -18,7 +18,7 @@ const CONTENT = {
   },
   hero: {
     partnerPrefix: 'Ihr Partner für',
-    rotatingWords: ['IT-Beratung', 'Projektmanagement', 'IT-Architektur', 'Seminare'],
+    rotatingWords: ['IT-Beratung', 'Projektmanagement', 'IT-Architektur', 'Data & KI'],
     // Eine Zeile pro Eintrag (Hero.jsx bricht nach jedem Eintrag um).
     title: ['IT-Architektur, die Orientierung gibt.', 'Projekte, die vorankommen.'],
     subtitle:
@@ -60,13 +60,20 @@ const CONTENT = {
   // (n, name, tagline) und verlinken auf /leistungen#<id>.
   leistungen: {
     // Trägt die sr-only <h1> auf /leistungen (LeistungenPage.jsx).
-    pageTitle: 'Unsere Leistungen: IT-Beratung, IT-Architektur und Projektmanagement',
+    pageTitle: 'Unsere Leistungen: IT-Beratung, IT-Architektur, Projektmanagement, Data & KI',
     // -- Startseiten-Teaser (#leistungen) --------------------
     teaser: {
       // `eyebrow` trägt die <h2> der Sektion, siehe Services.jsx.
       eyebrow: 'Unsere Leistungen',
       cta: 'Alle Leistungen ansehen',
       href: '/leistungen',
+      // Vertrauensband unter den Karten. Aussagen über die eigene Arbeit,
+      // keine Zertifikate — nichts hinzufügen, was ONEXIS nicht belegen kann.
+      trust: [
+        { icon: 'globe', label: 'Europäische Datensouveränität' },
+        { icon: 'shield', label: 'DSG- & DSGVO-konform' },
+        { icon: 'badge', label: 'Lizenzierter Personalverleih' },
+      ],
     },
     // -- Übersichtsseite /leistungen -------------------------
     jumpLabel: 'Zu den Leistungsbereichen',
@@ -119,7 +126,7 @@ const CONTENT = {
             body: 'Projekte sicher ins Ziel bringen – klassisch, agil oder hybrid',
           },
           {
-            name: 'Projekt Health Check & Recovery',
+            name: 'Projekt-Health-Check & Recovery',
             body: 'Kritische Projekte schnell stabilisieren und wieder auf Kurs bringen',
           },
           {
@@ -127,8 +134,8 @@ const CONTENT = {
             body: 'Von Rohdaten zu Entscheidungen – Pipelines, Plattformen, Dashboards',
           },
           {
-            name: 'Integration & IAM',
-            body: 'Systeme und Services sicher verbinden – inkl. Identitäten und Zugriffe',
+            name: 'Integration',
+            body: 'Systeme und Services sicher verbinden – inkl. Identitäten und Zugriffe (IAM)',
           },
           {
             name: 'Prozess- & Testautomation',
@@ -372,14 +379,19 @@ const CONTENT = {
     // direkter Mail-Kontakt über die allgemeine Kontaktadresse.
     contactEmail: 'kontakt@onexis.ch',
     contactEmailHref: 'mailto:kontakt@onexis.ch',
+    // Einzige Quelle für die Firmen-LinkedIn-URL (auch für sameAs in
+    // content/schema.js). Ohne ?viewAsMember — das ist die Admin-Ansicht.
+    linkedin: 'https://www.linkedin.com/company/onexis-gmbh/',
+    linkedinLabel: 'ONEXIS auf LinkedIn',
   },
   footer: {
-    tagline: 'Ihr Partner für IT-Beratung, Projekt-Management, IT-Architektur & Seminare.',
+    tagline: 'Ihr Partner für IT – Beraten · Umsetzen · Befähigen.',
     addressTitle: 'Adresse',
     company: 'ONEXIS GmbH',
     street: 'Sissacherstrasse 20',
     city: '4460 Gelterkinden',
     phone: '061 556 10 10',
+    linkedinLabel: 'LinkedIn',
     legalTitle: 'Rechtliches',
     legalLinks: [
       {

@@ -11,6 +11,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { ROUTE_META, NOT_FOUND_META, SITE_URL, routeMeta } from '../content/meta.js'
+import { schemaJsonLd } from '../content/schema.js'
 
 process.chdir(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'))
 
@@ -83,6 +84,12 @@ function injectHead(html, meta) {
   return html
 }
 
+// JSON-LD pro Route vor </head> (content/schema.js, aus de.js abgeleitet).
+function injectSchema(html, routePath) {
+  return replaceOne(html, '</head>', /<\/head>/,
+    () => `  <script type="application/ld+json">\n${schemaJsonLd(routePath)}\n  </script>\n</head>`)
+}
+
 function writeRoute(routePath, html) {
   const outPath = routePath === '/'
     ? 'dist/index.html'
@@ -97,18 +104,20 @@ console.log('Prerendering …')
 for (const routePath of Object.keys(ROUTE_META)) {
   const body = render(routePath)
   let html = injectHead(template, routeMeta(routePath))
+  html = injectSchema(html, routePath)
   html = html.replace('<div id="app"></div>', `<div id="app">${body}</div>`)
   writeRoute(routePath, html)
 }
 
-// 404: noindex, kein Canonical (eine 404-Seite hat keine "richtige" URL, auf
+// 404: noindex (ersetzt das robots-Tag aus index.html), kein Schema, kein Canonical (eine 404-Seite hat keine "richtige" URL, auf
 // die man verweisen könnte). og:url braucht trotzdem einen Wert — bekommt
 // SITE_URL als Platzhalter, ist wegen noindex ohnehin irrelevant.
 {
   const body = render('/__not-found__') // beliebiger unbekannter Pfad → App.jsx → NotFoundPage
   let html = injectHead(template, { ...NOT_FOUND_META, url: SITE_URL })
   html = html.replace('<div id="app"></div>', `<div id="app">${body}</div>`)
-  html = replaceOne(html, '<head>', /<head>/, '<head>\n  <meta name="robots" content="noindex" />')
+  html = replaceOne(html, 'meta[name=robots]', /<meta name="robots" content="[^"]*"\s*\/>/,
+    '<meta name="robots" content="noindex" />')
   html = replaceOne(html, 'link[rel=canonical] (Entfernung)',
     /\s*<link rel="canonical" href="[\s\S]*?"\s*\/>/, '')
   fs.mkdirSync('dist', { recursive: true })

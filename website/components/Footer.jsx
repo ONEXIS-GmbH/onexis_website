@@ -1,7 +1,9 @@
 import CONTENT from '../content/de.js'
+import LinkedInIcon from './LinkedInIcon.jsx'
 
 function Footer() {
   const c = CONTENT.footer
+  const linkedin = CONTENT.contact.linkedin
   const linkStyle = {
     color: 'var(--fg-on-dark-muted)', fontSize: 14, textDecoration: 'none',
     padding: '4px 0', borderRadius: 4,
@@ -34,6 +36,17 @@ function Footer() {
               {c.city}<br />
               {c.phone}
             </div>
+            <a
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+              aria-label={c.linkedinLabel}
+              title={c.linkedinLabel}
+              style={{ ...linkStyle, display: 'inline-flex', alignItems: 'center', marginTop: 6 }}
+            >
+              <LinkedInIcon size={20} />
+            </a>
           </div>
           <div>
             <div style={colTitle}>{c.legalTitle}</div>

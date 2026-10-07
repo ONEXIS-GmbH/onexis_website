@@ -12,21 +12,39 @@
 export const SITE_URL = 'https://www.onexis.ch'
 export const OG_IMAGE = `${SITE_URL}/assets/og-image.png`
 
-const DEFAULT_DESCRIPTION =
-  'ONEXIS GmbH — Schweizer Partner für IT-Beratung, Projekt-Management, ' +
-  'IT-Architektur und Seminare. Wir bringen kritische IT-Vorhaben sicher ins Ziel.'
+// Titel/Descriptions sind auf Suchbegriffe ausgelegt (≈60 bzw. ≤160 Zeichen,
+// danach kürzt Google ab). Der Claim "Projects in Motion" steht auf der Seite,
+// nicht im Titel — er ist kein Suchbegriff.
+export const DEFAULT_DESCRIPTION =
+  'ONEXIS GmbH aus Gelterkinden: IT-Beratung, IT-Architektur, Projektmanagement, ' +
+  'Data & KI. Wir bringen kritische IT-Vorhaben in der Schweiz sicher ins Ziel.'
+
+// Firmendaten für das strukturierte Markup (content/schema.js). Bewusst hier
+// und nicht in de.js: das ist Auszeichnung, kein sichtbarer Seiteninhalt.
+export const ORGANIZATION = {
+  name: 'ONEXIS',
+  legalName: 'ONEXIS GmbH',
+  email: 'kontakt@onexis.ch',
+  telephone: '+41 61 556 10 10',
+  address: {
+    streetAddress: 'Sissacherstrasse 20',
+    postalCode: '4460',
+    addressLocality: 'Gelterkinden',
+    addressRegion: 'Basel-Landschaft',
+    addressCountry: 'CH',
+  },
+}
 
 export const ROUTE_META = {
   '/': {
-    title: 'ONEXIS — Projects in Motion',
+    title: 'ONEXIS – IT-Beratung, IT-Architektur & Projektmanagement | Schweiz',
     description: DEFAULT_DESCRIPTION,
   },
   '/leistungen': {
-    title: 'Leistungen — ONEXIS',
+    title: 'Leistungen – IT-Beratung, Projektmanagement, Data & KI | ONEXIS',
     description:
       'Beraten, Umsetzen, Befähigen: IT-Strategie, Enterprise-Architektur, ' +
-      'Projekt- und Programmmanagement inkl. PMO, Data & BI, KI-Use-Cases, ' +
-      'Transformation & Change sowie Trainings und Workshops.',
+      'Projekt- und Programmmanagement, Data & BI, KI, Change und Trainings.',
   },
   '/impressum': {
     title: 'Impressum — ONEXIS',
