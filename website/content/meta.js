@@ -24,8 +24,9 @@ export const ROUTE_META = {
   '/leistungen': {
     title: 'Leistungen — ONEXIS',
     description:
-      'Von der Analyse über die Umsetzung bis zur Befähigung: Projektleitung, ' +
-      'PMO, Interim Management, Health Checks, IT-Architektur und Seminare.',
+      'Beraten, Umsetzen, Befähigen: IT-Strategie, Enterprise-Architektur, ' +
+      'Projekt- und Programmmanagement inkl. PMO, Data & BI, KI-Use-Cases, ' +
+      'Transformation & Change sowie Trainings und Workshops.',
   },
   '/impressum': {
     title: 'Impressum — ONEXIS',

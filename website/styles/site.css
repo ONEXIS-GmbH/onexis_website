@@ -474,7 +474,8 @@ button { font: inherit; }
 .pillar-card:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
 .pillar-card .mono-label { color: var(--fg-muted); }
 .pillar-card-more {
-  margin-top: 20px;
+  margin-top: auto;
+  padding-top: 20px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -483,31 +484,50 @@ button { font: inherit; }
   color: var(--accent-ink);
 }
 
-/* Leistungen-Seite — Säulen-Abschnitte ----------------------- */
-.pillar-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
+/* Leistungen-Seite — Liste mit fixierter Kopfspalte ---------- */
+.lp-jump { padding: calc(var(--nav-h) + 32px) 0 8px; }
+.lp-jump ul { display: flex; flex-wrap: wrap; gap: 8px 28px; list-style: none; margin: 0; padding: 0; }
+.lp-jump a {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  padding: 6px 0;
+  font-size: 15px; font-weight: 500;
+  color: var(--fg); text-decoration: none;
+  border-bottom: 1px solid var(--accent);
 }
-.pillar-count { color: var(--fg-muted); white-space: nowrap; }
+.lp-jump a:hover { color: var(--accent-ink); }
+.lp-jump a:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
 
-.leistung-grid {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+.lp-pillar {
+  padding: 56px 0 72px;
+  scroll-margin-top: calc(var(--nav-h) + 16px);
 }
-.leistung-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 26px 24px;
-  min-width: 0;
-  transition: box-shadow var(--dur-base) var(--ease-out),
-              border-color var(--dur-base) var(--ease-out);
+.lp-pillar + .lp-pillar { border-top: 1px solid var(--border); }
+.lp-split { display: grid; grid-template-columns: 1fr; gap: 32px; }
+.lp-split-head .lp-num { display: block; margin-bottom: 12px; color: var(--accent-ink); }
+.lp-intro { margin-top: 16px; max-width: 34ch; font-size: 17px; line-height: 1.55; color: var(--fg-muted); }
+
+.lp-list { list-style: none; margin: 0; padding: 0; min-width: 0; }
+.lp-list li { padding: 22px 0; border-top: 1px solid var(--border); }
+.lp-list li:last-child { border-bottom: 1px solid var(--border); }
+.lp-list p { margin-top: 8px; font-size: 16px; line-height: 1.55; color: var(--fg-muted); }
+
+@media (min-width: 720px) {
+  .lp-list li { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: baseline; }
+  .lp-list p { margin-top: 0; }
 }
-.leistung-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-1); }
+@media (min-width: 900px) {
+  .lp-pillar { padding: 72px 0 96px; }
+  .lp-split { grid-template-columns: minmax(240px, 1fr) 2fr; gap: 64px; align-items: start; }
+  .lp-split-head { position: sticky; top: calc(var(--nav-h) + 32px); }
+}
+
+.lp-collab-grid {
+  list-style: none; margin: 40px 0 0; padding: 0;
+  display: grid; grid-template-columns: 1fr; gap: 28px;
+}
+.lp-collab-grid li { padding-top: 20px; border-top: 1px solid var(--accent); }
+.lp-collab-grid p { margin-top: 10px; font-size: 16px; line-height: 1.55; color: var(--fg-muted); }
+@media (min-width: 720px) { .lp-collab-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
 
 @media (prefers-reduced-motion: reduce) {
   .pillar-card, .pillar-card::before { transition: none; }

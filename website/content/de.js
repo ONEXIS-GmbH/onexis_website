@@ -55,49 +55,21 @@ const CONTENT = {
   },
   // Leistungen: Single Source of Truth für den Startseiten-Teaser
   // (Services.jsx) UND die Übersichtsseite /leistungen (LeistungenPage.jsx).
-  // Struktur: 3 Säulen → Services. `items` = Leaf-Themen aus dem Board;
-  // sie sind erfasst, werden aktuell aber nicht gerendert (Q3: Name + Satz).
+  // Struktur: 3 Säulen (Beraten / Umsetzen / Befähigen) → Services mit
+  // Name + Einzeiler. Die Startseiten-Karten werden aus `pillars` abgeleitet
+  // (n, name, tagline) und verlinken auf /leistungen#<id>.
   leistungen: {
-    // -- Startseiten-Teaser (#leistungen) --------------------
-    // Trägt die sr-only <h1> auf /leistungen (LeistungenPage.jsx). Früher kam
-    // sie aus teaser.heading — das ist mit dem Chef-Feedback 20260923 entfallen.
+    // Trägt die sr-only <h1> auf /leistungen (LeistungenPage.jsx).
     pageTitle: 'Unsere Leistungen: IT-Beratung, IT-Architektur und Projektmanagement',
+    // -- Startseiten-Teaser (#leistungen) --------------------
     teaser: {
-      // Überschrift und Intro wurden entfernt (Chef-Feedback 20260923) — die
-      // drei Leistungen sollen für sich stehen. `eyebrow` trägt seither die
-      // <h2> der Sektion, siehe Services.jsx.
+      // `eyebrow` trägt die <h2> der Sektion, siehe Services.jsx.
       eyebrow: 'Unsere Leistungen',
       cta: 'Alle Leistungen ansehen',
       href: '/leistungen',
-      // Feste Startseiten-Karten (Chef-Feedback 20260913) — bewusst NICHT
-      // aus `pillars` unten abgeleitet: andere Namen, anderer Zuschnitt.
-      // /leistungen selbst bleibt auf der Assess&Design/Execute&Deliver/
-      // Empower-Struktur.
-      cards: [
-        {
-          name: 'IT-Beratung',
-          lead: 'Klarheit für gute Entscheidungen.',
-          body: 'Wir schaffen Orientierung in komplexen IT-Fragen, schärfen Ihre Ausgangslage und entwickeln tragfähige Strategien, Konzepte und Roadmaps.',
-        },
-        {
-          name: 'IT-Architektur',
-          lead: 'Architektur, die trägt.',
-          body: 'Wir entwickeln Zielbilder, Blueprints und Lösungsdesigns, die Geschäftsanforderungen, Systeme und Technologie sinnvoll verbinden.',
-        },
-        {
-          name: 'Projektmanagement',
-          lead: 'Projekte, die ins Ziel kommen.',
-          body: 'Wir strukturieren und steuern IT-Projekte, schaffen Transparenz und managen Abhängigkeiten – von der Konzeption bis zur erfolgreichen Umsetzung.',
-        },
-      ],
     },
     // -- Übersichtsseite /leistungen -------------------------
-    hero: {
-      eyebrow: 'Leistungen',
-      title: 'Projects in Motion',
-      subtitle:
-        'Von der Analyse über die Umsetzung bis zur Befähigung - unser Leistungsspektrum entlang Ihrer IT-Wertschöpfung.',
-    },
+    jumpLabel: 'Zu den Leistungsbereichen',
     contact: {
       text: 'Nicht sicher, welche Leistung zu Ihrem Vorhaben passt?',
       button: 'Erstgespräch vereinbaren',
@@ -105,116 +77,112 @@ const CONTENT = {
     },
     pillars: [
       {
-        id: 'assess-design',
-        name: 'Assess & Design',
-        tagline: 'Standortbestimmung und Zielbild - bevor investiert wird.',
+        id: 'beraten',
+        n: '01',
+        name: 'Beraten',
+        tagline: 'Orientierung und Zielbild, bevor investiert wird.',
         intro:
           'Wir klären, wo Ihre IT steht, wohin sie soll und was es dafür braucht.',
-        // Reihenfolge: Architektur zuerst (Chef-Feedback 20260923, Kernservice).
         services: [
           {
-            name: 'IT-Architektur & Technologie',
-            body: 'Wir übersetzen Unternehmensziele und Anforderungen in Zielarchitekturen und konkrete Lösungsdesigns.',
-            items: [
-              'Tech-Radar',
-              'Blueprints (Integration, Daten, Application, Cloud)',
-              'Enterprise Architekturen',
-              'Architektur-Disziplinen',
-              'Architektur-Assessments & Zielbild',
-            ],
+            name: 'IT-Strategie & Organisation',
+            body: 'IT, die das Geschäft trägt – mit klarer Strategie und Governance',
           },
           {
-            name: 'IT-Prozesse & Daten',
-            body: 'Wir gestalten Prozesse, Schnittstellen und Datenverantwortlichkeiten - von der Serviceerbringung bis zur Daten-Governance.',
-            items: [
-              'IT-Service Management',
-              'ITIL',
-              'Business Process Automation - Konzept',
-              'Data Governance',
-              'Data Management',
-            ],
+            name: 'IT-Betriebsmodelle',
+            body: 'Stabiler Betrieb dank klarer Prozesse, Rollen und Verantwortungen',
           },
           {
-            name: 'IT-Organisation',
-            body: 'Wir klären Organisation, Rollen und Verantwortlichkeiten und richten Ihre IT an den Anforderungen des Unternehmens aus.',
-            items: ['Service-Orientierung', 'Zielmodelle', 'IT-Strategie'],
+            name: 'Enterprise & Solution Architektur',
+            body: 'Zukunftsfähige Zielarchitektur mit Leitplanken für jede Entscheidung',
           },
           {
-            name: 'People & Skills',
-            body: 'Wir klären, welche Rollen und Kompetenzen benötigt werden, und unterstützen beim Aufbau, bei der Besetzung und bei Veränderungen.',
-            items: ['Zielprofile', 'Up-Skilling & Hiring', 'Transformation & Change Management'],
+            name: 'Daten-Governance',
+            body: 'Klare Datenverantwortung und verlässliche Datenqualität',
+          },
+          {
+            name: 'Technologiebewertung & Tech-Radar',
+            body: 'Fundierte Technologieentscheide – unabhängig und nachvollziehbar',
           },
         ],
       },
       {
-        id: 'execute-deliver',
-        name: 'Execute & Deliver',
-        tagline: 'Umsetzung mit ruhiger Hand, sauber in den Betrieb übergeben.',
+        id: 'umsetzen',
+        n: '02',
+        name: 'Umsetzen',
+        tagline: 'Verantwortung in der Umsetzung, sauber ins Ziel.',
         intro:
-          'Wir übernehmen Verantwortung in der Umsetzung - in der Projektleitung, im Projektmanagement Office sowie in Rollen für Produkte, Services und Architektur. Je nach Bedarf ergänzen wir Ihre Organisation dauerhaft, auf Zeit oder punktuell.',
+          'Wir übernehmen Verantwortung in der Umsetzung – von der Projektleitung bis zur technischen Realisierung.',
         services: [
           {
-            name: 'Projekt- & Programmmanagement',
-            body: 'Wir übernehmen Projekt- und Programmleitungsmandate - für neue Vorhaben, laufende Projekte oder Vorhaben, die wieder auf Kurs gebracht werden müssen. Klassisch, agil oder hybrid.',
-            items: [
-              'Health-Check & Reviews',
-              'Projekt-Rettung',
-              'Projekt/Programm-Leitung',
-              'Strategie & Blueprint umsetzen',
-            ],
+            name: 'Projekt- & Programmmanagement inkl. PMO',
+            body: 'Projekte sicher ins Ziel bringen – klassisch, agil oder hybrid',
           },
           {
-            name: 'Projektmanagement Office',
-            body: 'Wir übernehmen Aufgaben im Projektmanagement Office ad interim oder dauerhaft und schaffen Strukturen für Planung, Reporting, Steuerung und Entscheidungsfindung.',
-            items: [],
+            name: 'Projekt Health Check & Recovery',
+            body: 'Kritische Projekte schnell stabilisieren und wieder auf Kurs bringen',
           },
           {
-            name: 'Produkt- & Serviceverantwortung',
-            body: 'Wir verbinden Businessanforderungen mit dem Angebot der IT, koordinieren Prioritäten und planen die Weiterentwicklung von Produkten und Services.',
-            items: [],
+            name: 'Data Engineering, Analytics & BI',
+            body: 'Von Rohdaten zu Entscheidungen – Pipelines, Plattformen, Dashboards',
           },
           {
-            name: 'Interimprofile',
-            body: 'Wir übernehmen zeitlich begrenzte Schlüsselrollen - vom Interim-CIO über Projektleitungsmandate bis zur gezielten Unterstützung bei personellen oder fachlichen Engpässen.',
-            items: ['ad interim - IT-Positionen', 'Personalverleih', 'Dienstleistung basiert'],
+            name: 'Integration & IAM',
+            body: 'Systeme und Services sicher verbinden – inkl. Identitäten und Zugriffe',
           },
           {
-            name: 'Architecture as a Service (AaaS)',
-            body: 'Wir begleiten Ihre Architektur mit einem definierten Grundmandat und flexibel abrufbaren Zusatzleistungen. So steht Senior-Architekturkompetenz auch ohne eine feste Vollzeitstelle zur Verfügung.',
-            items: ['flexibles Architekturmodell - on demand'],
+            name: 'Prozess- & Testautomation',
+            body: 'Weniger manuelle Arbeit, schnellere Abläufe, stabile Releases',
           },
           {
-            name: 'Data & AI',
-            body: 'Wir analysieren Daten, entwickeln Dashboards und automatisieren wiederkehrende Abläufe. Methoden der künstlichen Intelligenz setzen wir dort ein, wo sie fachlich sinnvoll sind und einen nachvollziehbaren Nutzen bringen.',
-            items: ['AI Engineering', 'Datenanalyse', 'Dashboards', 'Business Process Automation'],
-          },
-          {
-            name: 'Unabhängige Produktevaluation',
-            body: 'Wir erfassen Anforderungen und Rahmenbedingungen, betrachten die bestehende IT-Landschaft und bewerten Produkte unabhängig und herstellerneutral. Daraus leiten wir eine begründete Empfehlung (Second Opinion) für Ihr Vorhaben ab.',
-            items: ['Market Screening', 'Product Recommendation'],
+            name: 'KI-Use-Cases',
+            body: 'KI produktiv einsetzen – DSG- und DSGVO-konform',
           },
         ],
       },
       {
-        id: 'empower',
-        name: 'Empower',
-        tagline: 'Wissen, das bleibt - befähigen statt Abhängigkeit.',
+        id: 'befaehigen',
+        n: '03',
+        name: 'Befähigen',
+        tagline: 'Wissen, das bleibt – befähigen statt Abhängigkeit.',
         intro:
           'Wir vermitteln Wissen und schaffen Räume für Reflexion, Austausch und neue Arbeitsweisen.',
         services: [
           {
-            name: 'Seminare & Inhouse-Trainings',
-            body: 'Wir bieten Seminare und Trainings zu Resilienz, Leadership und Empowerment an. Die Formate richten sich an Einzelpersonen, Teams oder ganze Organisationen.',
-            items: ['Resilienz', 'Leadership', 'Empowerment'],
+            name: 'Transformation & Change',
+            body: 'Veränderung, die ankommt – durch Kommunikation und Begleitung',
           },
           {
-            name: 'Workshops',
-            body: 'Wir entwickeln und moderieren Workshops passend zu Ihrer Fragestellung, Ihrem Ziel und Ihrer Organisation. Dabei kombinieren wir bewährte Vorgehensweisen mit Methoden wie LEGO\u00ae SERIOUS PLAY\u00ae oder TOM Canvas.',
-            items: ['Lego Serious Play', 'AI Potential & Ideation', 'Process Discovery', 'TOM Canvas'],
+            name: 'Rollen, Skills & Workforce Design',
+            body: 'Die richtigen Leute mit den richtigen Skills am richtigen Ort',
+          },
+          {
+            name: 'Trainings & Workshops',
+            body: 'Teams stärken – von Leadership bis Lego Serious Play',
           },
         ],
       },
     ],
+    // Zusammenarbeitsmodelle. Name + Stichwort stammen aus der Vorgabe
+    // ("Projekt · Mandat · On-Demand (Architektur as a Service & Experts)");
+    // die erklärenden Sätze sind ENTWURF und müssen von ONEXIS geprüft werden.
+    collaboration: {
+      heading: 'So arbeiten wir zusammen',
+      models: [
+        {
+          name: 'Projekt',
+          body: 'Ein klar umrissenes Vorhaben mit definiertem Ziel, Umfang und Zeitrahmen.',
+        },
+        {
+          name: 'Mandat',
+          body: 'Eine feste Rolle in Ihrer Organisation – dauerhaft oder auf Zeit, mit klarer Verantwortung.',
+        },
+        {
+          name: 'On-Demand',
+          body: 'Architektur as a Service und Experts: Senior-Kompetenz flexibel abrufbar, wenn Sie sie brauchen.',
+        },
+      ],
+    },
   },
   tom: {
     eyebrow: 'Unser Erfolgsmodell',

@@ -8,15 +8,17 @@
 ONEXIS führt und steuert IT-Vorhaben von der Planung bis zur
 Betriebsübergabe — national und international. Die drei Leistungssäulen:
 
-- **Assess & Design** — IT-Organisation, IT-Prozesse & Daten, IT-Architektur
-  & Technologie, People & Skills: Standortbestimmung und Zielbild, bevor
-  investiert wird.
-- **Execute & Deliver** — Projekt- & Programm-Management, PMO, Product &
-  Service Ownership, Talent-Pool (Interim-Mandate), Architecture as a
-  Service, Data & AI, Product Evaluation: Umsetzung bis zur sauberen
-  Betriebsübergabe.
-- **Empower** — Seminare und Workshops zu Resilienz, Leadership und
-  Transformation: Senior-Wissen, das im Team bleibt.
+- **Beraten** — IT-Strategie & Organisation, IT-Betriebsmodelle, Enterprise &
+  Solution Architektur, Daten-Governance, Technologiebewertung & Tech-Radar:
+  Orientierung und Zielbild, bevor investiert wird.
+- **Umsetzen** — Projekt- & Programmmanagement inkl. PMO, Projekt Health Check
+  & Recovery, Data Engineering, Analytics & BI, Integration & IAM, Prozess- &
+  Testautomation, KI-Use-Cases (DSG- und DSGVO-konform).
+- **Befähigen** — Transformation & Change, Rollen, Skills & Workforce Design,
+  Trainings & Workshops: Wissen, das im Team bleibt.
+
+Zusammenarbeit als Projekt, Mandat oder On-Demand (Architecture as a Service
+& Experts).
 
 Branchenschwerpunkte: Energieversorger, öffentliche Verwaltung,
 Versicherungen, IT Service Providers.
@@ -26,7 +28,12 @@ Versicherungen, IT Service Providers.
 - [Startseite](https://www.onexis.ch/): Überblick über Leistungen,
   Erfolgsmodell (Target Operating Model), Referenzen und Team.
 - [Leistungen](https://www.onexis.ch/leistungen): Alle Services entlang der
-  drei Säulen Assess & Design, Execute & Deliver, Empower.
+  drei Säulen Beraten (IT-Strategie, Betriebsmodelle, Architektur,
+  Daten-Governance, Tech-Radar), Umsetzen (Projekt-/Programmmanagement inkl.
+  PMO, Health Check & Recovery, Data Engineering & BI, Integration & IAM,
+  Automation, KI-Use-Cases) und Befähigen (Transformation & Change, Rollen &
+  Skills, Trainings & Workshops). Zusammenarbeit als Projekt, Mandat oder
+  On-Demand.
 - [Impressum](https://www.onexis.ch/impressum)
 - [Datenschutz](https://www.onexis.ch/datenschutz)
 - [AGB](https://www.onexis.ch/agb)

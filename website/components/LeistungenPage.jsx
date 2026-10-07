@@ -2,16 +2,14 @@ import CONTENT from '../content/de.js'
 import Nav from './Nav.jsx'
 import Footer from './Footer.jsx'
 
-// Übersichtsseite /leistungen: die drei Säulen als Gruppen, jeder Service
-// eine Karte (Name + ein Satz). Leaf-Themen (p.services[].items) sind in
-// de.js erfasst, werden hier aber bewusst nicht gerendert.
-// Der Hero wurde entfernt (Grafik-Feedback) — die erste Säulen-Überschrift
-// trug seither die einzige <h1> der Seite, aber "Assess & Design" trägt
-// keinen Keyword-Wert. Eine sr-only-h1 mit dem eigentlichen Seitenthema
-// (CONTENT.leistungen.pageTitle) steht jetzt voran; alle Säulen-
-// Überschriften sind konsequent h2.
+// Übersichtsseite /leistungen: pro Säule links der Kopf (Nummer, Name, Intro,
+// auf dem Desktop sticky), rechts eine Liste der Leistungen (Name + Einzeiler)
+// mit Hairlines statt Kartenraster. Darunter das Band "So arbeiten wir
+// zusammen" und der Abschluss-CTA.
+// Die sr-only-h1 trägt das eigentliche Seitenthema (CONTENT.leistungen.pageTitle);
+// alle Säulen-Überschriften sind h2, die Leistungen h3.
 function LeistungenPage() {
-  const { pageTitle, pillars, contact } = CONTENT.leistungen
+  const { pageTitle, jumpLabel, pillars, collaboration, contact } = CONTENT.leistungen
 
   return (
     <>
@@ -19,45 +17,61 @@ function LeistungenPage() {
       <main id="main-content">
         <h1 className="sr-only">{pageTitle}</h1>
 
-        {/* Säulen — abwechselnd hell / gedämpft für Rhythmus */}
-        {pillars.map((p, i) => {
-          return (
-            <section
-              key={p.id}
-              id={p.id}
-              className={`section leistungen-pillar${i % 2 === 1 ? ' muted' : ''}`}
-              style={{ scrollMarginTop: 'calc(var(--nav-h) + 16px)' }}
-            >
-              <div className="container-wide">
-                <div className="pillar-head">
-                  <h2 className="h-section" style={{ maxWidth: 720 }}>{p.name}</h2>
-                  <span className="mono-label pillar-count">
-                    {p.services.length} {p.services.length === 1 ? 'Leistung' : 'Leistungen'}
-                  </span>
-                </div>
-                <p style={{
-                  marginTop: 18, maxWidth: 620,
-                  fontSize: 18, lineHeight: 1.6, color: 'var(--fg-muted)',
-                }}>
-                  {p.intro}
-                </p>
+        {/* Sprungleiste — erste Sektion, trägt gleichzeitig den Abstand zur Nav */}
+        <nav className="lp-jump" aria-label={jumpLabel}>
+          <div className="container-wide">
+            <ul>
+              {pillars.map((p) => (
+                <li key={p.id}>
+                  <a href={`#${p.id}`}>
+                    <span className="mono-label">{p.n}</span> {p.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
 
-                <div className="leistung-grid" style={{ marginTop: 44 }}>
-                  {p.services.map((s) => (
-                    <article key={s.name} className="leistung-card">
-                      <h3 className="h-card">{s.name}</h3>
-                      <p style={{
-                        marginTop: 12, fontSize: 15, lineHeight: 1.55, color: 'var(--fg-muted)',
-                      }}>
-                        {s.body}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )
-        })}
+        {pillars.map((p) => (
+          <section
+            key={p.id}
+            id={p.id}
+            className="lp-pillar"
+            aria-labelledby={`${p.id}-title`}
+          >
+            <div className="container-wide lp-split">
+              <header className="lp-split-head">
+                <span className="mono-label lp-num">{p.n}</span>
+                <h2 id={`${p.id}-title`} className="h-section">{p.name}</h2>
+                <p className="lp-intro">{p.intro}</p>
+              </header>
+
+              <ul className="lp-list">
+                {p.services.map((s) => (
+                  <li key={s.name}>
+                    <h3 className="h-card">{s.name}</h3>
+                    <p>{s.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        ))}
+
+        {/* Zusammenarbeit */}
+        <section className="section muted lp-collab" aria-labelledby="zusammenarbeit-title">
+          <div className="container-wide">
+            <h2 id="zusammenarbeit-title" className="eyebrow">{collaboration.heading}</h2>
+            <ul className="lp-collab-grid">
+              {collaboration.models.map((m) => (
+                <li key={m.name}>
+                  <h3 className="h-card">{m.name}</h3>
+                  <p>{m.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
         {/* Abschluss-CTA */}
         <section className="section section-sm inverse">
