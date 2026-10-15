@@ -385,7 +385,7 @@ const CONTENT = {
     linkedinLabel: 'ONEXIS auf LinkedIn',
   },
   footer: {
-    tagline: 'Ihr Partner für IT: Beraten · Umsetzen · Befähigen.',
+    tagline: 'Ihr Partner für IT: Beraten  Umsetzen  Befähigen.',
     addressTitle: 'Adresse',
     company: 'ONEXIS GmbH',
     street: 'Sissacherstrasse 20',
